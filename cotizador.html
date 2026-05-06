@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Cotizador Averix — Broadcaster Bot & VendIA</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   body { font-family: 'Segoe UI', Arial, sans-serif; background: #f0f2f5; color: #222; }
@@ -973,22 +974,47 @@ function backToForm() { g('app').style.display='block'; g('quotation').style.dis
 function compartirWhatsApp() {
   const producto = currentProduct === 'bb' ? 'Broadcaster Bot' : 'VendIA';
   const cliente = currentProduct === 'bb'
-    ? (g('bb-q-client-name') ? g('bb-q-client-name').textContent : '')
-    : (g('vi-q-client-name') ? g('vi-q-client-name').textContent : '');
+    ? (g('bb-q-client-name') ? g('bb-q-client-name').textContent.trim() : 'Cliente')
+    : (g('vi-q-client-name') ? g('vi-q-client-name').textContent.trim() : 'Cliente');
   const fecha = g('propDate') ? g('propDate').value || 'Mayo 2026' : 'Mayo 2026';
+  const nombreArchivo = `Propuesta_Averix_${producto.replace(/ /g,'_')}_${cliente.replace(/ /g,'_')}.pdf`;
 
-  let resumen = '';
-  if (currentProduct === 'bb') {
-    const total = g('bb-disp-total') ? g('bb-disp-total').textContent : g('bb-p-disp-total') ? g('bb-p-disp-total').textContent : '—';
-    resumen = `Inversión total: ${total}`;
-  } else {
-    const fee = g('vi-disp-fee') ? g('vi-disp-fee').textContent : '—';
-    const setup = g('vi-disp-setup') ? g('vi-disp-setup').textContent : '$5,000.00';
-    resumen = `Set Up: ${setup}\nFee mensual: ${fee}`;
-  }
+  const elemento = currentProduct === 'bb' ? g('q-bb') : g('q-vi');
+  const btn = g('btn-whatsapp');
+  btn.textContent = '⏳ Generando PDF...';
+  btn.disabled = true;
 
-  const msg = `Hola, te comparto la propuesta comercial de Averix.\n\n*Producto:* ${producto}\n*Cliente:* ${cliente}\n*Fecha:* ${fecha}\n\n${resumen}\n\n*Vigencia:* 30 días naturales\n\nPara más detalles contacta a tu ejecutivo Averix.`;
-  window.open('https://wa.me/?text=' + encodeURIComponent(msg), '_blank');
+  const opciones = {
+    margin: 0,
+    filename: nombreArchivo,
+    image: { type: 'jpeg', quality: 0.92 },
+    html2canvas: { scale: 2, useCORS: true, logging: false },
+    jsPDF: { unit: 'px', format: [800, 1100], orientation: 'portrait' }
+  };
+
+  html2pdf().set(opciones).from(elemento).outputPdf('blob').then(function(blob) {
+    btn.textContent = '📲 Enviar por WhatsApp';
+    btn.disabled = false;
+    const archivo = new File([blob], nombreArchivo, { type: 'application/pdf' });
+    if (navigator.canShare && navigator.canShare({ files: [archivo] })) {
+      navigator.share({
+        files: [archivo],
+        title: `Propuesta Averix — ${producto}`,
+        text: `Propuesta comercial Averix para ${cliente}`
+      }).catch(() => {});
+    } else {
+      // Fallback: descargar el PDF
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url; a.download = nombreArchivo; a.click();
+      URL.revokeObjectURL(url);
+      alert('PDF descargado. Adjúntalo manualmente en WhatsApp.');
+    }
+  }).catch(function() {
+    btn.textContent = '📲 Enviar por WhatsApp';
+    btn.disabled = false;
+    alert('No se pudo generar el PDF. Usa el botón Imprimir para guardarlo.');
+  });
 }
 
 function resetForm() {
