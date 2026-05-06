@@ -976,45 +976,53 @@ function compartirWhatsApp() {
   const cliente = currentProduct === 'bb'
     ? (g('bb-q-client-name') ? g('bb-q-client-name').textContent.trim() : 'Cliente')
     : (g('vi-q-client-name') ? g('vi-q-client-name').textContent.trim() : 'Cliente');
-  const fecha = g('propDate') ? g('propDate').value || 'Mayo 2026' : 'Mayo 2026';
   const nombreArchivo = `Propuesta_Averix_${producto.replace(/ /g,'_')}_${cliente.replace(/ /g,'_')}.pdf`;
-
   const elemento = currentProduct === 'bb' ? g('q-bb') : g('q-vi');
   const btn = g('btn-whatsapp');
+
   btn.textContent = '⏳ Generando PDF...';
   btn.disabled = true;
 
   const opciones = {
     margin: 0,
     filename: nombreArchivo,
-    image: { type: 'jpeg', quality: 0.92 },
-    html2canvas: { scale: 2, useCORS: true, logging: false },
-    jsPDF: { unit: 'px', format: [800, 1100], orientation: 'portrait' }
+    image: { type: 'jpeg', quality: 0.90 },
+    html2canvas: { scale: 1.5, useCORS: true, logging: false, allowTaint: true },
+    jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
   };
 
-  html2pdf().set(opciones).from(elemento).outputPdf('blob').then(function(blob) {
+  html2pdf().set(opciones).from(elemento).toPdf().get('pdf').then(function(pdf) {
+    const arrayBuffer = pdf.output('arraybuffer');
+    const blob = new Blob([arrayBuffer], { type: 'application/pdf' });
+    const archivo = new File([blob], nombreArchivo, { type: 'application/pdf' });
+
     btn.textContent = '📲 Enviar por WhatsApp';
     btn.disabled = false;
-    const archivo = new File([blob], nombreArchivo, { type: 'application/pdf' });
-    if (navigator.canShare && navigator.canShare({ files: [archivo] })) {
-      navigator.share({
-        files: [archivo],
-        title: `Propuesta Averix — ${producto}`,
-        text: `Propuesta comercial Averix para ${cliente}`
-      }).catch(() => {});
+
+    // Intentar Web Share API con archivo (Android/iOS moderno)
+    if (navigator.share) {
+      navigator.share({ files: [archivo], title: `Propuesta Averix — ${producto}`, text: `Propuesta comercial para ${cliente}` })
+        .catch(function(err) {
+          if (err.name !== 'AbortError') descargarPDF(blob, nombreArchivo);
+        });
     } else {
-      // Fallback: descargar el PDF
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url; a.download = nombreArchivo; a.click();
-      URL.revokeObjectURL(url);
-      alert('PDF descargado. Adjúntalo manualmente en WhatsApp.');
+      descargarPDF(blob, nombreArchivo);
     }
   }).catch(function() {
     btn.textContent = '📲 Enviar por WhatsApp';
     btn.disabled = false;
-    alert('No se pudo generar el PDF. Usa el botón Imprimir para guardarlo.');
+    alert('No se pudo generar el PDF. Usa el botón Imprimir / Guardar PDF.');
   });
+}
+
+function descargarPDF(blob, nombre) {
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = nombre;
+  document.body.appendChild(a); a.click();
+  document.body.removeChild(a);
+  setTimeout(() => URL.revokeObjectURL(url), 2000);
+  alert('PDF guardado en tu dispositivo. Adjúntalo en WhatsApp desde la opción de archivos.');
 }
 
 function resetForm() {
