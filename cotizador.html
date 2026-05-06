@@ -415,67 +415,6 @@
       </div>
     </div>
 
-    <!-- SECCIÓN 3: COSTOS POR USO -->
-    <div class="card vi">
-      <h2>4. Sección 3 — Costos por Uso (estimado mensual)</h2>
-      <p style="font-size:.84rem;color:#555;margin-bottom:16px;">Estos costos son variables y dependen del volumen de uso. Ingresa estimados para incluirlos en la propuesta.</p>
-
-      <!-- Mensajes WhatsApp -->
-      <div class="pricing-section vi">
-        <h3>COSTO DE CATEGORÍAS DE MENSAJES — WhatsApp Business</h3>
-        <div class="pricing-row" style="background:#f8f9fa;border-radius:7px;padding:8px 10px;font-weight:700;font-size:.8rem;color:#666;"><span>Tipo de Mensaje</span><span style="text-align:right">Costo Unit.</span><span style="text-align:right">Subtotal est.</span></div>
-        <div class="pricing-row">
-          <span class="label">Marketing — vol. mensual estimado (conv.)</span>
-          <input type="number" id="vi-vol-mkt" min="0" value="0" oninput="viRecalcMsgs()" style="max-width:100px;">
-          <span class="subtotal vi" id="vi-st-mkt">$0.00 <small style="font-weight:400;color:#888;">($0.56/conv)</small></span>
-        </div>
-        <div class="pricing-row">
-          <span class="label">Utilidad — vol. mensual estimado (conv.)</span>
-          <input type="number" id="vi-vol-util" min="0" value="0" oninput="viRecalcMsgs()" style="max-width:100px;">
-          <span class="subtotal vi" id="vi-st-util">$0.00 <small style="font-weight:400;color:#888;">($0.16/conv)</small></span>
-        </div>
-        <div class="pricing-row">
-          <span class="label">Autenticación — vol. mensual estimado (conv.)</span>
-          <input type="number" id="vi-vol-auth" min="0" value="0" oninput="viRecalcMsgs()" style="max-width:100px;">
-          <span class="subtotal vi" id="vi-st-auth">$0.00 <small style="font-weight:400;color:#888;">($0.16/conv)</small></span>
-        </div>
-        <div class="pricing-row">
-          <span class="label">Servicio (incluidas en el plan — 1,000/mes)</span>
-          <span style="text-align:center;font-size:.8rem;color:#15803d;font-weight:700;">Incluido</span>
-          <span class="subtotal vi">$0.00</span>
-        </div>
-        <div class="pricing-row" style="background:#f0fdf4;border-radius:7px;padding:8px 10px;">
-          <span style="font-weight:700;color:#15803d;">SUBTOTAL MENSAJES / MES</span><span></span>
-          <span class="subtotal vi" id="vi-total-msgs" style="font-size:1rem;">$0.00</span>
-        </div>
-        <p style="font-size:.75rem;color:#888;margin-top:6px;font-style:italic;">* Precios sujetos a META</p>
-      </div>
-
-      <!-- Delivery -->
-      <div class="cost-info">
-        <h4>🚚 Costo de Delivery — Uber Direct (última milla)</h4>
-        <div class="cost-row"><span class="cost-label">1 – 2 km</span><span class="cost-val">~$40 – $60</span></div>
-        <div class="cost-row"><span class="cost-label">3 – 5 km</span><span class="cost-val">~$60 – $90</span></div>
-        <div class="cost-row"><span class="cost-label">5+ km</span><span class="cost-val">$90 – $130+</span></div>
-        <div class="cost-note">* El costo de entrega es dinámico y depende de distancia, demanda y horario. Precios sujetos a Uber Direct.</div>
-      </div>
-
-      <!-- Pasarela de pago -->
-      <div class="cost-info">
-        <h4>💳 Costo de Pasarela de Pago — Stripe (comisión por transacción)</h4>
-        <div class="cost-row"><span class="cost-label">Comisión base</span><span class="cost-val">3.6% + $3 por pedido</span></div>
-        <div class="cost-row"><span class="cost-label">Tarjetas internacionales</span><span class="cost-val">+ 0.5%</span></div>
-        <div class="cost-row"><span class="cost-label">Conversión de moneda</span><span class="cost-val">+ 2.0%</span></div>
-        <div class="cost-note">* Esquema pay-as-you-go, sin costos fijos. Precios sujetos a Stripe.</div>
-      </div>
-
-      <div class="totals-box vi" style="margin-top:4px;">
-        <div class="totals-row"><span>Set Up (Pago Único):</span><span>$5,000.00</span></div>
-        <div class="totals-row"><span>Fee Mensual del Plan:</span><span id="vi-disp-fee2">— Selecciona plazo en Sección 2 —</span></div>
-        <div class="totals-row"><span>Estimado Mensajes/mes:</span><span id="vi-disp-msgs">$0.00</span></div>
-        <div class="totals-row big vi"><span>TOTAL MENSUAL ESTIMADO (sin delivery/pagos):</span><span id="vi-disp-grand">—</span></div>
-      </div>
-    </div>
 
     <div class="actions" id="vi-actions" style="display:none;">
       <button class="btn-secondary" onclick="resetForm()">Limpiar</button>
@@ -598,34 +537,42 @@
       <div class="q-footer"><span>Averix — Confidencial</span><span id="vi-q-footer-date">2026</span><span>Vigencia: 30 días naturales</span></div>
     </div>
 
-    <!-- PAGE 4 VI: Costos de uso + Consideraciones -->
+    <!-- PAGE 4 VI: Consideraciones y Aceptación -->
     <div class="q-page">
-      <div class="q-header vi"><img src="logos/averix.png" alt="Averix" onerror="this.style.display='none'"><div><div class="header-title">PROPUESTA COMERCIAL</div><div class="header-sub">Costos por Uso y Consideraciones</div></div></div>
+      <div class="q-header vi"><img src="logos/averix.png" alt="Averix" onerror="this.style.display='none'"><div><div class="header-title">PROPUESTA COMERCIAL</div><div class="header-sub">Consideraciones y Aceptación</div></div></div>
 
-      <div class="q-section-title vi">Costo de Categorías de Mensajes — WhatsApp Business</div>
-      <div class="q-body" style="margin-bottom:6px;"><p>Los mensajes enviados a través del canal de WhatsApp generan cargos establecidos por Meta de acuerdo a la categoría del mensaje.</p></div>
-      <div id="vi-q-msgs-block"></div>
-      <p style="font-size:.72rem;color:#888;font-style:italic;margin-top:4px;margin-bottom:16px;">* Precios sujetos a META</p>
+      <div class="q-section-title vi">Sección 3 — Costos por Uso (estimado mensual)</div>
+      <div class="q-body" style="margin-bottom:6px;"><p>Los siguientes costos son variables y dependen del volumen de uso mensual. Se presentan como referencia para la planeación del cliente.</p></div>
 
-      <div class="q-section-title vi">Costo de Delivery</div>
-      <div class="cost-block">
-        <h4>Uber Direct — Servicio de Última Milla</h4>
+      <div class="q-section-title vi" style="font-size:.85rem;">Costo de Categorías de Mensajes — WhatsApp Business</div>
+      <table class="inv-table vi" style="margin-top:4px;margin-bottom:4px;">
+        <thead><tr><th>Tipo de Mensaje</th><th>Costo Unitario</th></tr></thead>
+        <tbody>
+          <tr><td>Marketing</td><td style="text-align:right;font-weight:700;color:#15803d;">$0.56 por conversación</td></tr>
+          <tr><td>Utilidad</td><td style="text-align:right;font-weight:700;color:#15803d;">$0.16 por conversación</td></tr>
+          <tr><td>Autenticación</td><td style="text-align:right;font-weight:700;color:#15803d;">$0.16 por conversación</td></tr>
+          <tr><td>Servicio (hasta 1,000 conv. incluidas en el plan)</td><td style="text-align:right;font-weight:700;color:#15803d;">$0.00 — Incluido</td></tr>
+        </tbody>
+      </table>
+      <p style="font-size:.72rem;color:#888;font-style:italic;margin-bottom:14px;">* Precios sujetos a META</p>
+
+      <div class="q-section-title vi" style="font-size:.85rem;">Costo de Delivery — Uber Direct (última milla)</div>
+      <div class="cost-block" style="margin-bottom:14px;">
         <div class="cost-block-row"><span>1 – 2 km</span><span style="font-weight:700;">~$40 – $60 MXN</span></div>
         <div class="cost-block-row"><span>3 – 5 km</span><span style="font-weight:700;">~$60 – $90 MXN</span></div>
         <div class="cost-block-row"><span>5+ km</span><span style="font-weight:700;">$90 – $130+ MXN</span></div>
         <div class="cost-block-note">El costo de entrega es dinámico y depende de distancia, demanda y horario. * Precios sujetos a Uber Direct.</div>
       </div>
 
-      <div class="q-section-title vi">Costo de Pasarela de Pago</div>
-      <div class="cost-block">
-        <h4>Stripe — Comisión por Transacción (pay-as-you-go)</h4>
+      <div class="q-section-title vi" style="font-size:.85rem;">Costo de Pasarela de Pago — Stripe</div>
+      <div class="cost-block" style="margin-bottom:20px;">
         <div class="cost-block-row"><span>Comisión base</span><span style="font-weight:700;">3.6% + $3 MXN por pedido</span></div>
         <div class="cost-block-row"><span>Tarjetas internacionales</span><span style="font-weight:700;">+ 0.5%</span></div>
         <div class="cost-block-row"><span>Conversión de moneda</span><span style="font-weight:700;">+ 2.0%</span></div>
-        <div class="cost-block-note">Sin costos fijos. * Precios sujetos a Stripe.</div>
+        <div class="cost-block-note">Sin costos fijos — esquema pay-as-you-go. * Precios sujetos a Stripe.</div>
       </div>
 
-      <div class="q-section-title vi" style="margin-top:20px;">Consideraciones Comerciales</div>
+      <div class="q-section-title vi">Consideraciones Comerciales</div>
       <div class="q-body">
         <ul>
           <li>Los precios no incluyen impuestos y están expresados en MXN.</li>
@@ -783,22 +730,6 @@ function viSelectPlazo(meses) {
   s('vi-total-plazo-label', `Total comprometido (setup + ${meses} meses):`);
   s('vi-disp-total-plazo', fmt(totalPlazo));
   s('vi-disp-total', fmt(fee) + '/mes');
-  viRecalcMsgs();
-}
-
-function viRecalcMsgs() {
-  const vM=v('vi-vol-mkt'),vU=v('vi-vol-util'),vA=v('vi-vol-auth');
-  const stM=vM*VI.msgs.mkt,stU=vU*VI.msgs.util,stA=vA*VI.msgs.auth;
-  g('vi-st-mkt').innerHTML = fmt(stM)+' <small style="font-weight:400;color:#888;">($0.56/conv)</small>';
-  g('vi-st-util').innerHTML = fmt(stU)+' <small style="font-weight:400;color:#888;">($0.16/conv)</small>';
-  g('vi-st-auth').innerHTML = fmt(stA)+' <small style="font-weight:400;color:#888;">($0.16/conv)</small>';
-  const totalMsgs = stM+stU+stA;
-  s('vi-total-msgs', fmt(totalMsgs));
-  s('vi-disp-msgs', fmt(totalMsgs));
-  if (viSelectedPlazo) {
-    const fee = VI.plazos[viSelectedPlazo].fee;
-    s('vi-disp-grand', fmt(fee + totalMsgs) + '/mes');
-  }
 }
 
 /* ===== GENERATE ===== */
@@ -904,49 +835,19 @@ function generateVIQuote(clientName,clientCity,propDate,preparedBy,clientScope) 
   // SECCIÓN 1: Set Up
   row('SECCIÓN 1 — SET UP','PAGO ÚNICO',true);
   row('Alta Cuenta WhatsApp Oficial. Configuración de plataforma VendIA. Incluye: soporte de alta, capacitación, licencias de Administrador y Supervisor, Wizard Bot (3 hrs CS).',fmt(VI.setup));
-  row('SUBTOTAL SET UP',fmt(VI.setup),false,true);
+  row('TOTAL SET UP',fmt(VI.setup),false,true);
 
   // SECCIÓN 2: Plan Mensual
   row(`SECCIÓN 2 — PLAN VENDIA BUSINESS (${viSelectedPlazo} meses)${descLabel}`,'FEE MENSUAL',true);
   row('Fee Mensual del Plan a '+viSelectedPlazo+' meses'+descLabel, fmt(fee)+'/mes');
   row('INCLUYE: Plataforma SAAS cCommerce, Catálogos, Sucursales, Lealtad, Gestor de Órdenes, Dashboard, Reportes, 1,000 Conv. Servicio, Integración Pagos, Integración Delivery, API hasta 3 hrs, Soporte Básico.', '');
-  row('SUBTOTAL FEE MENSUAL',fmt(fee)+'/mes',false,true);
-
-  // Mensajes
-  const vM=v('vi-vol-mkt'),vU=v('vi-vol-util'),vA=v('vi-vol-auth');
-  const stM=vM*VI.msgs.mkt,stU=vU*VI.msgs.util,stA=vA*VI.msgs.auth;
-  const totalMsgs=stM+stU+stA;
-
-  row('SECCIÓN 3 — COSTO DE MENSAJES WhatsApp Business','PAGO MENSUAL (por conversación)',true);
-  if(vM>0) row(`Marketing (${vM.toLocaleString('es-MX')} conv × $${VI.msgs.mkt})`,fmt(stM));
-  else row('Marketing','$0.56/conv');
-  if(vU>0) row(`Utilidad (${vU.toLocaleString('es-MX')} conv × $${VI.msgs.util})`,fmt(stU));
-  else row('Utilidad','$0.16/conv');
-  if(vA>0) row(`Autenticación (${vA.toLocaleString('es-MX')} conv × $${VI.msgs.auth})`,fmt(stA));
-  else row('Autenticación','$0.16/conv');
-  row('Servicio (1,000 conv. incluidas en el plan)','$0.00 — Incluido');
-  if(totalMsgs>0) row('SUBTOTAL MENSAJES / MES',fmt(totalMsgs),false,true);
+  row('TOTAL FEE MENSUAL',fmt(fee)+'/mes',false,true);
 
   // Resumen total
   row('RESUMEN DE INVERSIÓN','',true);
   row('Set Up (pago único):', fmt(VI.setup));
   row(`Fee Mensual del Plan (${viSelectedPlazo} meses${descLabel}):`, fmt(fee)+'/mes');
-  if(totalMsgs>0) row('Estimado Mensajes/mes:', fmt(totalMsgs)+'/mes');
   row('TOTAL COMPROMETIDO (Setup + '+viSelectedPlazo+' meses):',fmt(VI.setup+fee*viSelectedPlazo),false,true);
-
-  // Msgs block for page 4
-  const msgsBlock = g('vi-q-msgs-block');
-  msgsBlock.innerHTML = `
-    <table class="inv-table vi" style="margin-top:0;">
-      <thead><tr><th>Tipo de Mensaje</th><th>Costo Unitario</th></tr></thead>
-      <tbody>
-        <tr><td>Marketing</td><td style="text-align:right;font-weight:700;color:#15803d;">$0.56 por conversación</td></tr>
-        <tr><td>Utilidad</td><td style="text-align:right;font-weight:700;color:#15803d;">$0.16 por conversación</td></tr>
-        <tr><td>Autenticación</td><td style="text-align:right;font-weight:700;color:#15803d;">$0.16 por conversación</td></tr>
-        <tr><td>Servicio (hasta 1,000 incl. en plan)</td><td style="text-align:right;font-weight:700;color:#15803d;">$0.00</td></tr>
-        ${totalMsgs>0?`<tr class="total-row"><td>Estimado Mensajes/mes ingresado</td><td>${fmt(totalMsgs)}</td></tr>`:''}
-      </tbody>
-    </table>`;
 }
 
 function backToForm() { g('app').style.display='block'; g('quotation').style.display='none'; window.scrollTo(0,0); }
