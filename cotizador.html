@@ -407,10 +407,16 @@
         <div style="font-size:.75rem;color:#888;margin-top:10px;">* A partir de la hora 4 de integraciones API, costo adicional de $806/hr</div>
       </div>
 
+      <div class="annual-box" style="margin-bottom:14px;"><label><input type="checkbox" id="vi-chk-annual" onchange="viRecalcAnual()"><strong>Plan Anual Preferente (10% descuento en setup + mensualidad)</strong></label><p>Aplica 10% de descuento sobre el Set Up y sobre la mensualidad del plazo seleccionado.</p></div>
+
       <div class="totals-box vi">
-        <div class="totals-row"><span>Set Up (Pago Único):</span><span>$5,000.00</span></div>
+        <div class="totals-row"><span>Set Up (Pago Único):</span><span id="vi-disp-setup">$5,000.00</span></div>
+        <div class="totals-row hidden" id="vi-annual-setup-row"><span>Set Up con 10% dto:</span><span id="vi-disp-setup-dto" class="discount">—</span></div>
         <div class="totals-row"><span>Fee Mensual del Plan:</span><span id="vi-disp-fee">— Selecciona un plazo —</span></div>
+        <div class="totals-row hidden" id="vi-annual-fee-row"><span>Fee Mensual con 10% dto:</span><span id="vi-disp-fee-dto" class="discount">—</span></div>
         <div class="totals-row" id="vi-total-plazo-row" style="display:none;"><span id="vi-total-plazo-label">Total comprometido (× meses):</span><span id="vi-disp-total-plazo">—</span></div>
+        <div class="totals-row hidden" id="vi-annual-row"><span>Total Anual Preferente (setup + 12 meses):</span><span id="vi-disp-annual" class="discount">—</span></div>
+        <div class="totals-row hidden" id="vi-saving-row"><span>Ahorro anual:</span><span id="vi-disp-saving" style="color:#888;">—</span></div>
         <div class="totals-row big vi"><span>INVERSIÓN MENSUAL:</span><span id="vi-disp-total">— Selecciona un plazo —</span></div>
       </div>
     </div>
@@ -534,6 +540,7 @@
         <thead><tr><th>Descripción</th><th>Precio MXN + IVA</th></tr></thead>
         <tbody id="vi-inv-tbody"></tbody>
       </table>
+      <div class="annual-section" id="vi-q-annual-section" style="display:none;"><h3>Plan Anual Preferente</h3><div id="vi-q-annual-calcs"></div></div>
       <div class="q-footer"><span>Averix — Confidencial</span><span id="vi-q-footer-date">2026</span><span>Vigencia: 30 días naturales</span></div>
     </div>
 
@@ -718,18 +725,41 @@ function bbRecalcPlan() {
 
 /* ===== VI ===== */
 function viSelectPlazo(meses) {
+  if (!meses) return;
   viSelectedPlazo = meses;
   [12,24,36].forEach(m => g('vi-plazo-'+m).classList.toggle('selected', m===meses));
   const pl = VI.plazos[meses];
   const fee = pl.fee;
   const desc = meses===12 ? '' : meses===24 ? ' (10% dto)' : ' (20% dto)';
   s('vi-disp-fee', fmt(fee) + '/mes' + desc);
-  s('vi-disp-fee2', fmt(fee) + '/mes' + desc);
   const totalPlazo = VI.setup + fee * meses;
   g('vi-total-plazo-row').style.display = 'flex';
   s('vi-total-plazo-label', `Total comprometido (setup + ${meses} meses):`);
   s('vi-disp-total-plazo', fmt(totalPlazo));
   s('vi-disp-total', fmt(fee) + '/mes');
+  viRecalcAnual();
+}
+
+function viRecalcAnual() {
+  if (!viSelectedPlazo) return;
+  const isAnn = g('vi-chk-annual').checked;
+  const fee = VI.plazos[viSelectedPlazo].fee;
+  const setupDto = VI.setup * 0.9;
+  const feeDto = fee * 0.9;
+  const totalAnual = setupDto + feeDto * 12;
+  const ahorro = (VI.setup - setupDto) + (fee - feeDto) * 12;
+  toggle('vi-annual-setup-row', isAnn);
+  toggle('vi-annual-fee-row', isAnn);
+  toggle('vi-annual-row', isAnn);
+  toggle('vi-saving-row', isAnn);
+  if (isAnn) {
+    s('vi-disp-setup', fmt(setupDto) + ' (10% dto)');
+    s('vi-disp-fee-dto', fmt(feeDto) + '/mes');
+    s('vi-disp-annual', fmt(totalAnual) + ' (anual c/ dto)');
+    s('vi-disp-saving', fmt(ahorro) + ' de ahorro');
+  } else {
+    s('vi-disp-setup', fmt(VI.setup));
+  }
 }
 
 /* ===== GENERATE ===== */
@@ -844,10 +874,27 @@ function generateVIQuote(clientName,clientCity,propDate,preparedBy,clientScope) 
   row('TOTAL FEE MENSUAL',fmt(fee)+'/mes',false,true);
 
   // Resumen total
+  const isAnnVI = g('vi-chk-annual').checked;
+  const setupFinal = isAnnVI ? VI.setup * 0.9 : VI.setup;
+  const feeFinal = isAnnVI ? fee * 0.9 : fee;
   row('RESUMEN DE INVERSIÓN','',true);
-  row('Set Up (pago único):', fmt(VI.setup));
-  row(`Fee Mensual del Plan (${viSelectedPlazo} meses${descLabel}):`, fmt(fee)+'/mes');
-  row('TOTAL COMPROMETIDO (Setup + '+viSelectedPlazo+' meses):',fmt(VI.setup+fee*viSelectedPlazo),false,true);
+  row('Set Up (pago único):', isAnnVI ? fmt(setupFinal) + ' (10% dto)' : fmt(VI.setup));
+  row(`Fee Mensual del Plan (${viSelectedPlazo} meses${descLabel}):`, fmt(feeFinal)+'/mes' + (isAnnVI ? ' (10% dto)' : ''));
+  row('TOTAL COMPROMETIDO (Setup + '+viSelectedPlazo+' meses):',fmt(setupFinal+feeFinal*viSelectedPlazo),false,true);
+
+  // Sección anual en propuesta
+  const annElVI = g('vi-q-annual-section');
+  if (isAnnVI) {
+    annElVI.style.display = 'block';
+    const ahorro = (VI.setup - setupFinal) + (fee - feeFinal) * 12;
+    g('vi-q-annual-calcs').innerHTML = `
+      <div class="calc-row"><span>Set Up con 10% dto:</span><span>${fmt(setupFinal)}</span></div>
+      <div class="calc-row"><span>Fee Mensual con 10% dto:</span><span>${fmt(feeFinal)}/mes</span></div>
+      <div class="calc-row highlight"><span>Total Anual Preferente (setup + 12 meses):</span><span>${fmt(setupFinal + feeFinal * 12)}</span></div>
+      <div class="calc-row saving"><span>Ahorro anual:</span><span>${fmt(ahorro)}</span></div>`;
+  } else {
+    annElVI.style.display = 'none';
+  }
 }
 
 function backToForm() { g('app').style.display='block'; g('quotation').style.display='none'; window.scrollTo(0,0); }
