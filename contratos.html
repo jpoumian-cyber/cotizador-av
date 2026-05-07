@@ -15,25 +15,22 @@
   --amber:#d97706;--amber-lt:#fffbeb;
   --red:#dc2626;--red-lt:#fef2f2;
   --gray-bg:#f4f6fb;--gray-bd:#dde1eb;--gray-txt:#6b7280;
-  --shadow:0 2px 12px rgba(26,45,110,.10);--shadow-lg:0 8px 32px rgba(26,45,110,.14);
+  --shadow:0 2px 12px rgba(26,45,110,.10);
 }
 body{font-family:'Segoe UI',system-ui,Arial,sans-serif;background:var(--gray-bg);color:#1e2a3a;min-height:100vh}
 
-/* HEADER */
 .hdr{background:var(--navy);color:#fff;padding:0 40px;height:64px;
   display:flex;align-items:center;justify-content:space-between;
   box-shadow:0 2px 8px rgba(0,0,0,.18);position:sticky;top:0;z-index:100}
 .hdr-l{display:flex;align-items:center;gap:14px}
 .hdr-l img{height:34px;object-fit:contain;filter:brightness(0)invert(1)}
-.hdr-title{font-size:1rem;font-weight:800;letter-spacing:.2px}
+.hdr-title{font-size:1rem;font-weight:800}
 .hdr-sub{font-size:.73rem;opacity:.6;margin-top:1px}
 .hdr-badge{background:rgba(255,255,255,.15);border-radius:20px;padding:3px 14px;font-size:.73rem;font-weight:700;letter-spacing:.5px}
 
-/* STEPPER */
 .stpr-wrap{background:#fff;border-bottom:1px solid var(--gray-bd);padding:0 40px}
 .stpr{display:flex;align-items:center;max-width:740px;margin:0 auto;padding:20px 0}
-.stp{display:flex;align-items:center;flex:1}
-.stp:last-child{flex:0}
+.stp{display:flex;align-items:center;flex:1}.stp:last-child{flex:0}
 .stp-ind{display:flex;align-items:center;gap:8px;white-space:nowrap}
 .stp-num{width:32px;height:32px;border-radius:50%;border:2.5px solid var(--gray-bd);
   display:flex;align-items:center;justify-content:center;
@@ -46,41 +43,58 @@ body{font-family:'Segoe UI',system-ui,Arial,sans-serif;background:var(--gray-bg)
 .stp.done .stp-lbl{color:var(--green)}
 .stp.done+.stp-line{background:var(--green)}
 
-/* MAIN */
-.main{max-width:800px;margin:0 auto;padding:32px 20px 80px}
+.main{max-width:820px;margin:0 auto;padding:32px 20px 80px}
 
-/* CARDS */
 .card{background:#fff;border-radius:16px;padding:28px 32px;margin-bottom:18px;
   box-shadow:var(--shadow);border:1px solid rgba(26,45,110,.06)}
 .card-title{font-size:.95rem;font-weight:800;color:var(--navy);
   border-left:4px solid var(--navy);padding-left:11px;margin-bottom:20px}
 .card-sub{font-size:.78rem;color:var(--gray-txt);font-weight:400;margin-top:2px}
 
-/* TYPE SELECTOR */
-.type-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.type-card{border:2.5px solid var(--gray-bd);border-radius:13px;padding:22px 20px;
+/* TYPE */
+.type-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:24px}
+.type-card{border:2.5px solid var(--gray-bd);border-radius:13px;padding:20px;
   cursor:pointer;transition:all .2s;background:#fff;position:relative}
-.type-card:hover{border-color:var(--navy);box-shadow:0 4px 14px rgba(26,45,110,.1)}
+.type-card:hover{border-color:var(--navy)}
 .type-card.selected{border-color:var(--navy);background:var(--navy-lt)}
-.type-card .ico{font-size:1.8rem;margin-bottom:8px}
-.type-card h3{font-size:.92rem;font-weight:800;color:var(--navy);margin-bottom:3px}
-.type-card p{font-size:.75rem;color:var(--gray-txt);line-height:1.5}
-.rdot{width:20px;height:20px;border-radius:50%;border:2.5px solid var(--gray-bd);
-  position:absolute;top:18px;right:18px;background:#fff;transition:all .2s}
+.type-card .ico{font-size:1.6rem;margin-bottom:6px}
+.type-card h3{font-size:.9rem;font-weight:800;color:var(--navy);margin-bottom:2px}
+.type-card p{font-size:.74rem;color:var(--gray-txt);line-height:1.4}
+.rdot{width:18px;height:18px;border-radius:50%;border:2.5px solid var(--gray-bd);
+  position:absolute;top:16px;right:16px;background:#fff;transition:all .2s}
 .type-card.selected .rdot{border-color:var(--navy);background:var(--navy);box-shadow:inset 0 0 0 4px #fff}
+
+/* VIGENCIA */
+.vig-btns{display:flex;gap:10px;margin-bottom:0}
+.vig-btn{flex:1;border:2px solid var(--gray-bd);border-radius:10px;padding:14px;
+  cursor:pointer;background:#fff;text-align:center;transition:all .2s;font-family:inherit}
+.vig-btn:hover{border-color:var(--navy)}
+.vig-btn.sel{border-color:var(--navy);background:var(--navy-lt)}
+.vig-btn .vig-num{font-size:1.2rem;font-weight:800;color:var(--navy)}
+.vig-btn .vig-lbl{font-size:.72rem;color:var(--gray-txt);margin-top:2px}
+
+/* AVERIX FIELDS */
+.av-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.fld{display:flex;flex-direction:column;gap:5px}
+.fld.span2{grid-column:span 2}
+.fld label{font-size:.74rem;font-weight:700;color:#374151}
+.fld label .req{color:var(--red)}
+.fld input,.fld select{border:1.5px solid var(--gray-bd);border-radius:8px;padding:9px 12px;
+  font-size:.85rem;color:#1e2a3a;transition:border-color .2s;background:#fff;font-family:inherit}
+.fld input:focus,.fld select:focus{outline:none;border-color:var(--navy);box-shadow:0 0 0 3px rgba(26,45,110,.08)}
+.fld input.auto-ok{background:var(--green-lt);border-color:var(--green-mid)}
+.fld .hint{font-size:.68rem;color:var(--gray-txt)}
 
 /* DOCS */
 .doc-list{display:flex;flex-direction:column;gap:10px}
-.doc-item{display:flex;align-items:center;gap:14px;border:1.5px solid var(--gray-bd);
-  border-radius:11px;padding:13px 16px;background:#fafbfd;transition:all .2s}
+.doc-item{display:flex;align-items:center;gap:12px;border:1.5px solid var(--gray-bd);
+  border-radius:11px;padding:12px 16px;background:#fafbfd;transition:all .2s}
 .doc-item.ok{border-color:var(--green);background:var(--green-lt)}
-.doc-item.ok .doc-status{color:var(--green)}
 .doc-cb{width:22px;height:22px;border-radius:6px;border:2px solid var(--gray-bd);
   display:flex;align-items:center;justify-content:center;flex-shrink:0;background:#fff;transition:all .2s}
 .doc-item.ok .doc-cb{background:var(--green);border-color:var(--green)}
-.doc-cb svg{display:none}
-.doc-item.ok .doc-cb svg{display:block}
-.doc-name{font-size:.84rem;font-weight:600;color:#1e2a3a;margin-bottom:2px}
+.doc-cb svg{display:none}.doc-item.ok .doc-cb svg{display:block}
+.doc-name{font-size:.83rem;font-weight:600;color:#1e2a3a;margin-bottom:2px}
 .doc-status{font-size:.72rem;color:var(--gray-txt);font-weight:500}
 .doc-info{flex:1;min-width:0}
 .doc-btn{font-size:.73rem;font-weight:700;color:var(--navy);
@@ -89,67 +103,52 @@ body{font-family:'Segoe UI',system-ui,Arial,sans-serif;background:var(--gray-bg)
 .doc-item.ok .doc-btn{color:var(--green);border-color:var(--green);background:var(--green-lt)}
 input[type=file]{display:none}
 
+/* SECTION DIVIDER */
+.sec-div{font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:.9px;
+  color:var(--navy);margin:20px 0 14px;padding-bottom:7px;border-bottom:2px solid var(--navy-lt)}
+
 /* PROCESSING */
-.proc-step{display:flex;align-items:flex-start;gap:14px;padding:12px 0;
+.proc-step{display:flex;align-items:flex-start;gap:12px;padding:11px 0;
   border-bottom:1px solid var(--gray-bd)}
 .proc-step:last-child{border-bottom:none}
-.proc-icon{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;
-  justify-content:center;font-size:.9rem;flex-shrink:0;margin-top:1px}
-.proc-icon.spin{animation:spin .8s linear infinite}
-.proc-icon.wait{background:var(--gray-bg);border:2px solid var(--gray-bd)}
-.proc-icon.running{background:var(--navy-lt);border:2px solid var(--navy)}
-.proc-icon.done{background:var(--green-lt);border:2px solid var(--green)}
-.proc-icon.err{background:var(--red-lt);border:2px solid var(--red)}
-.proc-info{flex:1}
-.proc-title{font-size:.85rem;font-weight:700;color:#1e2a3a}
-.proc-desc{font-size:.75rem;color:var(--gray-txt);margin-top:2px}
-.proc-bar-wrap{height:4px;background:var(--gray-bd);border-radius:4px;margin-top:8px;overflow:hidden}
-.proc-bar{height:100%;background:var(--navy);border-radius:4px;transition:width .3s;width:0}
+.proc-icon{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;
+  justify-content:center;font-size:.85rem;flex-shrink:0;margin-top:1px;transition:all .3s}
+.proc-icon.wait{background:var(--gray-bg);border:2px solid var(--gray-bd);color:var(--gray-txt)}
+.proc-icon.running{background:var(--navy-lt);border:2px solid var(--navy);color:var(--navy)}
+.proc-icon.done{background:var(--green-lt);border:2px solid var(--green);color:var(--green)}
+.proc-icon.err{background:var(--amber-lt);border:2px solid var(--amber);color:var(--amber)}
+.spin{animation:spin .7s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
+.proc-info{flex:1}
+.proc-title{font-size:.84rem;font-weight:700;color:#1e2a3a}
+.proc-desc{font-size:.74rem;color:var(--gray-txt);margin-top:2px}
 
-/* REVIEW FIELDS */
-.rev-section{margin-bottom:24px}
-.rev-section-title{font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:.9px;
-  color:var(--navy);margin-bottom:12px;padding-bottom:7px;border-bottom:2px solid var(--navy-lt)}
+/* REVIEW */
 .rev-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.rev-grid.cols1{grid-template-columns:1fr}
 .rev-grid.cols3{grid-template-columns:1fr 1fr 1fr}
-.fld{display:flex;flex-direction:column;gap:5px}
-.fld.span2{grid-column:span 2}
-.fld.span3{grid-column:span 3}
-.fld label{font-size:.74rem;font-weight:700;color:#374151;display:flex;align-items:center;gap:6px}
-.fld label .req{color:var(--red)}
-.fld label .src{font-size:.68rem;font-weight:500;color:var(--green);background:var(--green-lt);
-  border-radius:4px;padding:1px 6px}
-.fld label .src.manual{color:var(--amber);background:var(--amber-lt)}
-.fld input,.fld select,.fld textarea{
-  border:1.5px solid var(--gray-bd);border-radius:8px;padding:9px 12px;
-  font-size:.85rem;color:#1e2a3a;transition:border-color .2s,box-shadow .2s;
-  background:#fff;font-family:inherit}
-.fld input.auto-filled{background:#f0fdf4;border-color:var(--green-mid)}
-.fld input:focus,.fld select:focus{outline:none;border-color:var(--navy);box-shadow:0 0 0 3px rgba(26,45,110,.08)}
-.fld .hint{font-size:.68rem;color:var(--gray-txt)}
+.rev-grid.cols1{grid-template-columns:1fr}
+.fld.s2{grid-column:span 2}
+.fld.s3{grid-column:span 3}
+.field-auto{font-size:.68rem;color:var(--green);font-weight:600;margin-left:4px}
+.field-empty{font-size:.68rem;color:var(--amber);font-weight:600;margin-left:4px}
 
 /* VALIDATION */
-.val-box{border-radius:12px;padding:18px 22px;margin-bottom:18px}
+.val-box{border-radius:12px;padding:16px 20px;margin-bottom:18px}
 .val-box.ok{background:var(--green-lt);border:1.5px solid var(--green)}
 .val-box.warn{background:var(--amber-lt);border:1.5px solid var(--amber)}
-.val-box.err{background:var(--red-lt);border:1.5px solid var(--red)}
-.val-title{font-size:.85rem;font-weight:800;margin-bottom:10px}
+.val-title{font-size:.85rem;font-weight:800;margin-bottom:8px}
 .val-box.ok .val-title{color:var(--green)}
 .val-box.warn .val-title{color:var(--amber)}
-.val-box.err .val-title{color:var(--red)}
-.val-list{list-style:none;display:flex;flex-direction:column;gap:5px}
-.val-list li{font-size:.79rem;display:flex;align-items:center;gap:7px}
+.val-list{list-style:none;display:flex;flex-direction:column;gap:4px}
+.val-list li{font-size:.78rem;display:flex;align-items:center;gap:6px}
 .val-list li.ok{color:var(--green)}
-.val-list li.warn{color:var(--amber)}
-.val-list li.miss{color:var(--red)}
+.val-list li.miss{color:var(--amber)}
 
 /* CONTRACT VIEWER */
 .contract-viewer{background:#fff;border:1px solid var(--gray-bd);border-radius:12px;
-  height:620px;overflow-y:auto;box-shadow:inset 0 2px 8px rgba(0,0,0,.04)}
+  height:640px;overflow-y:auto;box-shadow:inset 0 2px 8px rgba(0,0,0,.04)}
 #contract-out{padding:50px 56px;font-family:'Times New Roman',Times,serif;
-  font-size:.875rem;line-height:1.85;color:#111;max-width:100%}
+  font-size:.875rem;line-height:1.85;color:#111}
 #contract-out .c-title{text-align:center;font-weight:700;text-transform:uppercase;
   font-size:.95rem;margin-bottom:22px;line-height:1.6}
 #contract-out .c-decl{font-weight:700;text-transform:uppercase;margin:18px 0 7px}
@@ -166,23 +165,19 @@ input[type=file]{display:none}
 
 /* BUTTONS */
 .actions{display:flex;justify-content:space-between;align-items:center;
-  padding-top:22px;border-top:1px solid var(--gray-bd);margin-top:6px}
+  padding-top:20px;border-top:1px solid var(--gray-bd);margin-top:6px}
 .btn{border:none;border-radius:10px;font-size:.88rem;font-weight:700;cursor:pointer;
   padding:11px 26px;transition:all .2s;font-family:inherit;display:inline-flex;align-items:center;gap:7px}
-.btn-primary{background:var(--navy);color:#fff}
-.btn-primary:hover{background:var(--navy-dk)}
+.btn-primary{background:var(--navy);color:#fff}.btn-primary:hover{background:var(--navy-dk)}
 .btn-secondary{background:#fff;color:var(--navy);border:2px solid var(--navy)}
 .btn-secondary:hover{background:var(--navy-lt)}
-.btn-success{background:var(--green);color:#fff}
-.btn-success:hover{background:#0f6030}
+.btn-success{background:var(--green);color:#fff}.btn-success:hover{background:#0f6030}
 .btn-group{display:flex;gap:8px;flex-wrap:wrap}
 .btn:disabled{opacity:.45;cursor:not-allowed}
 
-/* INFO BOX */
 .info-box{background:var(--navy-lt);border:1.5px solid var(--navy-mid);border-radius:10px;
   padding:12px 16px;font-size:.8rem;color:var(--navy);margin-bottom:18px;line-height:1.6}
 
-/* LOADER OVERLAY */
 .loader{position:fixed;inset:0;background:rgba(26,45,110,.6);
   display:none;flex-direction:column;align-items:center;justify-content:center;z-index:999}
 .loader.on{display:flex}
@@ -197,23 +192,22 @@ input[type=file]{display:none}
 .tag-pm{background:#fce7f3;color:#9d174d}
 
 @media(max-width:640px){
-  .hdr{padding:0 14px}
-  .stpr-wrap{padding:0 14px}
+  .hdr,.stpr-wrap{padding:0 14px}
   .stp-lbl{display:none}
-  .main{padding:18px 10px 80px}
+  .main{padding:16px 10px 80px}
   .card{padding:18px 14px}
-  .type-grid{grid-template-columns:1fr}
-  .rev-grid,.rev-grid.cols3{grid-template-columns:1fr}
-  .fld.span2,.fld.span3{grid-column:span 1}
-  #contract-out{padding:24px 16px;font-size:.79rem}
+  .type-grid,.av-grid,.rev-grid,.rev-grid.cols3{grid-template-columns:1fr}
+  .fld.s2,.fld.s3,.fld.span2{grid-column:span 1}
+  .vig-btns{flex-direction:column}
+  #contract-out{padding:22px 14px;font-size:.79rem}
   .contract-viewer{height:400px}
   .actions{flex-direction:column;gap:10px}
   .btn{width:100%;justify-content:center}
 }
 @media print{
   .hdr,.stpr-wrap,.card:not(.viewer-card),.actions{display:none!important}
-  .contract-viewer{height:auto;border:none;box-shadow:none;overflow:visible}
-  #contract-out{padding:16px}
+  .contract-viewer{height:auto;border:none;overflow:visible}
+  #contract-out{padding:14px}
 }
 </style>
 </head>
@@ -222,228 +216,150 @@ input[type=file]{display:none}
 <header class="hdr">
   <div class="hdr-l">
     <img src="logos/averix.png" alt="Averix" onerror="this.style.display='none'">
-    <div>
-      <div class="hdr-title">Generador de Contratos</div>
-      <div class="hdr-sub">Plataformas Digitales, S.A. de C.V.</div>
-    </div>
+    <div><div class="hdr-title">Generador de Contratos</div><div class="hdr-sub">Plataformas Digitales, S.A. de C.V.</div></div>
   </div>
   <div class="hdr-badge">CONFIDENCIAL</div>
 </header>
 
 <div class="stpr-wrap">
   <div class="stpr">
-    <div class="stp active" id="stp1">
-      <div class="stp-ind"><div class="stp-num" id="sn1">1</div><div class="stp-lbl">Documentos</div></div>
-    </div>
+    <div class="stp active" id="stp1"><div class="stp-ind"><div class="stp-num" id="sn1">1</div><div class="stp-lbl">Configuración y Documentos</div></div></div>
     <div class="stp-line"></div>
-    <div class="stp" id="stp2">
-      <div class="stp-ind"><div class="stp-num" id="sn2">2</div><div class="stp-lbl">Extracción y Revisión</div></div>
-    </div>
+    <div class="stp" id="stp2"><div class="stp-ind"><div class="stp-num" id="sn2">2</div><div class="stp-lbl">Extracción Automática</div></div></div>
     <div class="stp-line"></div>
-    <div class="stp" id="stp3">
-      <div class="stp-ind"><div class="stp-num" id="sn3">3</div><div class="stp-lbl">Contrato</div></div>
-    </div>
+    <div class="stp" id="stp3"><div class="stp-ind"><div class="stp-num" id="sn3">3</div><div class="stp-lbl">Contrato</div></div></div>
   </div>
 </div>
 
 <main class="main">
 
-<!-- ═══════════ STEP 1 ═══════════ -->
+<!-- ══ STEP 1: TIPO + AVERIX + DOCS ══ -->
 <div id="step1">
   <div class="card">
-    <div class="card-title">Tipo de Persona <span class="card-sub">— Selecciona el tipo de cliente</span></div>
+    <div class="card-title">Tipo de Persona</div>
     <div class="type-grid">
       <div class="type-card" id="tc-pf" onclick="selectType('pf')">
-        <div class="rdot"></div>
-        <div class="ico">👤</div>
-        <h3>Persona Física</h3>
-        <p>Contrato para persona física que actúa por propio derecho.</p>
+        <div class="rdot"></div><div class="ico">👤</div>
+        <h3>Persona Física</h3><p>Actúa por propio derecho</p>
       </div>
       <div class="type-card" id="tc-pm" onclick="selectType('pm')">
-        <div class="rdot"></div>
-        <div class="ico">🏢</div>
-        <h3>Persona Moral</h3>
-        <p>Contrato para empresa o sociedad mercantil.</p>
+        <div class="rdot"></div><div class="ico">🏢</div>
+        <h3>Persona Moral</h3><p>Empresa o sociedad mercantil</p>
       </div>
+    </div>
+
+    <div class="sec-div">Vigencia del Contrato</div>
+    <div class="vig-btns">
+      <button class="vig-btn" id="vb-12" onclick="selectVig(12,'DOCE')">
+        <div class="vig-num">12</div><div class="vig-lbl">meses</div>
+      </button>
+      <button class="vig-btn" id="vb-24" onclick="selectVig(24,'VEINTICUATRO')">
+        <div class="vig-num">24</div><div class="vig-lbl">meses</div>
+      </button>
+      <button class="vig-btn" id="vb-36" onclick="selectVig(36,'TREINTA Y SEIS')">
+        <div class="vig-num">36</div><div class="vig-lbl">meses</div>
+      </button>
+    </div>
+
+    <div class="sec-div" style="margin-top:24px">Datos del Ejecutivo Averix</div>
+    <div class="av-grid">
+      <div class="fld span2"><label>Nombre completo del ejecutivo <span class="req">*</span></label><input type="text" id="av-nombre" placeholder="Nombre del comercial Averix"></div>
+      <div class="fld"><label>Correo electrónico <span class="req">*</span></label><input type="email" id="av-email" placeholder="ejecutivo@averix.com.mx"></div>
+      <div class="fld"><label>Teléfono</label><input type="tel" id="av-tel" placeholder="55 1234 5678"></div>
+      <div class="fld"><label>WhatsApp</label><input type="tel" id="av-wa" placeholder="55 1234 5678"></div>
     </div>
   </div>
 
   <div class="card hidden" id="docs-card">
-    <div class="card-title" id="docs-title">Documentación Requerida</div>
-    <div class="info-box">El sistema leerá automáticamente los archivos que subas para extraer los datos y llenar el contrato. Sube los documentos en PDF, JPG o PNG.</div>
+    <div class="card-title" id="docs-title">Documentación del Cliente</div>
+    <div class="info-box">El sistema leerá cada documento automáticamente y extraerá todos los datos necesarios para llenar el contrato. Sube los archivos en PDF, JPG o PNG.</div>
 
-    <!-- PF docs -->
+    <!-- PF -->
     <div class="doc-list hidden" id="dg-pf">
-      <div class="doc-item" id="di-pf-0">
-        <div class="doc-cb"><svg width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4.5L4 7.5L10 1" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <div class="doc-info"><div class="doc-name">Constancia de Situación Fiscal (RFC)</div><div class="doc-status" id="ds-pf-0">Pendiente de carga</div></div>
-        <label class="doc-btn" for="f-pf-0">Subir</label>
-        <input type="file" id="f-pf-0" accept=".pdf,.jpg,.jpeg,.png" onchange="onDocUpload('pf',0,this)">
-      </div>
-      <div class="doc-item" id="di-pf-1">
-        <div class="doc-cb"><svg width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4.5L4 7.5L10 1" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <div class="doc-info"><div class="doc-name">Identificación oficial vigente (INE / Pasaporte)</div><div class="doc-status" id="ds-pf-1">Pendiente de carga</div></div>
-        <label class="doc-btn" for="f-pf-1">Subir</label>
-        <input type="file" id="f-pf-1" accept=".pdf,.jpg,.jpeg,.png" onchange="onDocUpload('pf',1,this)">
-      </div>
-      <div class="doc-item" id="di-pf-2">
-        <div class="doc-cb"><svg width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4.5L4 7.5L10 1" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <div class="doc-info"><div class="doc-name">Comprobante de Domicilio (máx. 3 meses)</div><div class="doc-status" id="ds-pf-2">Pendiente de carga</div></div>
-        <label class="doc-btn" for="f-pf-2">Subir</label>
-        <input type="file" id="f-pf-2" accept=".pdf,.jpg,.jpeg,.png" onchange="onDocUpload('pf',2,this)">
-      </div>
+      <div class="doc-item" id="di-pf-0"><div class="doc-cb"><svg width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4.5L4 7.5L10 1" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="doc-info"><div class="doc-name">Constancia de Situación Fiscal (RFC)</div><div class="doc-status" id="ds-pf-0">Pendiente</div></div><label class="doc-btn" for="f-pf-0">Subir</label><input type="file" id="f-pf-0" accept=".pdf,.jpg,.jpeg,.png" onchange="onDoc('pf',0,this)"></div>
+      <div class="doc-item" id="di-pf-1"><div class="doc-cb"><svg width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4.5L4 7.5L10 1" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="doc-info"><div class="doc-name">Identificación oficial vigente (INE / Pasaporte)</div><div class="doc-status" id="ds-pf-1">Pendiente</div></div><label class="doc-btn" for="f-pf-1">Subir</label><input type="file" id="f-pf-1" accept=".pdf,.jpg,.jpeg,.png" onchange="onDoc('pf',1,this)"></div>
+      <div class="doc-item" id="di-pf-2"><div class="doc-cb"><svg width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4.5L4 7.5L10 1" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="doc-info"><div class="doc-name">Comprobante de Domicilio (máx. 3 meses)</div><div class="doc-status" id="ds-pf-2">Pendiente</div></div><label class="doc-btn" for="f-pf-2">Subir</label><input type="file" id="f-pf-2" accept=".pdf,.jpg,.jpeg,.png" onchange="onDoc('pf',2,this)"></div>
     </div>
 
-    <!-- PM docs -->
+    <!-- PM -->
     <div class="doc-list hidden" id="dg-pm">
-      <div class="doc-item" id="di-pm-0">
-        <div class="doc-cb"><svg width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4.5L4 7.5L10 1" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <div class="doc-info"><div class="doc-name">Constancia de Situación Fiscal (RFC de la empresa)</div><div class="doc-status" id="ds-pm-0">Pendiente de carga</div></div>
-        <label class="doc-btn" for="f-pm-0">Subir</label>
-        <input type="file" id="f-pm-0" accept=".pdf,.jpg,.jpeg,.png" onchange="onDocUpload('pm',0,this)">
-      </div>
-      <div class="doc-item" id="di-pm-1">
-        <div class="doc-cb"><svg width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4.5L4 7.5L10 1" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <div class="doc-info"><div class="doc-name">Acta Constitutiva (inscrita en Registro Público)</div><div class="doc-status" id="ds-pm-1">Pendiente de carga</div></div>
-        <label class="doc-btn" for="f-pm-1">Subir</label>
-        <input type="file" id="f-pm-1" accept=".pdf,.jpg,.jpeg,.png" onchange="onDocUpload('pm',1,this)">
-      </div>
-      <div class="doc-item" id="di-pm-2">
-        <div class="doc-cb"><svg width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4.5L4 7.5L10 1" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <div class="doc-info"><div class="doc-name">Poder Notarial del Representante Legal</div><div class="doc-status" id="ds-pm-2">Pendiente de carga</div></div>
-        <label class="doc-btn" for="f-pm-2">Subir</label>
-        <input type="file" id="f-pm-2" accept=".pdf,.jpg,.jpeg,.png" onchange="onDocUpload('pm',2,this)">
-      </div>
-      <div class="doc-item" id="di-pm-3">
-        <div class="doc-cb"><svg width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4.5L4 7.5L10 1" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <div class="doc-info"><div class="doc-name">Identificación oficial del Representante Legal</div><div class="doc-status" id="ds-pm-3">Pendiente de carga</div></div>
-        <label class="doc-btn" for="f-pm-3">Subir</label>
-        <input type="file" id="f-pm-3" accept=".pdf,.jpg,.jpeg,.png" onchange="onDocUpload('pm',3,this)">
-      </div>
-      <div class="doc-item" id="di-pm-4">
-        <div class="doc-cb"><svg width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4.5L4 7.5L10 1" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <div class="doc-info"><div class="doc-name">Comprobante de Domicilio (máx. 3 meses)</div><div class="doc-status" id="ds-pm-4">Pendiente de carga</div></div>
-        <label class="doc-btn" for="f-pm-4">Subir</label>
-        <input type="file" id="f-pm-4" accept=".pdf,.jpg,.jpeg,.png" onchange="onDocUpload('pm',4,this)">
-      </div>
+      <div class="doc-item" id="di-pm-0"><div class="doc-cb"><svg width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4.5L4 7.5L10 1" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="doc-info"><div class="doc-name">Constancia de Situación Fiscal (RFC empresa)</div><div class="doc-status" id="ds-pm-0">Pendiente</div></div><label class="doc-btn" for="f-pm-0">Subir</label><input type="file" id="f-pm-0" accept=".pdf,.jpg,.jpeg,.png" onchange="onDoc('pm',0,this)"></div>
+      <div class="doc-item" id="di-pm-1"><div class="doc-cb"><svg width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4.5L4 7.5L10 1" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="doc-info"><div class="doc-name">Acta Constitutiva (Registro Público de Comercio)</div><div class="doc-status" id="ds-pm-1">Pendiente</div></div><label class="doc-btn" for="f-pm-1">Subir</label><input type="file" id="f-pm-1" accept=".pdf,.jpg,.jpeg,.png" onchange="onDoc('pm',1,this)"></div>
+      <div class="doc-item" id="di-pm-2"><div class="doc-cb"><svg width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4.5L4 7.5L10 1" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="doc-info"><div class="doc-name">Poder Notarial del Representante Legal</div><div class="doc-status" id="ds-pm-2">Pendiente</div></div><label class="doc-btn" for="f-pm-2">Subir</label><input type="file" id="f-pm-2" accept=".pdf,.jpg,.jpeg,.png" onchange="onDoc('pm',2,this)"></div>
+      <div class="doc-item" id="di-pm-3"><div class="doc-cb"><svg width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4.5L4 7.5L10 1" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="doc-info"><div class="doc-name">Identificación oficial del Representante Legal</div><div class="doc-status" id="ds-pm-3">Pendiente</div></div><label class="doc-btn" for="f-pm-3">Subir</label><input type="file" id="f-pm-3" accept=".pdf,.jpg,.jpeg,.png" onchange="onDoc('pm',3,this)"></div>
+      <div class="doc-item" id="di-pm-4"><div class="doc-cb"><svg width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4.5L4 7.5L10 1" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="doc-info"><div class="doc-name">Comprobante de Domicilio (máx. 3 meses)</div><div class="doc-status" id="ds-pm-4">Pendiente</div></div><label class="doc-btn" for="f-pm-4">Subir</label><input type="file" id="f-pm-4" accept=".pdf,.jpg,.jpeg,.png" onchange="onDoc('pm',4,this)"></div>
     </div>
 
     <div class="actions">
       <div></div>
-      <button class="btn btn-primary" onclick="startExtraction()">Leer documentos y extraer datos →</button>
+      <button class="btn btn-primary" onclick="startExtraction()">Extraer datos y generar contrato →</button>
     </div>
   </div>
 </div>
 
-<!-- ═══════════ STEP 2 ═══════════ -->
+<!-- ══ STEP 2: EXTRACCIÓN AUTOMÁTICA + REVISIÓN ══ -->
 <div id="step2" class="hidden">
-
-  <!-- Processing panel -->
   <div class="card" id="proc-card">
-    <div class="card-title">Leyendo y extrayendo datos de los documentos</div>
+    <div class="card-title">Extracción automática de datos</div>
     <div id="proc-steps"></div>
-    <div style="margin-top:16px;font-size:.8rem;color:var(--gray-txt)" id="proc-note"></div>
+    <div style="margin-top:14px;font-size:.8rem;color:var(--gray-txt)" id="proc-note"></div>
   </div>
 
-  <!-- Review form (shown after extraction) -->
   <div class="card hidden" id="review-card">
-    <div class="card-title" id="rev-title">Datos extraídos — Revisa y corrige antes de generar el contrato</div>
-    <div class="info-box" id="rev-info">Los campos marcados con <span style="color:var(--green);font-weight:700">● Auto</span> fueron detectados automáticamente. Los marcados con <span style="color:var(--amber);font-weight:700">● Manual</span> requieren captura manual.</div>
+    <div class="card-title" id="rev-title">Datos extraídos — Verifica y corrige si es necesario</div>
+    <div class="info-box" id="rev-info">Todos los campos fueron extraídos automáticamente de los documentos. Los campos en <span style="color:var(--amber);font-weight:700">amarillo</span> no se detectaron — captúralos manualmente.</div>
 
-    <!-- PF review -->
     <div id="rev-pf" class="hidden">
-      <div class="rev-section">
-        <div class="rev-section-title">Datos Personales</div>
-        <div class="rev-grid">
-          <div class="fld span2"><label>Nombre completo <span class="req">*</span> <span class="src manual" id="src-pf-nombre">Manual</span></label><input type="text" id="pf-nombre" placeholder="Nombre completo del cliente"></div>
-          <div class="fld"><label>RFC <span class="req">*</span> <span class="src" id="src-pf-rfc">Auto</span></label><input type="text" id="pf-rfc" placeholder="RFC con homoclave" style="text-transform:uppercase"></div>
-          <div class="fld"><label>CURP <span class="req">*</span> <span class="src" id="src-pf-curp">Auto</span></label><input type="text" id="pf-curp" placeholder="CURP" style="text-transform:uppercase"></div>
-          <div class="fld"><label>Clave CIC (INE) <span class="req">*</span> <span class="src" id="src-pf-cic">Auto</span></label><input type="text" id="pf-cic" placeholder="Número CIC de la credencial"></div>
-          <div class="fld"><label>Vigencia del contrato <span class="req">*</span> <span class="src manual" id="src-pf-vig">Manual</span></label><input type="text" id="pf-vigencia" placeholder="Ej. 12 (DOCE)"><div class="hint">Número y letra: 12 (DOCE)</div></div>
-        </div>
+      <div class="sec-div">Datos Personales</div>
+      <div class="rev-grid">
+        <div class="fld s2"><label>Nombre completo <span class="req">*</span> <span class="field-auto" id="lbl-pf-nombre"></span></label><input type="text" id="pf-nombre" placeholder="Extraído de RFC o INE"></div>
+        <div class="fld"><label>RFC <span class="req">*</span> <span class="field-auto" id="lbl-pf-rfc"></span></label><input type="text" id="pf-rfc" placeholder="RFC" style="text-transform:uppercase"></div>
+        <div class="fld"><label>CURP <span class="req">*</span> <span class="field-auto" id="lbl-pf-curp"></span></label><input type="text" id="pf-curp" placeholder="CURP" style="text-transform:uppercase"></div>
+        <div class="fld"><label>Clave CIC (INE) <span class="req">*</span> <span class="field-auto" id="lbl-pf-cic"></span></label><input type="text" id="pf-cic" placeholder="Número CIC"></div>
+        <div class="fld"><label>Correo electrónico <span class="req">*</span> <span class="field-auto" id="lbl-pf-email"></span></label><input type="email" id="pf-email" placeholder="correo@dominio.com"></div>
       </div>
-      <div class="rev-section">
-        <div class="rev-section-title">Contacto y Domicilio</div>
-        <div class="rev-grid">
-          <div class="fld span2"><label>Domicilio completo <span class="req">*</span> <span class="src" id="src-pf-dom">Auto</span></label><input type="text" id="pf-domicilio" placeholder="Calle, número, colonia, municipio, estado, CP"></div>
-          <div class="fld"><label>Correo electrónico <span class="req">*</span> <span class="src manual">Manual</span></label><input type="email" id="pf-email" placeholder="cliente@empresa.com"></div>
-          <div class="fld"><label>Teléfono <span class="req">*</span> <span class="src manual">Manual</span></label><input type="tel" id="pf-tel" placeholder="55 1234 5678"></div>
-          <div class="fld"><label>WhatsApp</label><input type="tel" id="pf-wa" placeholder="55 1234 5678"></div>
-          <div class="fld"><label>Fecha del contrato <span class="req">*</span> <span class="src manual">Manual</span></label><input type="date" id="pf-fecha"></div>
-        </div>
-      </div>
-      <div class="rev-section">
-        <div class="rev-section-title">Ejecutivo Averix</div>
-        <div class="rev-grid">
-          <div class="fld"><label>Nombre del comercial <span class="req">*</span></label><input type="text" id="pf-comercial" placeholder="Ejecutivo Averix"></div>
-          <div class="fld"><label>Correo comercial <span class="req">*</span></label><input type="email" id="pf-email-av" placeholder="ejecutivo@averix.com.mx"></div>
-          <div class="fld"><label>Teléfono comercial</label><input type="tel" id="pf-tel-av" placeholder="55 1234 5678"></div>
-          <div class="fld"><label>WhatsApp comercial</label><input type="tel" id="pf-wa-av" placeholder="55 1234 5678"></div>
-        </div>
+      <div class="sec-div">Domicilio</div>
+      <div class="rev-grid cols1">
+        <div class="fld"><label>Domicilio completo <span class="req">*</span> <span class="field-auto" id="lbl-pf-dom"></span></label><input type="text" id="pf-domicilio" placeholder="Calle, número, colonia, municipio, estado, CP"></div>
       </div>
     </div>
 
-    <!-- PM review -->
     <div id="rev-pm" class="hidden">
-      <div class="rev-section">
-        <div class="rev-section-title">Datos de la Empresa</div>
-        <div class="rev-grid">
-          <div class="fld span2"><label>Razón Social <span class="req">*</span> <span class="src" id="src-pm-razon">Auto</span></label><input type="text" id="pm-razon" placeholder="Sin S.A. DE C.V." style="text-transform:uppercase"><div class="hint">Se agrega automáticamente ", S.A. DE C.V." al contrato</div></div>
-          <div class="fld"><label>RFC <span class="req">*</span> <span class="src" id="src-pm-rfc">Auto</span></label><input type="text" id="pm-rfc" placeholder="RFC empresa" style="text-transform:uppercase"></div>
-          <div class="fld"><label>Domicilio fiscal <span class="req">*</span> <span class="src" id="src-pm-dom">Auto</span></label><input type="text" id="pm-domicilio" placeholder="Domicilio completo"></div>
-        </div>
+      <div class="sec-div">Datos de la Empresa</div>
+      <div class="rev-grid">
+        <div class="fld s2"><label>Razón Social <span class="req">*</span> <span class="field-auto" id="lbl-pm-razon"></span></label><input type="text" id="pm-razon" placeholder="Sin S.A. DE C.V." style="text-transform:uppercase"><div class="hint">Se agrega automáticamente ", S.A. DE C.V."</div></div>
+        <div class="fld"><label>RFC <span class="req">*</span> <span class="field-auto" id="lbl-pm-rfc"></span></label><input type="text" id="pm-rfc" placeholder="RFC empresa" style="text-transform:uppercase"></div>
+        <div class="fld"><label>Correo electrónico <span class="req">*</span> <span class="field-auto" id="lbl-pm-email"></span></label><input type="email" id="pm-email" placeholder="contacto@empresa.com"></div>
+        <div class="fld s2"><label>Domicilio fiscal <span class="req">*</span> <span class="field-auto" id="lbl-pm-dom"></span></label><input type="text" id="pm-domicilio" placeholder="Domicilio completo"></div>
       </div>
-      <div class="rev-section">
-        <div class="rev-section-title">Acta Constitutiva</div>
-        <div class="rev-grid cols3">
-          <div class="fld"><label>Núm. escritura pública <span class="req">*</span> <span class="src" id="src-pm-nesc">Auto</span></label><input type="text" id="pm-num-escritura" placeholder="Ej. 45,231"></div>
-          <div class="fld"><label>Fecha de la escritura <span class="req">*</span> <span class="src" id="src-pm-fesc">Auto</span></label><input type="text" id="pm-fecha-escritura" placeholder="Ej. 15 de enero del 2020"></div>
-          <div class="fld"><label>Nombre del Notario <span class="req">*</span> <span class="src" id="src-pm-not">Auto</span></label><input type="text" id="pm-notario" placeholder="Nombre del Notario"></div>
-          <div class="fld"><label>Número de Notaría <span class="req">*</span> <span class="src" id="src-pm-nnot">Auto</span></label><input type="text" id="pm-num-notario" placeholder="Ej. 42"></div>
-          <div class="fld"><label>Ciudad de la Notaría <span class="req">*</span> <span class="src" id="src-pm-cnot">Auto</span></label><input type="text" id="pm-ciudad-notario" placeholder="Ej. Ciudad de México"></div>
-          <div class="fld"><label>Ciudad Registro Público <span class="req">*</span> <span class="src" id="src-pm-crpc">Auto</span></label><input type="text" id="pm-ciudad-rpc" placeholder="Ej. Naucalpan"></div>
-          <div class="fld span3"><label>Folio Mercantil Electrónico <span class="req">*</span> <span class="src" id="src-pm-folio">Auto</span></label><input type="text" id="pm-folio" placeholder="Ej. N-2024081234"></div>
-        </div>
+      <div class="sec-div">Acta Constitutiva</div>
+      <div class="rev-grid cols3">
+        <div class="fld"><label>Núm. escritura <span class="req">*</span> <span class="field-auto" id="lbl-pm-nesc"></span></label><input type="text" id="pm-num-escritura" placeholder="Ej. 45,231"></div>
+        <div class="fld"><label>Fecha de escritura <span class="req">*</span> <span class="field-auto" id="lbl-pm-fesc"></span></label><input type="text" id="pm-fecha-escritura" placeholder="Ej. 15 de enero del 2020"></div>
+        <div class="fld"><label>Nombre del Notario <span class="req">*</span> <span class="field-auto" id="lbl-pm-not"></span></label><input type="text" id="pm-notario" placeholder="Nombre completo"></div>
+        <div class="fld"><label>Núm. Notaría <span class="req">*</span> <span class="field-auto" id="lbl-pm-nnot"></span></label><input type="text" id="pm-num-notario" placeholder="Ej. 42"></div>
+        <div class="fld"><label>Ciudad Notaría <span class="req">*</span> <span class="field-auto" id="lbl-pm-cnot"></span></label><input type="text" id="pm-ciudad-notario" placeholder="Ej. Ciudad de México"></div>
+        <div class="fld"><label>Ciudad Reg. Público <span class="req">*</span> <span class="field-auto" id="lbl-pm-crpc"></span></label><input type="text" id="pm-ciudad-rpc" placeholder="Ej. Naucalpan"></div>
+        <div class="fld s3"><label>Folio Mercantil Electrónico <span class="req">*</span> <span class="field-auto" id="lbl-pm-folio"></span></label><input type="text" id="pm-folio" placeholder="Ej. N-2024081234"></div>
       </div>
-      <div class="rev-section">
-        <div class="rev-section-title">Representante Legal</div>
-        <div class="rev-grid">
-          <div class="fld span2"><label>Nombre completo del Representante Legal <span class="req">*</span> <span class="src" id="src-pm-rl">Auto</span></label><input type="text" id="pm-rl" placeholder="Nombre completo"></div>
-          <div class="fld"><label>Núm. escritura Poder Notarial <span class="req">*</span> <span class="src" id="src-pm-npod">Auto</span></label><input type="text" id="pm-num-poder" placeholder="Ej. 45,232"></div>
-          <div class="fld"><label>Nombre del Notario del Poder <span class="req">*</span> <span class="src" id="src-pm-notpod">Auto</span></label><input type="text" id="pm-notario-poder" placeholder="Nombre del Notario"></div>
-          <div class="fld"><label>Núm. Notaría del Poder <span class="req">*</span> <span class="src" id="src-pm-nnpod">Auto</span></label><input type="text" id="pm-num-notario-poder" placeholder="Ej. 42"></div>
-          <div class="fld"><label>Ciudad Notaría del Poder <span class="req">*</span> <span class="src" id="src-pm-cpod">Auto</span></label><input type="text" id="pm-ciudad-poder" placeholder="Ej. Ciudad de México"></div>
-        </div>
-      </div>
-      <div class="rev-section">
-        <div class="rev-section-title">Vigencia y Contacto</div>
-        <div class="rev-grid">
-          <div class="fld"><label>Vigencia del contrato <span class="req">*</span> <span class="src manual">Manual</span></label><input type="text" id="pm-vigencia" placeholder="Ej. 12 (DOCE)"><div class="hint">Número y letra: 12 (DOCE)</div></div>
-          <div class="fld"><label>Fecha del contrato <span class="req">*</span> <span class="src manual">Manual</span></label><input type="date" id="pm-fecha"></div>
-          <div class="fld"><label>Correo electrónico cliente <span class="req">*</span></label><input type="email" id="pm-email" placeholder="contacto@empresa.com"></div>
-          <div class="fld"><label>Teléfono cliente <span class="req">*</span></label><input type="tel" id="pm-tel" placeholder="55 1234 5678"></div>
-          <div class="fld"><label>WhatsApp cliente</label><input type="tel" id="pm-wa" placeholder="55 1234 5678"></div>
-        </div>
-      </div>
-      <div class="rev-section">
-        <div class="rev-section-title">Ejecutivo Averix</div>
-        <div class="rev-grid">
-          <div class="fld"><label>Nombre del comercial <span class="req">*</span></label><input type="text" id="pm-comercial" placeholder="Ejecutivo Averix"></div>
-          <div class="fld"><label>Correo comercial <span class="req">*</span></label><input type="email" id="pm-email-av" placeholder="ejecutivo@averix.com.mx"></div>
-          <div class="fld"><label>Teléfono comercial</label><input type="tel" id="pm-tel-av" placeholder="55 1234 5678"></div>
-          <div class="fld"><label>WhatsApp comercial</label><input type="tel" id="pm-wa-av" placeholder="55 1234 5678"></div>
-        </div>
+      <div class="sec-div">Representante Legal</div>
+      <div class="rev-grid">
+        <div class="fld s2"><label>Nombre del Representante Legal <span class="req">*</span> <span class="field-auto" id="lbl-pm-rl"></span></label><input type="text" id="pm-rl" placeholder="Nombre completo"></div>
+        <div class="fld"><label>Núm. escritura Poder <span class="req">*</span> <span class="field-auto" id="lbl-pm-npod"></span></label><input type="text" id="pm-num-poder" placeholder="Ej. 45,232"></div>
+        <div class="fld"><label>Notario del Poder <span class="req">*</span> <span class="field-auto" id="lbl-pm-notpod"></span></label><input type="text" id="pm-notario-poder" placeholder="Nombre del Notario"></div>
+        <div class="fld"><label>Núm. Notaría Poder <span class="req">*</span> <span class="field-auto" id="lbl-pm-nnpod"></span></label><input type="text" id="pm-num-notario-poder" placeholder="Ej. 42"></div>
+        <div class="fld"><label>Ciudad Notaría Poder <span class="req">*</span> <span class="field-auto" id="lbl-pm-cpod"></span></label><input type="text" id="pm-ciudad-poder" placeholder="Ej. Ciudad de México"></div>
       </div>
     </div>
 
     <div class="actions">
       <button class="btn btn-secondary" onclick="goStep(1)">← Cambiar documentos</button>
-      <button class="btn btn-primary" onclick="generateContract()">Generar Contrato →</button>
+      <button class="btn btn-primary" onclick="generateContract()">Generar contrato completo →</button>
     </div>
   </div>
 </div>
 
-<!-- ═══════════ STEP 3 ═══════════ -->
+<!-- ══ STEP 3: CONTRATO ══ -->
 <div id="step3" class="hidden">
   <div id="val-card" class="val-box ok" style="margin-bottom:18px">
     <div class="val-title" id="val-title">✅ Contrato generado correctamente</div>
@@ -451,9 +367,9 @@ input[type=file]{display:none}
   </div>
   <div class="card viewer-card">
     <div class="card-title" style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px">
-      <span>Contrato Marco — Vista Completa</span>
+      <span>Contrato Marco Completo</span>
       <div class="btn-group">
-        <button class="btn btn-secondary" onclick="goStep(2)">← Editar datos</button>
+        <button class="btn btn-secondary" onclick="goStep(2)">← Editar</button>
         <button class="btn btn-success" onclick="downloadPDF()">⬇ PDF</button>
         <button class="btn btn-primary" onclick="window.print()">🖨 Imprimir</button>
       </div>
@@ -463,384 +379,285 @@ input[type=file]{display:none}
 </div>
 
 </main>
-
 <div class="loader" id="loader"><div class="loader-box"><div class="loader-spin"></div><div class="loader-txt" id="loader-txt">Procesando...</div></div></div>
 
 <script>
-// ─── STATE ───
-let clientType = null;
-let docFiles = { pf: [null,null,null], pm: [null,null,null,null,null] };
-let extractedText = {};
-
-// ─── PDF.js setup ───
 pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.worker.min.js';
 
-// ─── STEP NAV ───
+let clientType = null;
+let vigencia = null, vigenciaLabel = null;
+let docFiles = { pf:[null,null,null], pm:[null,null,null,null,null] };
+
+// ── STEP NAV ──
 function goStep(n) {
   [1,2,3].forEach(i => {
-    document.getElementById(`step${i}`).classList.toggle('hidden', i !== n);
-    const s = document.getElementById(`stp${i}`), sn = document.getElementById(`sn${i}`);
+    document.getElementById(`step${i}`).classList.toggle('hidden', i!==n);
+    const s=document.getElementById(`stp${i}`), sn=document.getElementById(`sn${i}`);
     s.classList.remove('active','done');
-    if (i < n) { s.classList.add('done'); sn.textContent = '✓'; }
-    if (i === n) { s.classList.add('active'); sn.textContent = i; }
-    if (i > n) sn.textContent = i;
+    if(i<n){s.classList.add('done');sn.textContent='✓';}
+    if(i===n){s.classList.add('active');sn.textContent=i;}
+    if(i>n) sn.textContent=i;
   });
   window.scrollTo(0,0);
 }
 
-// ─── TYPE SELECT ───
+// ── TYPE ──
 function selectType(t) {
   clientType = t;
-  document.getElementById('tc-pf').classList.toggle('selected', t==='pf');
-  document.getElementById('tc-pm').classList.toggle('selected', t==='pm');
+  ['pf','pm'].forEach(x => {
+    document.getElementById(`tc-${x}`).classList.toggle('selected', x===t);
+    document.getElementById(`dg-${x}`).classList.toggle('hidden', x!==t);
+  });
   document.getElementById('docs-card').classList.remove('hidden');
-  document.getElementById('dg-pf').classList.toggle('hidden', t!=='pf');
-  document.getElementById('dg-pm').classList.toggle('hidden', t!=='pm');
-  document.getElementById('docs-title').innerHTML =
-    `Documentación <span class="tag ${t==='pf'?'tag-pf':'tag-pm'}">${t==='pf'?'Persona Física':'Persona Moral'}</span>`;
+  document.getElementById('docs-title').innerHTML = `Documentación — <span class="tag ${t==='pf'?'tag-pf':'tag-pm'}">${t==='pf'?'Persona Física':'Persona Moral'}</span>`;
 }
 
-// ─── DOC UPLOAD ───
-function onDocUpload(type, idx, inp) {
-  if (!inp.files || !inp.files[0]) return;
+// ── VIGENCIA ──
+function selectVig(n, lbl) {
+  vigencia = n; vigenciaLabel = lbl;
+  [12,24,36].forEach(m => document.getElementById(`vb-${m}`).classList.toggle('sel', m===n));
+}
+
+// ── DOC UPLOAD ──
+function onDoc(type, idx, inp) {
+  if(!inp.files||!inp.files[0]) return;
   docFiles[type][idx] = inp.files[0];
   document.getElementById(`di-${type}-${idx}`).classList.add('ok');
   document.getElementById(`ds-${type}-${idx}`).textContent = '✓ ' + inp.files[0].name;
 }
 
-// ─── TEXT EXTRACTION ───
+// ── EXTRACTION ──
 async function extractPDF(file, stepId) {
   try {
     const ab = await file.arrayBuffer();
     const pdf = await pdfjsLib.getDocument({ data: ab }).promise;
     const maxPages = Math.min(pdf.numPages, 10);
-
-    // 1. Intentar extracción de texto nativo
     let text = '';
-    for (let i = 1; i <= maxPages; i++) {
+    for(let i=1;i<=maxPages;i++) {
       const page = await pdf.getPage(i);
       const tc = await page.getTextContent();
-      text += tc.items.map(x => x.str).join(' ') + '\n';
+      text += tc.items.map(x=>x.str).join(' ') + '\n';
     }
-
-    // Si hay suficiente texto, devolverlo directamente
-    if (text.trim().length > 80) return text;
-
-    // 2. PDF escaneado: renderizar páginas como canvas y aplicar OCR
-    if (stepId) setProcStep(stepId, 'running', 'PDF escaneado detectado — aplicando OCR...');
+    if(text.trim().length > 80) return text;
+    // PDF escaneado: renderizar + OCR
+    if(stepId) setProcStep(stepId,'running','PDF escaneado — aplicando OCR...');
     let ocrText = '';
-    for (let i = 1; i <= Math.min(maxPages, 5); i++) {
+    for(let i=1;i<=Math.min(maxPages,5);i++) {
       const page = await pdf.getPage(i);
-      const viewport = page.getViewport({ scale: 2.5 });
+      const vp = page.getViewport({scale:2.5});
       const canvas = document.createElement('canvas');
-      canvas.width = viewport.width;
-      canvas.height = viewport.height;
-      const ctx = canvas.getContext('2d');
-      await page.render({ canvasContext: ctx, viewport }).promise;
-      if (stepId) setProcStep(stepId, 'running', `OCR página ${i} de ${Math.min(maxPages,5)}...`);
+      canvas.width=vp.width; canvas.height=vp.height;
+      await page.render({canvasContext:canvas.getContext('2d'),viewport:vp}).promise;
+      if(stepId) setProcStep(stepId,'running',`OCR página ${i}/${Math.min(maxPages,5)}...`);
       try {
-        const { data: { text: pt } } = await Tesseract.recognize(canvas, 'spa');
+        const {data:{text:pt}} = await Tesseract.recognize(canvas,'spa');
         ocrText += pt + '\n';
-      } catch(e) {}
+      } catch(e){}
     }
     return ocrText;
-  } catch(e) { return ''; }
+  } catch(e){ return ''; }
 }
 
 async function extractImage(file) {
   try {
-    const { data: { text } } = await Tesseract.recognize(file, 'spa');
+    const {data:{text}} = await Tesseract.recognize(file,'spa');
     return text;
-  } catch(e) { return ''; }
+  } catch(e){ return ''; }
 }
 
 async function extractText(file, stepId) {
-  if (!file) return '';
-  if (file.type === 'application/pdf') return extractPDF(file, stepId);
+  if(!file) return '';
+  if(file.type==='application/pdf') return extractPDF(file, stepId);
   return extractImage(file);
 }
 
-// ─── FIELD EXTRACTION ───
-function findRFC(txt) {
-  const m = txt.match(/\b([A-ZÑ&]{3,4}\d{6}[A-Z0-9]{3})\b/i);
-  return m ? m[1].toUpperCase() : '';
-}
-function findCURP(txt) {
-  const m = txt.match(/\b([A-Z][AEIOU][A-Z]{2}\d{6}[HM][A-Z]{2}[B-DF-HJ-NP-TV-Z]{3}[A-Z0-9]\d)\b/i);
-  return m ? m[1].toUpperCase() : '';
-}
-function findCIC(txt) {
-  // Look for CIC followed by numbers, or standalone 10-digit number near "CIC"
-  let m = txt.match(/CIC[^0-9A-Z]*([0-9]{8,12})/i);
-  if (m) return m[1];
-  m = txt.match(/clave[^0-9]*([0-9]{10})/i);
-  return m ? m[1] : '';
-}
-function findAddress(txt) {
-  // Look for common address patterns
-  let m = txt.match(/domicilio[^:]*:\s*([^\n\r]{10,80})/i);
-  if (m) return m[1].trim();
-  m = txt.match(/(calle|av\.|avenida|blvd\.)[^\n\r]{5,60}(col\.|colonia)[^\n\r]{5,40}/i);
-  return m ? m[0].trim() : '';
-}
-function findCompanyName(txt) {
-  // Look for S.A. DE C.V. or S.A.P.I. patterns
-  let m = txt.match(/([A-ZÁÉÍÓÚÑ][A-ZÁÉÍÓÚÑ\s,\.]{3,60}),?\s+S\.?\s*A\.?\s*(DE\s*C\.?\s*V\.?|P\.?\s*I\.?)/i);
-  if (m) return m[0].replace(/,?\s*S\.?\s*A\.?.*/i, '').trim().toUpperCase();
-  // Try "Denominación Social" pattern
-  m = txt.match(/denominaci[oó]n social[^:]*:\s*([^\n\r]{5,80})/i);
-  if (m) return m[1].replace(/S\.?\s*A\.?.*/i,'').trim().toUpperCase();
-  return '';
-}
-function findEscritura(txt) {
-  let m = txt.match(/escritura p[uú]blica\s+n[uú]mero\s+([\d,\.]+)/i);
-  if (m) return m[1];
-  m = txt.match(/p[oó]liza\s+n[uú]mero\s+([\d,\.]+)/i);
-  return m ? m[1] : '';
-}
-function findFolio(txt) {
-  let m = txt.match(/folio\s+mercantil\s+electr[oó]nico\s+n[uú]mero\s+([\w\-]+)/i);
-  if (m) return m[1];
-  m = txt.match(/folio\s+mercantil[^:]*:\s*([\w\-]+)/i);
-  return m ? m[1] : '';
-}
-function findNotarioName(txt) {
-  let m = txt.match(/licenciado\s+([\w\s]{5,40}),?\s+[nN]otario/i);
-  if (m) return m[1].trim();
-  m = txt.match(/ante\s+el\s+licenciado\s+([\w\s]{5,40}),/i);
-  return m ? m[1].trim() : '';
-}
-function findNotarioNum(txt) {
-  let m = txt.match(/[nN]otario\s+P[uú]blico\s+n[uú]mero\s+([\d]+)/i);
-  if (m) return m[1];
-  m = txt.match(/notar[ií]a\s+(?:p[uú]blica\s+)?(?:n[uú]mero\s+)?([\d]+)/i);
-  return m ? m[1] : '';
-}
-function findCity(txt) {
-  // Look for "de [City]" patterns near notario references
-  let m = txt.match(/[nN]otario\s+P[uú]blico\s+n[uú]mero\s+\d+\s+de\s+([\w\s]{4,30})[,\.]/i);
-  if (m) return m[1].trim();
-  m = txt.match(/corredor[ía]+\s+p[uú]blica[^d]+de\s+([\w\s]{4,25})[,\.]/i);
-  return m ? m[1].trim() : '';
-}
-function findRPCCity(txt) {
-  let m = txt.match(/Registro\s+P[uú]blico\s+de\s+Comercio\s+de\s+([\w\s]{4,30})[,\.]/i);
-  return m ? m[1].trim() : '';
-}
-function findRepLegal(txt) {
-  let m = txt.match(/representante\s+legal[^:]*:\s*([\w\s]{5,50})[,\.]/i);
-  if (m) return m[1].trim();
-  m = txt.match(/se[ñn]or\(a\)\s+([\w\s]{5,50}),?\s+cuenta/i);
-  return m ? m[1].trim() : '';
-}
-function findFechaEscritura(txt) {
-  let m = txt.match(/de\s+fecha\s+([\d]{1,2}\s+de\s+[a-záéíóú]+\s+del?\s+[\d]{4})/i);
-  return m ? m[1] : '';
-}
+function sleep(ms){ return new Promise(r=>setTimeout(r,ms)); }
 
-// ─── PROCESS STEP UI ───
 function setProcStep(id, state, desc) {
-  const el = document.getElementById(id);
-  if (!el) return;
-  const icon = el.querySelector('.proc-icon');
-  const descEl = el.querySelector('.proc-desc');
-  icon.className = 'proc-icon ' + state;
-  icon.textContent = state === 'done' ? '✓' : state === 'err' ? '✗' : state === 'running' ? '⟳' : '○';
-  if (state === 'running') icon.classList.add('spin');
-  if (descEl && desc) descEl.textContent = desc;
+  const el=document.getElementById(id); if(!el) return;
+  const icon=el.querySelector('.proc-icon'), descEl=el.querySelector('.proc-desc');
+  icon.className='proc-icon '+state;
+  icon.classList.toggle('spin', state==='running');
+  icon.textContent = state==='done'?'✓':state==='err'?'!':(state==='running'?'⟳':'○');
+  if(descEl&&desc) descEl.textContent=desc;
 }
 
 function makeProcStep(id, title, desc) {
-  return `<div class="proc-step" id="${id}">
-    <div class="proc-icon wait">○</div>
-    <div class="proc-info">
-      <div class="proc-title">${title}</div>
-      <div class="proc-desc">${desc}</div>
-      <div class="proc-bar-wrap hidden" id="${id}-bar"><div class="proc-bar" id="${id}-pb"></div></div>
-    </div>
-  </div>`;
+  return `<div class="proc-step" id="${id}"><div class="proc-icon wait">○</div><div class="proc-info"><div class="proc-title">${title}</div><div class="proc-desc">${desc}</div></div></div>`;
 }
 
-function setFilled(fieldId, value, srcId, isAuto) {
-  const el = document.getElementById(fieldId);
-  if (!el) return;
-  if (value) {
-    el.value = value;
-    el.classList.add('auto-filled');
-  }
-  if (srcId) {
-    const src = document.getElementById(srcId);
-    if (src) {
-      src.textContent = isAuto && value ? 'Auto' : 'Manual';
-      src.className = 'src ' + (isAuto && value ? '' : 'manual');
-    }
+// ── FIELD HELPERS ──
+function findRFC(txt){ const m=txt.match(/\b([A-ZÑ&]{3,4}\d{6}[A-Z0-9]{3})\b/i); return m?m[1].toUpperCase():''; }
+function findCURP(txt){ const m=txt.match(/\b([A-Z][AEIOU][A-Z]{2}\d{6}[HM][A-Z]{2}[B-DF-HJ-NP-TV-Z]{3}[A-Z0-9]\d)\b/i); return m?m[1].toUpperCase():''; }
+function findCIC(txt){
+  let m=txt.match(/CIC[^\d]*(\d{8,12})/i); if(m) return m[1];
+  m=txt.match(/clave[^\d]*(\d{10})/i); return m?m[1]:'';
+}
+function findEmail(txt){ const m=txt.match(/\b([a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,})\b/); return m?m[1]:''; }
+function findPhone(txt){ const m=txt.match(/(?:tel[ée]fono|tel\.|cel\.?)[^\d]*(\d[\d\s\-]{8,14})/i); return m?m[1].replace(/\s/g,''):''; }
+function findName(txt){
+  let m=txt.match(/nombre[^:]*:\s*([A-ZÁÉÍÓÚÑ][A-ZÁÉÍÓÚÑ\s]{4,50})\n/i); if(m) return m[1].trim();
+  m=txt.match(/contribuyente[^:]*:\s*([A-ZÁÉÍÓÚÑ][A-ZÁÉÍÓÚÑ\s]{4,60})\n/i); return m?m[1].trim():'';
+}
+function findAddress(txt){
+  let m=txt.match(/domicilio[^:]*:\s*([^\n\r]{12,100})/i); if(m) return m[1].trim();
+  m=txt.match(/(calle|av\.|avenida)[^\n\r]{5,80}/i); return m?m[0].trim():'';
+}
+function findCompany(txt){
+  let m=txt.match(/([A-ZÁÉÍÓÚÑ][A-ZÁÉÍÓÚÑ\s,\.]{3,60}),?\s+S\.?\s*A\.?\s*(DE\s*C\.?\s*V\.?|P\.?\s*I\.?)/i);
+  if(m) return m[0].replace(/,?\s*S\.?\s*A\.?.*/i,'').trim().toUpperCase();
+  m=txt.match(/raz[oó]n social[^:]*:\s*([^\n\r]{4,80})/i);
+  return m?m[1].replace(/S\.?\s*A\.?.*/i,'').trim().toUpperCase():'';
+}
+function findEscritura(txt){ let m=txt.match(/escritura p[uú]blica[^\d]*n[uú]mero\s*([\d,\.]+)/i); if(m)return m[1]; m=txt.match(/p[oó]liza\s+n[uú]mero\s*([\d,\.]+)/i); return m?m[1]:''; }
+function findFolio(txt){ let m=txt.match(/folio\s+mercantil[^\d]*n[uú]mero\s*([\w\-]+)/i); if(m)return m[1]; m=txt.match(/folio\s+mercantil[^:]*:\s*([\w\-]+)/i); return m?m[1]:''; }
+function findNotarioName(txt){ let m=txt.match(/licenciado\s+([\w\s]{5,40}),?\s+[nN]otario/i); if(m)return m[1].trim(); m=txt.match(/ante\s+el\s+licenciado\s+([\w\s]{5,40})[,\.]/i); return m?m[1].trim():''; }
+function findNotarioNum(txt){ let m=txt.match(/[nN]otario\s+P[uú]blico\s+n[uú]mero\s+(\d+)/i); if(m)return m[1]; m=txt.match(/corredor[ií]a\s+p[uú]blica\s+n[uú]mero\s+(\d+)/i); return m?m[1]:''; }
+function findCity(txt){ let m=txt.match(/[nN]otario\s+P[uú]blico\s+n[uú]mero\s+\d+\s+de\s+([\w\s]{4,30})[,\.]/i); if(m)return m[1].trim(); m=txt.match(/corredor[ií]a\s+p[uú]blica\s+n[uú]mero\s+\d+\s+de\s+([\w\s]{4,25})[,\.]/i); return m?m[1].trim():''; }
+function findRPCCity(txt){ const m=txt.match(/Registro\s+P[uú]blico\s+de\s+Comercio\s+de\s+([\w\s]{4,30})[,\.]/i); return m?m[1].trim():''; }
+function findRL(txt){ let m=txt.match(/representante\s+legal[^:]*:\s*([\w\s]{5,60})[,\.]/i); if(m)return m[1].trim(); m=txt.match(/se[ñn]or[^\w]*([\w\s]{5,50}),?\s+cuenta\s+con/i); return m?m[1].trim():''; }
+function findFechaEsc(txt){ const m=txt.match(/de\s+fecha\s+([\d]{1,2}\s+de\s+[a-záéíóú]+\s+del?\s+\d{4})/i); return m?m[1]:''; }
+
+function setField(id, val, lblId) {
+  const el=document.getElementById(id); if(!el) return;
+  el.value = val||'';
+  if(val){ el.classList.add('auto-ok'); }
+  if(lblId){
+    const lbl=document.getElementById(lblId); if(!lbl) return;
+    lbl.textContent = val ? '● Auto' : '● Capturar';
+    lbl.className = val ? 'field-auto' : 'field-empty';
   }
 }
 
-// ─── MAIN EXTRACTION FLOW ───
+// ── MAIN FLOW ──
 async function startExtraction() {
-  if (!clientType) { alert('Selecciona el tipo de persona primero.'); return; }
+  if(!clientType){ alert('Selecciona el tipo de persona primero.'); return; }
+  if(!vigencia){ alert('Selecciona la vigencia del contrato.'); return; }
+  if(!document.getElementById('av-nombre').value.trim()){ alert('Ingresa el nombre del ejecutivo Averix.'); return; }
+  if(!document.getElementById('av-email').value.trim()){ alert('Ingresa el correo del ejecutivo Averix.'); return; }
   const files = docFiles[clientType].filter(Boolean);
-  if (!files.length) { alert('Sube al menos un documento para continuar.'); return; }
+  if(!files.length){ alert('Sube al menos un documento para continuar.'); return; }
 
   goStep(2);
 
-  const docNames = clientType === 'pf'
-    ? ['Constancia de Situación Fiscal','Identificación oficial','Comprobante de Domicilio']
-    : ['Constancia de Situación Fiscal','Acta Constitutiva','Poder Notarial','Identificación del Representante Legal','Comprobante de Domicilio'];
+  const docNames = clientType==='pf'
+    ? ['Constancia Situación Fiscal','Identificación oficial','Comprobante de Domicilio']
+    : ['Constancia Situación Fiscal','Acta Constitutiva','Poder Notarial','Identificación Representante Legal','Comprobante de Domicilio'];
 
-  // Build processing steps HTML
-  const procEl = document.getElementById('proc-steps');
-  let stepsHtml = makeProcStep('ps-overall','Iniciando proceso de lectura','Preparando extracción de datos...');
-  docFiles[clientType].forEach((f, i) => {
-    if (f) stepsHtml += makeProcStep(`ps-doc-${i}`, `Leyendo: ${docNames[i]}`, f.name);
-  });
-  stepsHtml += makeProcStep('ps-extract','Analizando y extrayendo campos del contrato','Identificando RFC, CURP, nombres, datos notariales...');
-  stepsHtml += makeProcStep('ps-validate','Validando datos extraídos','Verificando completitud y formato...');
-  procEl.innerHTML = stepsHtml;
+  let stepsHtml = makeProcStep('ps-init','Iniciando extracción','Preparando lectura de documentos...');
+  docFiles[clientType].forEach((f,i) => { if(f) stepsHtml += makeProcStep(`ps-${i}`,`Leyendo: ${docNames[i]}`,f.name); });
+  stepsHtml += makeProcStep('ps-ext','Analizando y extrayendo campos','Identificando todos los datos del contrato...');
+  stepsHtml += makeProcStep('ps-fill','Llenando contrato','Completando todos los campos automáticamente...');
+  document.getElementById('proc-steps').innerHTML = stepsHtml;
 
   await sleep(400);
-  setProcStep('ps-overall','running','Leyendo documentos...');
-  await sleep(600);
-  setProcStep('ps-overall','done','Proceso iniciado correctamente');
+  setProcStep('ps-init','running','Iniciando...');
+  await sleep(500);
+  setProcStep('ps-init','done','Listo');
 
-  // Extract text from each document
+  // Extraer textos
+  const docKeys = clientType==='pf' ? ['rfc','ine','dom'] : ['rfc','acta','poder','ine','dom'];
   const texts = {};
-  const docKeys = clientType === 'pf' ? ['rfc','ine','dom'] : ['rfc','acta','poder','ine','dom'];
-
-  for (let i = 0; i < docFiles[clientType].length; i++) {
-    const f = docFiles[clientType][i];
-    if (!f) continue;
-    setProcStep(`ps-doc-${i}`, 'running', `Leyendo ${f.name}...`);
-    await sleep(300);
-    const txt = await extractText(f, `ps-doc-${i}`);
+  for(let i=0;i<docFiles[clientType].length;i++){
+    const f=docFiles[clientType][i]; if(!f) continue;
+    setProcStep(`ps-${i}`,'running',`Leyendo ${f.name}...`);
+    const txt = await extractText(f, `ps-${i}`);
     texts[docKeys[i]] = txt;
-    setProcStep(`ps-doc-${i}`, txt.length > 20 ? 'done' : 'err',
-      txt.length > 20 ? `${txt.length} caracteres extraídos` : 'No se pudo leer — intenta con un PDF sin contraseña o imagen de mayor resolución');
-    await sleep(200);
+    setProcStep(`ps-${i}`, txt.length>20?'done':'err',
+      txt.length>20 ? `${txt.length} caracteres extraídos` : 'Texto no detectado (imagen baja resolución o PDF protegido)');
+    await sleep(100);
   }
 
-  // Extract fields
-  setProcStep('ps-extract','running','Identificando campos...');
-  await sleep(800);
-  const allText = Object.values(texts).join('\n');
+  setProcStep('ps-ext','running','Analizando...');
+  await sleep(700);
+  const all = Object.values(texts).join('\n');
 
-  if (clientType === 'pf') {
-    const rfcTxt = texts.rfc || allText;
-    setFilled('pf-rfc',    findRFC(rfcTxt),     'src-pf-rfc',  true);
-    setFilled('pf-curp',   findCURP(rfcTxt) || findCURP(allText), 'src-pf-curp', true);
-    setFilled('pf-cic',    findCIC(texts.ine || allText), 'src-pf-cic', true);
-    setFilled('pf-domicilio', findAddress(texts.dom || rfcTxt) || findAddress(allText), 'src-pf-dom', true);
-    // Try name from RFC doc
-    const nameM = rfcTxt.match(/nombre[^:]*:\s*([A-ZÁÉÍÓÚÑ][A-ZÁÉÍÓÚÑ\s]{4,50})\n/i);
-    if (nameM) setFilled('pf-nombre', nameM[1].trim(), 'src-pf-nombre', true);
+  if(clientType==='pf'){
+    const r=texts.rfc||'', ine=texts.ine||'', dom=texts.dom||'';
+    setField('pf-nombre', findName(r)||findName(all), 'lbl-pf-nombre');
+    setField('pf-rfc', findRFC(r)||findRFC(all), 'lbl-pf-rfc');
+    setField('pf-curp', findCURP(r)||findCURP(ine)||findCURP(all), 'lbl-pf-curp');
+    setField('pf-cic', findCIC(ine)||findCIC(all), 'lbl-pf-cic');
+    setField('pf-email', findEmail(r)||findEmail(all), 'lbl-pf-email');
+    setField('pf-domicilio', findAddress(dom)||findAddress(r)||findAddress(all), 'lbl-pf-dom');
   } else {
-    const rfcTxt = texts.rfc || '';
-    const actaTxt = texts.acta || '';
-    const poderTxt = texts.poder || '';
-    const combined = rfcTxt + '\n' + actaTxt + '\n' + poderTxt + '\n' + allText;
-    setFilled('pm-rfc',    findRFC(rfcTxt || combined),       'src-pm-rfc',   true);
-    setFilled('pm-razon',  findCompanyName(rfcTxt || combined), 'src-pm-razon', true);
-    setFilled('pm-domicilio', findAddress(texts.dom || rfcTxt) || findAddress(combined), 'src-pm-dom', true);
-    setFilled('pm-num-escritura', findEscritura(actaTxt || combined), 'src-pm-nesc', true);
-    setFilled('pm-fecha-escritura', findFechaEscritura(actaTxt || combined), 'src-pm-fesc', true);
-    setFilled('pm-notario',  findNotarioName(actaTxt || combined), 'src-pm-not',  true);
-    setFilled('pm-num-notario', findNotarioNum(actaTxt || combined), 'src-pm-nnot', true);
-    setFilled('pm-ciudad-notario', findCity(actaTxt || combined), 'src-pm-cnot', true);
-    setFilled('pm-ciudad-rpc', findRPCCity(actaTxt || combined), 'src-pm-crpc', true);
-    setFilled('pm-folio', findFolio(actaTxt || combined), 'src-pm-folio', true);
-    setFilled('pm-rl', findRepLegal(poderTxt || combined), 'src-pm-rl', true);
-    // Poder notarial data
-    setFilled('pm-num-poder', findEscritura(poderTxt), 'src-pm-npod', true);
-    setFilled('pm-notario-poder', findNotarioName(poderTxt || combined), 'src-pm-notpod', true);
-    setFilled('pm-num-notario-poder', findNotarioNum(poderTxt || combined), 'src-pm-nnpod', true);
-    setFilled('pm-ciudad-poder', findCity(poderTxt || combined), 'src-pm-cpod', true);
+    const r=texts.rfc||'', acta=texts.acta||'', poder=texts.poder||'', dom=texts.dom||'';
+    setField('pm-razon', findCompany(r)||findCompany(acta)||findCompany(all), 'lbl-pm-razon');
+    setField('pm-rfc', findRFC(r)||findRFC(all), 'lbl-pm-rfc');
+    setField('pm-email', findEmail(r)||findEmail(all), 'lbl-pm-email');
+    setField('pm-domicilio', findAddress(dom)||findAddress(r)||findAddress(all), 'lbl-pm-dom');
+    setField('pm-num-escritura', findEscritura(acta)||findEscritura(all), 'lbl-pm-nesc');
+    setField('pm-fecha-escritura', findFechaEsc(acta)||findFechaEsc(all), 'lbl-pm-fesc');
+    setField('pm-notario', findNotarioName(acta)||findNotarioName(all), 'lbl-pm-not');
+    setField('pm-num-notario', findNotarioNum(acta)||findNotarioNum(all), 'lbl-pm-nnot');
+    setField('pm-ciudad-notario', findCity(acta)||findCity(all), 'lbl-pm-cnot');
+    setField('pm-ciudad-rpc', findRPCCity(acta)||findRPCCity(all), 'lbl-pm-crpc');
+    setField('pm-folio', findFolio(acta)||findFolio(all), 'lbl-pm-folio');
+    setField('pm-rl', findRL(poder)||findRL(acta)||findRL(all), 'lbl-pm-rl');
+    setField('pm-num-poder', findEscritura(poder), 'lbl-pm-npod');
+    setField('pm-notario-poder', findNotarioName(poder)||findNotarioName(acta), 'lbl-pm-notpod');
+    setField('pm-num-notario-poder', findNotarioNum(poder)||findNotarioNum(acta), 'lbl-pm-nnpod');
+    setField('pm-ciudad-poder', findCity(poder)||findCity(acta), 'lbl-pm-cpod');
   }
-  setProcStep('ps-extract','done','Campos identificados correctamente');
 
-  // Validate
-  setProcStep('ps-validate','running','Verificando datos...');
-  await sleep(600);
-  setProcStep('ps-validate','done','Validación completada — revisa los datos a continuación');
+  setProcStep('ps-ext','done','Campos identificados');
+  setProcStep('ps-fill','running','Llenando contrato...');
+  await sleep(500);
+  setProcStep('ps-fill','done','Contrato listo para revisión');
 
-  // Show review
-  document.getElementById('proc-note').textContent = '✅ Extracción completada. Revisa los datos a continuación, corrige lo que sea necesario y genera el contrato.';
+  document.getElementById('proc-note').textContent = '✅ Extracción completada. Revisa los campos en verde (auto) y completa los amarillos si es necesario.';
   document.getElementById('review-card').classList.remove('hidden');
   document.getElementById(`rev-${clientType}`).classList.remove('hidden');
-  document.getElementById('rev-title').innerHTML = `Datos extraídos — Revisa y completa <span class="tag ${clientType==='pf'?'tag-pf':'tag-pm'}">${clientType==='pf'?'Persona Física':'Persona Moral'}</span>`;
+  document.getElementById('rev-title').innerHTML = `Datos extraídos — <span class="tag ${clientType==='pf'?'tag-pf':'tag-pm'}">${clientType==='pf'?'Persona Física':'Persona Moral'}</span>`;
 }
 
-function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
-
-// ─── CONTRACT GENERATION ───
-function v(id) { const e = document.getElementById(id); return e ? e.value.trim() : ''; }
-function fill(t) { return `<span class="c-fill">${t||'_______________'}</span>`; }
-function formatDate(ds) {
-  if (!ds) return '_______________';
-  const d = new Date(ds + 'T12:00:00');
-  const m = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
-  return `${d.getDate()} de ${m[d.getMonth()]} del ${d.getFullYear()}`;
+// ── CONTRACT BUILD ──
+function v(id){ const e=document.getElementById(id); return e?e.value.trim():''; }
+function fill(t){ return `<span class="c-fill">${t||'_______________'}</span>`; }
+function todayStr(){
+  const d=new Date(), ms=['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+  return `${d.getDate()} de ${ms[d.getMonth()]} del ${d.getFullYear()}`;
 }
 
-function generateContract() {
-  // Basic validation
-  const req = clientType === 'pf'
-    ? ['pf-rfc','pf-vigencia','pf-email','pf-fecha','pf-comercial','pf-email-av']
-    : ['pm-razon','pm-rfc','pm-vigencia','pm-fecha','pm-email','pm-comercial','pm-email-av'];
-  const missing = req.filter(id => !v(id));
-  if (missing.length) {
-    alert('Completa los campos requeridos (*) antes de generar el contrato:\n' + missing.map(id => '• ' + document.querySelector(`[id="${id}"]`)?.closest('.fld')?.querySelector('label')?.textContent?.replace('*','').replace('Auto','').replace('Manual','').trim()).join('\n'));
-    return;
-  }
-
+function generateContract(){
   showLoader('Generando contrato...');
-  setTimeout(() => {
-    const html = clientType === 'pf' ? buildPF() : buildPM();
+  setTimeout(()=>{
+    const html = clientType==='pf' ? buildPF() : buildPM();
     document.getElementById('contract-out').innerHTML = html;
     buildValidation();
     hideLoader();
     goStep(3);
-  }, 700);
+  }, 600);
 }
 
-function buildValidation() {
-  const checks = clientType === 'pf'
-    ? [{l:'Nombre del cliente',id:'pf-nombre'},{l:'RFC',id:'pf-rfc'},{l:'CURP',id:'pf-curp'},{l:'CIC (INE)',id:'pf-cic'},{l:'Vigencia',id:'pf-vigencia'},{l:'Domicilio',id:'pf-domicilio'},{l:'Correo del cliente',id:'pf-email'},{l:'Fecha del contrato',id:'pf-fecha'},{l:'Ejecutivo Averix',id:'pf-comercial'}]
-    : [{l:'Razón Social',id:'pm-razon'},{l:'RFC',id:'pm-rfc'},{l:'Representante Legal',id:'pm-rl'},{l:'Núm. escritura constitutiva',id:'pm-num-escritura'},{l:'Folio Mercantil',id:'pm-folio'},{l:'Núm. escritura Poder',id:'pm-num-poder'},{l:'Vigencia',id:'pm-vigencia'},{l:'Fecha del contrato',id:'pm-fecha'},{l:'Correo del cliente',id:'pm-email'},{l:'Ejecutivo Averix',id:'pm-comercial'}];
-  let missing = 0, html = '';
-  checks.forEach(c => {
-    const val = v(c.id);
-    if (!val) missing++;
-    html += `<li class="${val?'ok':'miss'}">${val?'✅':'❌'} ${c.l}${val?' — <strong>'+val+'</strong>':' — <strong>FALTA</strong>'}</li>`;
+function buildValidation(){
+  const checks = clientType==='pf'
+    ? [{l:'Nombre',id:'pf-nombre'},{l:'RFC',id:'pf-rfc'},{l:'CURP',id:'pf-curp'},{l:'CIC',id:'pf-cic'},{l:'Correo',id:'pf-email'},{l:'Domicilio',id:'pf-domicilio'}]
+    : [{l:'Razón Social',id:'pm-razon'},{l:'RFC',id:'pm-rfc'},{l:'Rep. Legal',id:'pm-rl'},{l:'Escritura constitutiva',id:'pm-num-escritura'},{l:'Folio Mercantil',id:'pm-folio'},{l:'Escritura Poder',id:'pm-num-poder'}];
+  let miss=0, html='';
+  checks.forEach(c=>{
+    const val=v(c.id); if(!val) miss++;
+    html+=`<li class="${val?'ok':'miss'}">${val?'✅':'⚠️'} ${c.l}${val?' — <strong>'+val+'</strong>':' — pendiente'}</li>`;
   });
-  const card = document.getElementById('val-card');
-  const title = document.getElementById('val-title');
-  if (missing > 0) {
-    card.className = 'val-box warn';
-    title.textContent = `⚠️ ${missing} campo(s) sin completar — el contrato tiene secciones vacías`;
-  } else {
-    card.className = 'val-box ok';
-    title.textContent = '✅ Contrato completo — todos los campos verificados';
-  }
-  document.getElementById('val-list').innerHTML = html;
+  const card=document.getElementById('val-card'), title=document.getElementById('val-title');
+  if(miss){ card.className='val-box warn'; title.textContent=`⚠️ ${miss} campo(s) pendientes — el contrato tiene secciones en blanco`; }
+  else { card.className='val-box ok'; title.textContent='✅ Contrato completo — todos los campos verificados'; }
+  document.getElementById('val-list').innerHTML=html;
 }
 
-// ─── PF CONTRACT ───
-function buildPF() {
-  const nombre = v('pf-nombre') || '_______________';
-  const rfc = v('pf-rfc') || '_______________';
-  const curp = v('pf-curp') || '_______________';
-  const cic = v('pf-cic') || '_______________';
-  const vig = v('pf-vigencia') || '_______________';
-  const dom = v('pf-domicilio') || '_______________';
-  const email = v('pf-email') || '_______________';
-  const tel = v('pf-tel') || '_______________';
-  const wa = v('pf-wa') || email;
-  const fecha = formatDate(v('pf-fecha'));
-  const comercial = v('pf-comercial') || '_______________';
-  const emailAv = v('pf-email-av') || '_______________';
-  const telAv = v('pf-tel-av') || '_______________';
-  const waAv = v('pf-wa-av') || telAv;
+function buildPF(){
+  const nombre=v('pf-nombre')||'_______________';
+  const rfc=v('pf-rfc')||'_______________';
+  const curp=v('pf-curp')||'_______________';
+  const cic=v('pf-cic')||'_______________';
+  const email=v('pf-email')||'_______________';
+  const dom=v('pf-domicilio')||'_______________';
+  const vig=`${vigencia} (${vigenciaLabel})`;
+  const fecha=todayStr();
+  const avNombre=v('av-nombre')||'_______________';
+  const avEmail=v('av-email')||'_______________';
+  const avTel=v('av-tel')||'_______________';
+  const avWa=v('av-wa')||avTel;
   return `
 <div class="c-title">CONTRATO MARCO DE PRESTACIÓN DE SERVICIOS TECNOLÓGICOS Y CONSULTORÍA<br>
 QUE CELEBRAN, EL SEÑOR ${fill(nombre.toUpperCase())} POR SU PROPIO DERECHO, A QUIEN EN LO SUCESIVO SE LE DENOMINARÁ EL "CLIENTE"; Y POR LA OTRA PARTE LA SOCIEDAD DENOMINADA PLATAFORMAS DIGITALES, S.A. DE C.V. REPRESENTADA POR LA SEÑORA MÓNICA TORRES MEDINA, A QUIEN EN LO SUCESIVO SE LE DENOMINARÁ EL "PROVEEDOR"; CONJUNTAMENTE LAS "PARTES", AL TENOR DE LAS SIGUIENTES DECLARACIONES Y CLÁUSULAS:</div>
@@ -850,90 +667,77 @@ QUE CELEBRAN, EL SEÑOR ${fill(nombre.toUpperCase())} POR SU PROPIO DERECHO, A Q
 <div class="c-ind">b) Su Registro Federal de Contribuyentes ${fill(rfc)} y Clave Única de Registro de Población ${fill(curp)}.</div>
 <div class="c-ind">d) Cuentan con los recursos económicos necesarios para cumplir con sus obligaciones en términos de lo establecido en el presente Contrato.</div>
 <div class="c-ind">e) Es su voluntad contratar al PROVEEDOR con el objeto de que le preste los Servicios (según dicho término se define más adelante).</div>
-<div class="c-ind">f) El presente contrato marco tiene por objeto regular la prestación de servicios tecnológicos y de consultoría por parte del PROVEEDOR al CLIENTE, comprendiendo de manera integral y conforme sea requerido por anexo, lo siguiente: 1) Fábrica de software; 2) Consultoría de sistemas; 3) Consultoría de omnicanalidad; 4) Desarrollos de soluciones impulsadas por inteligencia artificial; 5) Consultoría e implementación de plataformas SaaS; y 6) Análisis de Big Data impulsado por inteligencia artificial, (en lo sucesivo los "Servicios").</div>
-<div class="c-ind">g) Los Servicios podrán prestarse y se detallarán en Anexos individuales que se adjuntará al mismo, en las cuales se especificará el alcance de los trabajos, contraprestación, las fechas de prestación, entre otros.</div>
+<div class="c-ind">f) El presente contrato marco tiene por objeto regular la prestación de servicios tecnológicos y de consultoría por parte del PROVEEDOR al CLIENTE, comprendiendo de manera integral y conforme sea requerido por anexo, lo siguiente: 1) Fábrica de software; 2) Consultoría de sistemas; 3) Consultoría de omnicanalidad; 4) Desarrollos de soluciones impulsadas por inteligencia artificial; 5) Consultoría e implementación de plataformas SaaS; y 6) Análisis de Big Data impulsado por inteligencia artificial (en lo sucesivo los "Servicios").</div>
+<div class="c-ind">g) Los Servicios podrán prestarse y se detallarán en Anexos individuales que se adjuntará al mismo.</div>
 <div class="c-decl">II. El PROVEEDOR a través de su administrador único:</div>
 <div class="c-ind">a) Que es una persona moral válidamente constituida conforme a las leyes de los Estados Unidos Mexicanos, por póliza número 20,648, de fecha 11 de julio del 2022, otorgada ante el Licenciado Rene Gurmilan Sánchez, titular de la correduría pública número 16 de Tlalnepantla, cuyo primer testimonio quedó inscrito en el Registro Público de Comercio de Naucalpan, en el Folio Mercantil Electrónico número N-2022064331.</div>
-<div class="c-ind">b) Que su administrador único cuenta con todas las facultades necesarias para la celebración del presente contrato y que, a la fecha, dichas facultades no le han sido revocadas, modificadas o limitadas en forma alguna, según consta en la póliza número 20,648, de fecha 11 de julio del 2022.</div>
+<div class="c-ind">b) Su administrador único cuenta con todas las facultades necesarias para la celebración del presente contrato, según consta en la póliza número 20,648, de fecha 11 de julio del 2022.</div>
 <div class="c-ind">c) Cuenta con Registro Federal de Contribuyentes PDI220711CQ7.</div>
 <div class="c-ind">d) Cuenta con los elementos, experiencia y capacidad técnica, operativa, financiera, administrativa, comercial y legal necesaria para cumplir con los Servicios.</div>
 <div class="c-ind">e) Cuenta con las herramientas necesarias para el correcto desempeño de las funciones y los proyectos que le sean asignados por Anexo.</div>
 <div class="c-decl">C L Á U S U L A S</div>
 <div class="c-clause">PRIMERA.- OBJETO.</div>
-<div class="c-p">El PROVEEDOR se compromete a ofrecer al CLIENTE servicios enunciativamente pero no limitativamente relacionados con 1) Fábrica de software; 2) Consultoría de sistemas; 3) Consultoría de omnicanalidad; 4) Desarrollos de soluciones impulsadas por inteligencia artificial; 5) Consultoría e implementación de plataformas SaaS; y 6) Análisis de Big Data impulsado por inteligencia artificial, respectivamente (los "Servicios"). Los Servicios podrán prestarse y se detallarán en Anexos individuales que se adjuntarán al mismo.</div>
+<div class="c-p">El PROVEEDOR se compromete a ofrecer al CLIENTE servicios relacionados con 1) Fábrica de software; 2) Consultoría de sistemas; 3) Consultoría de omnicanalidad; 4) Desarrollos de soluciones impulsadas por inteligencia artificial; 5) Consultoría e implementación de plataformas SaaS; y 6) Análisis de Big Data impulsado por inteligencia artificial. Los Servicios se detallarán en Anexos individuales.</div>
 <div class="c-clause">SEGUNDA.- CONTRAPRESTACIÓN.</div>
-<div class="c-p">Como contraprestación por los Servicios descritos en el presente contrato marco, el CLIENTE pagará al PROVEEDOR los montos, términos y condiciones que se establezcan en cada Anexo correspondiente. El PROVEEDOR proporciona al CLIENTE la siguiente cuenta bancaria:</div>
-<div class="c-ind"><strong>TITULAR:</strong> PLATAFORMAS DIGITALES, S.A. DE C.V. &nbsp;&nbsp; <strong>INSTITUCIÓN BANCARIA:</strong> BBVA<br><strong>CLABE INTERBANCARIA:</strong> 012180001243767570 &nbsp;&nbsp; <strong>CUENTA:</strong> 0124376757</div>
+<div class="c-p">El CLIENTE pagará al PROVEEDOR los montos, términos y condiciones establecidos en cada Anexo. El PROVEEDOR proporciona al CLIENTE la siguiente cuenta bancaria:</div>
+<div class="c-ind"><strong>TITULAR:</strong> PLATAFORMAS DIGITALES, S.A. DE C.V. &nbsp; <strong>BANCO:</strong> BBVA &nbsp; <strong>CLABE:</strong> 012180001243767570 &nbsp; <strong>CUENTA:</strong> 0124376757</div>
 <div class="c-clause">SUSPENSIÓN DE SERVICIOS POR FALTA DE PAGO.</div>
-<div class="c-p">En caso de que el CLIENTE incurra en falta de pago de la contraprestación correspondiente por un periodo igual o superior a dos (2) meses consecutivos, el PROVEEDOR podrá suspender total o parcialmente la prestación de los servicios, sin necesidad de declaración judicial.</div>
+<div class="c-p">En caso de falta de pago por un periodo igual o superior a dos (2) meses consecutivos, el PROVEEDOR podrá suspender total o parcialmente la prestación de los servicios sin necesidad de declaración judicial.</div>
 <div class="c-clause">TERCERA.- IMPUESTOS.</div>
 <div class="c-p">Cada una de las Partes pagará los impuestos que resulten a su cargo derivados de la celebración y/o ejecución del presente Contrato y Anexos.</div>
 <div class="c-clause">CUARTA.- VIGENCIA, TERMINACIÓN Y RESCISIÓN.</div>
-<div class="c-p">Vigencia inicial: ${fill(vig)} meses, forzosos renovable automáticamente por tiempo indefinido, salvo aviso en contrario con 30 (Treinta) días naturales de anticipación.<br>Terminación unilateral: Con aviso previo de 30 (Treinta) días; previa liquidación de servicios.<br>Rescisión por incumplimiento: En caso de no haber subsanado un incumplimiento, mediante aviso con 30 (Treinta) días naturales de anticipación.</div>
+<div class="c-p">Vigencia inicial: ${fill(vig)} meses, forzosos, renovable automáticamente por tiempo indefinido, salvo aviso en contrario con 30 (Treinta) días naturales de anticipación.<br>Terminación unilateral: Con aviso previo de 30 días; previa liquidación de servicios.<br>Rescisión por incumplimiento: Mediante aviso con 30 días naturales de anticipación.</div>
 <div class="c-clause">QUINTA.- PENA CONVENCIONAL.</div>
-<div class="c-p">En caso de incumplimiento de las obligaciones previstas en el presente Contrato Marco, únicamente cuando así se establezca de manera expresa en el Anexo correspondiente, la Parte incumplida tendrá derecho a exigir el pago de una pena convencional en la cantidad o porcentaje que se prevea en dicho Anexo.</div>
-<div class="c-clause">SEXTA.- CANAL DE COMUNICACIÓN Y HORARIOS.</div>
-<div class="c-p">Los canales de comunicación, contactos responsables y horarios de atención serán establecidos de manera específica en cada Anexo correspondiente.</div>
-<div class="c-clause">SÉPTIMA.- ENTREGABLES.</div>
-<div class="c-p">Los entregables serán definidos de manera específica en cada Anexo correspondiente, incluyendo descripción detallada, formatos de entrega, fechas de entrega o plazos.</div>
-<div class="c-clause">OCTAVA.- ALCANCES.</div>
-<div class="c-p">El PROVEEDOR se obliga a prestar al CLIENTE los servicios descritos, comprendiendo: Fábrica de software; Consultoría de sistemas; Consultoría de omnicanalidad; Desarrollos de IA; Consultoría e implementación de plataformas SaaS; y Análisis de Big Data impulsado por IA. Los alcances específicos serán establecidos en cada Anexo.</div>
-<div class="c-clause">NOVENA A DÉCIMA.- PRUEBAS, VALIDACIÓN Y NIVELES DE SERVICIO (SLA).</div>
-<div class="c-p">Los entregables estarán sujetos a pruebas, validaciones o revisiones por parte del CLIENTE, conforme a los criterios establecidos en cada Anexo correspondiente. Los niveles de servicio (SLA), tiempos de respuesta y disponibilidad serán establecidos de manera específica en cada Anexo.</div>
+<div class="c-p">En caso de incumplimiento, únicamente cuando así se establezca en el Anexo correspondiente, la Parte incumplida tendrá derecho a exigir el pago de una pena convencional en la cantidad que se prevea en dicho Anexo.</div>
+<div class="c-clause">SEXTA A DÉCIMA.- COMUNICACIÓN, ENTREGABLES, ALCANCES, PRUEBAS Y SLA.</div>
+<div class="c-p">Los canales de comunicación, entregables, alcances detallados y niveles de servicio serán establecidos de manera específica en cada Anexo correspondiente.</div>
 <div class="c-clause">DÉCIMA PRIMERA.- ANEXOS Y PRECEDENCIA.</div>
-<div class="c-p">Cada Servicio se documentará mediante un Anexo que deberá detallar: letra de Anexo, alcance del servicio, contraprestación y condiciones, entregables, canal de comunicación, SLA y firmas. En caso de discrepancia: el Anexo prevalecerá respecto a alcances técnicos; el Contrato Marco respecto a cláusulas generales.</div>
-<div class="c-clause">DÉCIMA SEGUNDA.- CONFIDENCIALIDAD, SEGURIDAD DE LA INFORMACIÓN Y PROTECCIÓN DE DATOS PERSONALES.</div>
-<div class="c-p">Las partes se obligan a mantener la Información Confidencial en estricta confidencialidad y a no divulgarla sin consentimiento previo y por escrito de la parte titular. Las obligaciones de confidencialidad permanecerán vigentes por cinco (5) años posteriores a la terminación del contrato.</div>
+<div class="c-p">Cada Servicio se documentará mediante un Anexo que detallará: letra de Anexo, alcance del servicio, contraprestación, entregables, canal de comunicación, SLA y firmas. En caso de discrepancia: el Anexo prevalecerá respecto a alcances técnicos; el Contrato Marco respecto a cláusulas generales.</div>
+<div class="c-clause">DÉCIMA SEGUNDA.- CONFIDENCIALIDAD Y PROTECCIÓN DE DATOS PERSONALES.</div>
+<div class="c-p">Las partes se obligan a mantener la Información Confidencial en estricta confidencialidad. Las obligaciones de confidencialidad permanecerán vigentes por cinco (5) años posteriores a la terminación del contrato.</div>
 <div class="c-clause">DÉCIMA TERCERA.- PROPIEDAD INTELECTUAL.</div>
-<div class="c-p">Cada Parte conservará la titularidad de sus derechos de propiedad intelectual e industrial. Salvo que se establezca lo contrario en el Anexo correspondiente, la prestación de los servicios no implicará la cesión de dichos derechos.</div>
+<div class="c-p">Cada Parte conservará la titularidad de sus derechos de propiedad intelectual. Salvo que se establezca expresamente lo contrario en el Anexo, la prestación de servicios no implicará la cesión de dichos derechos.</div>
 <div class="c-clause">DÉCIMA CUARTA.- ANTICORRUPCIÓN Y PREVENCIÓN DE LAVADO DE DINERO.</div>
 <div class="c-p">Las partes garantizan que los recursos utilizados provienen de actividades lícitas y se obligan a cumplir con la legislación aplicable en materia de prevención de lavado de dinero.</div>
-<div class="c-clause">DÉCIMA QUINTA.- FUERZA MAYOR.</div>
-<div class="c-p">Ninguna de las Partes será responsable por incumplimientos derivados de eventos de fuerza mayor imprevisibles e inevitables fuera del control razonable de la Parte afectada.</div>
-<div class="c-clause">DÉCIMA SEXTA.- NO EXCLUSIVIDAD.</div>
-<div class="c-p">El presente Contrato no otorga exclusividad alguna entre las Partes.</div>
-<div class="c-clause">DÉCIMA SÉPTIMA A DÉCIMA NOVENA.- SERVICIOS ADICIONALES, CESIÓN Y MODIFICACIONES.</div>
-<div class="c-p">El PROVEEDOR podrá ofrecer servicios adicionales, los cuales deberán formalizarse mediante convenio modificatorio por escrito. Las Partes no podrán ceder o transferir los derechos u obligaciones derivados de este Contrato sin autorización previa y por escrito de la otra Parte. Cualquier modificación deberá realizarse mediante convenio modificatorio por escrito.</div>
+<div class="c-clause">DÉCIMA QUINTA A DÉCIMA NOVENA.- FUERZA MAYOR, NO EXCLUSIVIDAD, SERVICIOS ADICIONALES, CESIÓN Y MODIFICACIONES.</div>
+<div class="c-p">Ninguna Parte será responsable por fuerza mayor. El Contrato no otorga exclusividad. Los servicios adicionales deberán formalizarse por escrito. Las Partes no podrán ceder derechos sin autorización escrita. Las modificaciones requerirán convenio modificatorio escrito.</div>
 <div class="c-clause">VIGÉSIMA.- DOMICILIOS.</div>
-<div class="c-p">EL PROVEEDOR: Homero, número 1933, interior 201 B, Col. Polanco I Sección, Alcaldía Miguel Hidalgo, C.P. 11510, Ciudad de México.<br>Correo: ${fill(emailAv)} | Tel: ${fill(telAv)} | WhatsApp: ${fill(waAv)} | Contacto: ${fill(comercial)}</div>
-<div class="c-p">EL CLIENTE: ${fill(dom)}<br>Correo: ${fill(email)} | Tel: ${fill(tel)} | WhatsApp: ${fill(wa)}</div>
+<div class="c-p">EL PROVEEDOR: Homero No. 1933 Int. 201B, Col. Polanco I Sección, Alcaldía Miguel Hidalgo, C.P. 11510, Ciudad de México.<br>Correo: ${fill(avEmail)} | Tel: ${fill(avTel)} | WhatsApp: ${fill(avWa)} | Contacto: ${fill(avNombre)}</div>
+<div class="c-p">EL CLIENTE: ${fill(dom)}<br>Correo: ${fill(email)}</div>
 <div class="c-clause">VIGÉSIMA PRIMERA.- FIRMA ELECTRÓNICA.</div>
-<div class="c-p">Las Partes acuerdan que este contrato podrá ser firmado de manera electrónica a través de plataformas de firma digital, con la misma validez y efecto legal que una firma manuscrita.</div>
+<div class="c-p">Las Partes acuerdan que este contrato podrá ser firmado de manera electrónica, con la misma validez y efecto legal que una firma manuscrita.</div>
 <div class="c-clause">VIGÉSIMA SEGUNDA.- INTERPRETACIÓN Y CUMPLIMIENTO.</div>
-<div class="c-p">Para los efectos de interpretación y cumplimiento, las partes se someten expresamente a la jurisdicción y competencia de los Tribunales de la Ciudad de México.</div>
-<div class="c-p" style="margin-top:22px;">El presente Contrato se firma por medios electrónicos en la Ciudad de México el día ${fill(fecha)} por las partes contratantes, mismas que manifiestan que su voluntad ha sido libremente expresada.</div>
+<div class="c-p">Las partes se someten expresamente a la jurisdicción y competencia de los Tribunales de la Ciudad de México.</div>
+<div class="c-p" style="margin-top:22px;">El presente Contrato se firma por medios electrónicos en la Ciudad de México el día ${fill(fecha)} por las partes contratantes.</div>
 <table class="c-sign"><tr>
 <td><div class="c-sline"></div><div class="c-sname">${nombre.toUpperCase()}</div><div class="c-srole">EL CLIENTE — POR SU PROPIO DERECHO</div></td>
 <td><div class="c-sline"></div><div class="c-sname">MÓNICA TORRES MEDINA</div><div class="c-srole">PLATAFORMAS DIGITALES, S.A. DE C.V. — ADMINISTRADOR ÚNICO</div></td>
 </tr></table>`;
 }
 
-// ─── PM CONTRACT ───
-function buildPM() {
-  const razon = (v('pm-razon') || '_______________').toUpperCase();
-  const rfc = v('pm-rfc') || '_______________';
-  const dom = v('pm-domicilio') || '_______________';
-  const nEsc = v('pm-num-escritura') || '_______________';
-  const fEsc = v('pm-fecha-escritura') || '_______________';
-  const not = v('pm-notario') || '_______________';
-  const nNot = v('pm-num-notario') || '_______________';
-  const cNot = v('pm-ciudad-notario') || '_______________';
-  const cRPC = v('pm-ciudad-rpc') || '_______________';
-  const folio = v('pm-folio') || '_______________';
-  const rl = v('pm-rl') || '_______________';
-  const nPod = v('pm-num-poder') || '_______________';
-  const notPod = v('pm-notario-poder') || '_______________';
-  const nNotPod = v('pm-num-notario-poder') || '_______________';
-  const cPod = v('pm-ciudad-poder') || '_______________';
-  const vig = v('pm-vigencia') || '_______________';
-  const fecha = formatDate(v('pm-fecha'));
-  const email = v('pm-email') || '_______________';
-  const tel = v('pm-tel') || '_______________';
-  const wa = v('pm-wa') || email;
-  const comercial = v('pm-comercial') || '_______________';
-  const emailAv = v('pm-email-av') || '_______________';
-  const telAv = v('pm-tel-av') || '_______________';
-  const waAv = v('pm-wa-av') || telAv;
+function buildPM(){
+  const razon=(v('pm-razon')||'_______________').toUpperCase();
+  const rfc=v('pm-rfc')||'_______________';
+  const dom=v('pm-domicilio')||'_______________';
+  const email=v('pm-email')||'_______________';
+  const nEsc=v('pm-num-escritura')||'_______________';
+  const fEsc=v('pm-fecha-escritura')||'_______________';
+  const not=v('pm-notario')||'_______________';
+  const nNot=v('pm-num-notario')||'_______________';
+  const cNot=v('pm-ciudad-notario')||'_______________';
+  const cRPC=v('pm-ciudad-rpc')||'_______________';
+  const folio=v('pm-folio')||'_______________';
+  const rl=v('pm-rl')||'_______________';
+  const nPod=v('pm-num-poder')||'_______________';
+  const notPod=v('pm-notario-poder')||'_______________';
+  const nNotPod=v('pm-num-notario-poder')||'_______________';
+  const cPod=v('pm-ciudad-poder')||'_______________';
+  const vig=`${vigencia} (${vigenciaLabel})`;
+  const fecha=todayStr();
+  const avNombre=v('av-nombre')||'_______________';
+  const avEmail=v('av-email')||'_______________';
+  const avTel=v('av-tel')||'_______________';
+  const avWa=v('av-wa')||avTel;
   return `
 <div class="c-title">CONTRATO MARCO DE PRESTACIÓN DE SERVICIOS TECNOLÓGICOS Y CONSULTORÍA<br>
 Celebrado entre ${fill(razon)}, S.A. DE C.V., en su carácter de "CLIENTE" y PLATAFORMAS DIGITALES, S.A. DE C.V. en su carácter de "PROVEEDOR"; conjuntamente las "PARTES" al tenor de las siguientes Declaraciones y Cláusulas:</div>
@@ -943,46 +747,43 @@ Celebrado entre ${fill(razon)}, S.A. DE C.V., en su carácter de "CLIENTE" y PLA
 <div class="c-ind">b) Que su representante legal, el(la) señor(a) ${fill(rl)}, cuenta con todas las facultades necesarias para la celebración del presente contrato y que, a la fecha, dichas facultades no le han sido revocadas, modificadas o limitadas en forma alguna, según consta en la escritura pública número ${fill(nPod)}, otorgada ante el Licenciado ${fill(notPod)}, Notario Público número ${fill(nNotPod)} de ${fill(cPod)}.</div>
 <div class="c-ind">c) Su Registro Federal de Contribuyentes es ${fill(rfc)}.</div>
 <div class="c-ind">d) Cuenta con los recursos económicos necesarios para cumplir con sus obligaciones en términos de lo establecido en el presente Contrato.</div>
-<div class="c-ind">e) Es su voluntad contratar al PROVEEDOR con el objeto de que le preste los Servicios (según dicho término se define más adelante).</div>
-<div class="c-ind">f) El presente contrato marco tiene por objeto regular la prestación de servicios tecnológicos y de consultoría por parte del PROVEEDOR al CLIENTE, comprendiendo de manera integral y conforme sea requerido por anexo, lo siguiente: 1) Fábrica de software; 2) Consultoría de sistemas; 3) Consultoría de omnicanalidad; 4) Desarrollos de soluciones impulsadas por inteligencia artificial; 5) Consultoría e implementación de plataformas SaaS; y 6) Análisis de Big Data impulsado por inteligencia artificial, (en lo sucesivo los "Servicios").</div>
-<div class="c-ind">g) Los Servicios podrán prestarse y se detallarán en Anexos individuales que se adjuntará al mismo.</div>
+<div class="c-ind">e) Es su voluntad contratar al PROVEEDOR con el objeto de que le preste los Servicios.</div>
+<div class="c-ind">f) El presente contrato marco tiene por objeto regular la prestación de servicios: 1) Fábrica de software; 2) Consultoría de sistemas; 3) Consultoría de omnicanalidad; 4) Desarrollos de IA; 5) Plataformas SaaS; y 6) Análisis de Big Data impulsado por IA.</div>
 <div class="c-decl">II. El PROVEEDOR a través de su administrador único:</div>
-<div class="c-ind">a) Que es una persona moral válidamente constituida conforme a las leyes de los Estados Unidos Mexicanos, por póliza número 20,648, de fecha 11 de julio del 2022, otorgada ante el Licenciado Rene Gurmilan Sánchez, titular de la correduría pública número 16 de Tlalnepantla, cuyo primer testimonio quedó inscrito en el Registro Público de Comercio de Naucalpan, en el Folio Mercantil Electrónico número N-2022064331.</div>
-<div class="c-ind">b) Que su administrador único cuenta con todas las facultades necesarias para la celebración del presente contrato y que, a la fecha, dichas facultades no le han sido revocadas ni limitadas, según consta en la póliza número 20,648, de fecha 11 de julio del 2022.</div>
+<div class="c-ind">a) Que es una persona moral válidamente constituida, por póliza número 20,648, de fecha 11 de julio del 2022, otorgada ante el Licenciado Rene Gurmilan Sánchez, titular de la correduría pública número 16 de Tlalnepantla, con Folio Mercantil Electrónico número N-2022064331.</div>
+<div class="c-ind">b) Su administrador único cuenta con todas las facultades necesarias para la celebración del presente contrato, según consta en la póliza número 20,648, de fecha 11 de julio del 2022.</div>
 <div class="c-ind">c) Cuenta con Registro Federal de Contribuyentes PDI220711CQ7.</div>
 <div class="c-ind">d) Cuenta con los elementos, experiencia y capacidad técnica, operativa, financiera, administrativa, comercial y legal necesaria para cumplir con los Servicios.</div>
-<div class="c-ind">e) Cuenta con las herramientas necesarias para el correcto desempeño de las funciones y los proyectos que le sean asignados por Anexo.</div>
+<div class="c-ind">e) Cuenta con las herramientas necesarias para el correcto desempeño de las funciones y los proyectos asignados por Anexo.</div>
 <div class="c-decl">C L Á U S U L A S</div>
 <div class="c-clause">PRIMERA.- OBJETO.</div>
-<div class="c-p">El PROVEEDOR se compromete a ofrecer al CLIENTE servicios enunciativamente pero no limitativamente relacionados con 1) Fábrica de software; 2) Consultoría de sistemas; 3) Consultoría de omnicanalidad; 4) Desarrollos de soluciones impulsadas por inteligencia artificial; 5) Consultoría e implementación de plataformas SaaS; y 6) Análisis de Big Data impulsado por inteligencia artificial. Los Servicios se detallarán en Anexos individuales.</div>
+<div class="c-p">El PROVEEDOR se compromete a ofrecer al CLIENTE servicios relacionados con 1) Fábrica de software; 2) Consultoría de sistemas; 3) Consultoría de omnicanalidad; 4) Desarrollos de IA; 5) Plataformas SaaS; y 6) Análisis de Big Data. Los Servicios se detallarán en Anexos individuales.</div>
 <div class="c-clause">SEGUNDA.- CONTRAPRESTACIÓN.</div>
-<div class="c-p">Como contraprestación por los Servicios, el CLIENTE pagará al PROVEEDOR los montos, términos y condiciones que se establezcan en cada Anexo. El PROVEEDOR proporciona al CLIENTE la siguiente cuenta bancaria:</div>
-<div class="c-ind"><strong>TITULAR:</strong> PLATAFORMAS DIGITALES, S.A. DE C.V. &nbsp;&nbsp; <strong>INSTITUCIÓN BANCARIA:</strong> BBVA<br><strong>CLABE INTERBANCARIA:</strong> 012180001243767570 &nbsp;&nbsp; <strong>CUENTA:</strong> 0124376757</div>
+<div class="c-p">El CLIENTE pagará al PROVEEDOR los montos establecidos en cada Anexo. El PROVEEDOR proporciona al CLIENTE la siguiente cuenta bancaria:</div>
+<div class="c-ind"><strong>TITULAR:</strong> PLATAFORMAS DIGITALES, S.A. DE C.V. &nbsp; <strong>BANCO:</strong> BBVA &nbsp; <strong>CLABE:</strong> 012180001243767570 &nbsp; <strong>CUENTA:</strong> 0124376757</div>
 <div class="c-clause">SUSPENSIÓN DE SERVICIOS POR FALTA DE PAGO.</div>
-<div class="c-p">En caso de que el CLIENTE incurra en falta de pago por un periodo igual o superior a dos (2) meses consecutivos, el PROVEEDOR podrá suspender total o parcialmente la prestación de los servicios sin necesidad de declaración judicial.</div>
+<div class="c-p">En caso de falta de pago por dos (2) meses consecutivos, el PROVEEDOR podrá suspender total o parcialmente la prestación de los servicios sin necesidad de declaración judicial.</div>
 <div class="c-clause">TERCERA.- IMPUESTOS.</div>
-<div class="c-p">Cada una de las Partes pagará los impuestos que resulten a su cargo derivados de la celebración y/o ejecución del presente Contrato y Anexos.</div>
+<div class="c-p">Cada una de las Partes pagará los impuestos que resulten a su cargo derivados de la celebración y/o ejecución del presente Contrato.</div>
 <div class="c-clause">CUARTA.- VIGENCIA, TERMINACIÓN Y RESCISIÓN.</div>
-<div class="c-p">Vigencia inicial: ${fill(vig)} meses, forzosos renovable automáticamente por tiempo indefinido, salvo aviso en contrario con 30 (Treinta) días naturales de anticipación.<br>Terminación unilateral: Con aviso previo de 30 (Treinta) días; previa liquidación de servicios.<br>Rescisión por incumplimiento: Mediante aviso con 30 (Treinta) días naturales de anticipación.</div>
+<div class="c-p">Vigencia inicial: ${fill(vig)} meses, forzosos, renovable automáticamente por tiempo indefinido, salvo aviso en contrario con 30 (Treinta) días naturales de anticipación.<br>Terminación unilateral: Con aviso previo de 30 días.<br>Rescisión por incumplimiento: Mediante aviso con 30 días naturales de anticipación.</div>
 <div class="c-clause">QUINTA.- PENA CONVENCIONAL.</div>
-<div class="c-p">En caso de incumplimiento, únicamente cuando así se establezca de manera expresa en el Anexo correspondiente, la Parte incumplida tendrá derecho a exigir el pago de una pena convencional en la cantidad o porcentaje que se prevea en dicho Anexo.</div>
-<div class="c-clause">SEXTA A DÉCIMA.- CANAL DE COMUNICACIÓN, ENTREGABLES, ALCANCES, PRUEBAS Y SLA.</div>
-<div class="c-p">Los canales de comunicación, entregables, alcances detallados y niveles de servicio (SLA) serán establecidos de manera específica en cada Anexo correspondiente. Los alcances generales comprenden: Fábrica de software; Consultoría de sistemas; Consultoría de omnicanalidad; Desarrollos de IA; Implementación de plataformas SaaS; y Análisis de Big Data.</div>
-<div class="c-clause">DÉCIMA PRIMERA.- ANEXOS Y PRECEDENCIA.</div>
-<div class="c-p">Cada Servicio se documentará mediante un Anexo que deberá detallar: letra de Anexo, alcance del servicio, contraprestación y condiciones, entregables, canal de comunicación, SLA y firmas. En caso de discrepancia: el Anexo prevalecerá respecto a alcances técnicos; el Contrato Marco respecto a cláusulas generales.</div>
-<div class="c-clause">DÉCIMA SEGUNDA.- CONFIDENCIALIDAD, SEGURIDAD DE LA INFORMACIÓN Y PROTECCIÓN DE DATOS PERSONALES.</div>
-<div class="c-p">Las partes se obligan a mantener la Información Confidencial en estricta confidencialidad y a no divulgarla sin consentimiento previo y por escrito de la parte titular. Las obligaciones de confidencialidad permanecerán vigentes por cinco (5) años posteriores a la terminación del contrato.</div>
+<div class="c-p">En caso de incumplimiento, únicamente cuando así se establezca en el Anexo correspondiente, la Parte incumplida tendrá derecho a exigir el pago de una pena convencional.</div>
+<div class="c-clause">SEXTA A DÉCIMA PRIMERA.- COMUNICACIÓN, ENTREGABLES, ALCANCES, PRUEBAS, SLA Y ANEXOS.</div>
+<div class="c-p">Los canales de comunicación, entregables, alcances detallados y niveles de servicio serán establecidos en cada Anexo. En caso de discrepancia: el Anexo prevalecerá respecto a alcances técnicos; el Contrato Marco respecto a cláusulas generales.</div>
+<div class="c-clause">DÉCIMA SEGUNDA.- CONFIDENCIALIDAD Y PROTECCIÓN DE DATOS PERSONALES.</div>
+<div class="c-p">Las partes se obligan a mantener la Información Confidencial en estricta confidencialidad. Las obligaciones de confidencialidad permanecerán vigentes por cinco (5) años posteriores a la terminación del contrato.</div>
 <div class="c-clause">DÉCIMA TERCERA.- PROPIEDAD INTELECTUAL.</div>
-<div class="c-p">Cada Parte conservará la titularidad de sus derechos de propiedad intelectual. Salvo que se establezca expresamente lo contrario en el Anexo, la prestación de servicios no implicará la cesión de dichos derechos.</div>
+<div class="c-p">Cada Parte conservará la titularidad de sus derechos de propiedad intelectual. La prestación de servicios no implicará cesión de dichos derechos salvo que se establezca expresamente en el Anexo.</div>
 <div class="c-clause">DÉCIMA CUARTA.- ANTICORRUPCIÓN Y PREVENCIÓN DE LAVADO DE DINERO.</div>
-<div class="c-p">Las partes garantizan que los recursos utilizados provienen de actividades lícitas y se obligan a cumplir con la legislación aplicable en materia de prevención de lavado de dinero y financiamiento al terrorismo.</div>
+<div class="c-p">Las partes garantizan que los recursos utilizados provienen de actividades lícitas y se obligan a cumplir con la legislación aplicable en materia de prevención de lavado de dinero.</div>
 <div class="c-clause">DÉCIMA QUINTA A DÉCIMA NOVENA.- FUERZA MAYOR, NO EXCLUSIVIDAD, SERVICIOS ADICIONALES, CESIÓN Y MODIFICACIONES.</div>
-<div class="c-p">Ninguna Parte será responsable por fuerza mayor. El Contrato no otorga exclusividad. Los servicios adicionales deberán formalizarse por escrito. Las Partes no podrán ceder derechos sin autorización previa y por escrito. Las modificaciones al Contrato requerirán convenio modificatorio escrito.</div>
+<div class="c-p">Ninguna Parte será responsable por fuerza mayor. El Contrato no otorga exclusividad. Los servicios adicionales deberán formalizarse por escrito. Las Partes no podrán ceder derechos sin autorización escrita. Las modificaciones requerirán convenio modificatorio escrito.</div>
 <div class="c-clause">VIGÉSIMA.- DOMICILIOS.</div>
-<div class="c-p">EL PROVEEDOR: Homero, número 1933, interior 201 B, Col. Polanco I Sección, Alcaldía Miguel Hidalgo, C.P. 11510, Ciudad de México.<br>Correo: ${fill(emailAv)} | Tel: ${fill(telAv)} | WhatsApp: ${fill(waAv)} | Contacto: ${fill(comercial)}</div>
-<div class="c-p">EL CLIENTE: ${fill(razon)}, S.A. DE C.V. — ${fill(dom)}<br>Correo: ${fill(email)} | Tel: ${fill(tel)} | WhatsApp: ${fill(wa)}</div>
+<div class="c-p">EL PROVEEDOR: Homero No. 1933 Int. 201B, Col. Polanco I Sección, Alcaldía Miguel Hidalgo, C.P. 11510, Ciudad de México.<br>Correo: ${fill(avEmail)} | Tel: ${fill(avTel)} | WhatsApp: ${fill(avWa)} | Contacto: ${fill(avNombre)}</div>
+<div class="c-p">EL CLIENTE: ${fill(razon)}, S.A. DE C.V. — ${fill(dom)}<br>Correo: ${fill(email)}</div>
 <div class="c-clause">VIGÉSIMA PRIMERA.- FIRMA ELECTRÓNICA.</div>
-<div class="c-p">Las Partes acuerdan que este contrato podrá ser firmado de manera electrónica, con la misma validez y efecto legal que una firma manuscrita conforme a la legislación aplicable.</div>
+<div class="c-p">Las Partes acuerdan que este contrato podrá ser firmado de manera electrónica, con la misma validez y efecto legal que una firma manuscrita.</div>
 <div class="c-clause">VIGÉSIMA SEGUNDA.- INTERPRETACIÓN Y CUMPLIMIENTO.</div>
 <div class="c-p">Las partes se someten expresamente a la jurisdicción y competencia de los Tribunales de la Ciudad de México.</div>
 <div class="c-p" style="margin-top:22px;">El presente Contrato se firma por medios electrónicos en la Ciudad de México el día ${fill(fecha)} por las partes contratantes.</div>
@@ -992,21 +793,17 @@ Celebrado entre ${fill(razon)}, S.A. DE C.V., en su carácter de "CLIENTE" y PLA
 </tr></table>`;
 }
 
-// ─── PDF DOWNLOAD ───
-function downloadPDF() {
-  const tipo = clientType === 'pf' ? v('pf-nombre') : v('pm-razon');
-  const nombre = `Contrato_Marco_Averix_${(tipo||'Cliente').replace(/\s+/g,'_')}.pdf`;
+function downloadPDF(){
+  const tipo=clientType==='pf'?v('pf-nombre'):v('pm-razon');
+  const nombre=`Contrato_Marco_Averix_${(tipo||'Cliente').replace(/\s+/g,'_')}.pdf`;
   showLoader('Generando PDF...');
-  html2pdf().set({
-    margin:[14,14,14,14],filename:nombre,
-    image:{type:'jpeg',quality:.95},
-    html2canvas:{scale:2,useCORS:true},
-    jsPDF:{unit:'mm',format:'a4',orientation:'portrait'}
-  }).from(document.getElementById('contract-out')).save().then(hideLoader);
+  html2pdf().set({margin:[14,14,14,14],filename:nombre,image:{type:'jpeg',quality:.95},
+    html2canvas:{scale:2,useCORS:true},jsPDF:{unit:'mm',format:'a4',orientation:'portrait'}})
+  .from(document.getElementById('contract-out')).save().then(hideLoader);
 }
 
-function showLoader(t) { document.getElementById('loader-txt').textContent = t; document.getElementById('loader').classList.add('on'); }
-function hideLoader() { document.getElementById('loader').classList.remove('on'); }
+function showLoader(t){ document.getElementById('loader-txt').textContent=t; document.getElementById('loader').classList.add('on'); }
+function hideLoader(){ document.getElementById('loader').classList.remove('on'); }
 </script>
 </body>
 </html>
