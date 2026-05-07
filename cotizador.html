@@ -207,6 +207,34 @@
   .btn-whatsapp { display: inline-block; background: #25d366; color: #fff; border: none; border-radius: 8px; padding: 13px 24px; font-size: 1rem; font-weight: 700; cursor: pointer; margin-left: 12px; }
   .btn-whatsapp:hover { background: #1ebe5d; }
 
+  /* ===== OMIA ===== */
+  .prod-tab.active-om { border-color: #7c3aed; background: #f5f3ff; }
+  .prod-tab.active-om .tab-label { color: #7c3aed; }
+  .prod-tab.active-om h3 { color: #7c3aed; }
+  .card.om h2 { color: #7c3aed; border-color: #7c3aed; }
+  .pricing-section.om h3 { background: #7c3aed; }
+  .pricing-row .subtotal.om { color: #7c3aed; }
+  .plazo-card.selected-om { border-color: #7c3aed; background: #f5f3ff; }
+  .plazo-card.selected-om .plazo-label { color: #7c3aed; }
+  .plazo-card.selected-om .plazo-months { color: #7c3aed; }
+  .plazo-card.selected-om .plazo-price { color: #7c3aed; }
+  .plazo-card.selected-om .plazo-desc { color: #7c3aed; font-weight: 700; }
+  .plazo-card:hover { border-color: #7c3aed; }
+  .totals-box.om { border-color: #7c3aed; background: #f5f3ff; }
+  .totals-row.big.om { color: #7c3aed; border-color: #7c3aed; }
+  .btn-primary.om { background: #7c3aed; }
+  .btn-primary.om:hover { background: #6d28d9; }
+  .annual-box.om { background: #ede9fe; border-color: #7c3aed; }
+  .q-cover.om { background: #7c3aed; }
+  .q-header.om { border-color: #7c3aed; }
+  .q-header.om .header-title { color: #7c3aed; }
+  .q-section-title.om { background: #7c3aed; }
+  .inv-table.om th { background: #7c3aed; }
+  .inv-table.om td:last-child { color: #7c3aed; }
+  .inv-table.om tr.section-row td { background: #f5f3ff; color: #7c3aed; }
+  .inv-table.om tr.total-row td { background: #7c3aed; }
+  .includes-item .check-om { color: #7c3aed; font-weight: 700; flex-shrink: 0; }
+
   @media (max-width: 640px) {
     .btn-whatsapp { display: block; margin: 10px auto 0; width: 100%; }
   }
@@ -306,6 +334,11 @@
       <div class="tab-label">Comercio Conversacional</div>
       <h3>🛒 VendIA</h3>
       <p>Ventas automatizadas en WhatsApp sin intervención humana</p>
+    </div>
+    <div class="prod-tab" id="ptab-om" onclick="selectProduct('om')">
+      <div class="tab-label">Contact Center IA</div>
+      <h3>📞 OMIA</h3>
+      <p>Agente de IA para llamadas outbound automatizadas</p>
     </div>
   </div>
 
@@ -499,6 +532,72 @@
       <button class="btn-primary vi" onclick="generateQuote('vi')">📄 Generar Propuesta VendIA</button>
     </div>
   </div><!-- /section-vi -->
+
+  <!-- ========== OMIA ========== -->
+  <div id="section-om" class="hidden">
+    <div class="card om">
+      <h2>1. Selección de Plazo — OMIA</h2>
+      <div class="plazo-cards">
+        <div class="plazo-card" id="om-plazo-12" onclick="omSelectPlazo(12)">
+          <div class="plazo-label">Plazo</div>
+          <div class="plazo-months">12 meses</div>
+          <div class="plazo-price">$8,998/mes</div>
+          <div class="plazo-desc">Sin descuento</div>
+        </div>
+        <div class="plazo-card" id="om-plazo-24" onclick="omSelectPlazo(24)">
+          <div class="plazo-label">Plazo</div>
+          <div class="plazo-months">24 meses</div>
+          <div class="plazo-price">$8,098/mes</div>
+          <div class="plazo-desc">10% de descuento</div>
+        </div>
+        <div class="plazo-card" id="om-plazo-36" onclick="omSelectPlazo(36)">
+          <div class="plazo-label">Plazo</div>
+          <div class="plazo-months">36 meses</div>
+          <div class="plazo-price">$7,198/mes</div>
+          <div class="plazo-desc">20% de descuento</div>
+        </div>
+      </div>
+
+      <div style="background:#f5f3ff;border:1.5px solid #c4b5fd;border-radius:10px;padding:16px 20px;margin-bottom:16px;">
+        <div style="font-size:.85rem;font-weight:700;color:#7c3aed;margin-bottom:12px;text-transform:uppercase;letter-spacing:.5px;">✓ Incluido en el Plan OMIA Business</div>
+        <div class="includes-grid">
+          <div class="includes-item"><span class="check-om">✓</span><span>Plataforma SAAS de llamadas salientes con IA</span></div>
+          <div class="includes-item"><span class="check-om">✓</span><span>Agente telefónico impulsado por IA (CC)</span></div>
+          <div class="includes-item"><span class="check-om">✓</span><span>600 llamadas Outbound en paralelo por agente</span></div>
+          <div class="includes-item"><span class="check-om">✓</span><span>Dashboard de salientes</span></div>
+          <div class="includes-item"><span class="check-om">✓</span><span>Historial de conversaciones</span></div>
+          <div class="includes-item"><span class="check-om">✓</span><span>Agente de IA configurable mediante prompt</span></div>
+          <div class="includes-item"><span class="check-om">✓</span><span>Asistente virtual de configuración de prompt</span></div>
+          <div class="includes-item"><span class="check-om">✓</span><span>Variables dinámicas</span></div>
+          <div class="includes-item"><span class="check-om">✓</span><span>Respuestas inteligentes y personalizadas</span></div>
+          <div class="includes-item"><span class="check-om">✓</span><span>Reportes de sistema</span></div>
+          <div class="includes-item"><span class="check-om">✓</span><span>Licencia de Administrador</span></div>
+          <div class="includes-item"><span class="check-om">✓</span><span>Integraciones API hasta 3 hrs (Gateway)</span></div>
+          <div class="includes-item"><span class="check-om">✓</span><span>Soporte Básico (3 hrs / 8×5 días hábiles)</span></div>
+          <div class="includes-item"><span class="cross">✗</span><span>Horas de Desarrollo ($806/hr extra)</span></div>
+        </div>
+        <div style="font-size:.75rem;color:#888;margin-top:10px;">* A partir de la hora 4 de integraciones API, costo adicional de $806/hr</div>
+      </div>
+
+      <div class="annual-box om" style="margin-bottom:14px;"><label><input type="checkbox" id="om-chk-annual" onchange="omRecalcAnual()"><strong>Plan Anual Preferente (10% descuento en setup + mensualidad)</strong></label><p>Aplica 10% de descuento sobre el Set Up y sobre la mensualidad del plazo seleccionado.</p></div>
+
+      <div class="totals-box om">
+        <div class="totals-row"><span>Set Up (Pago Único):</span><span id="om-disp-setup">$5,000.00</span></div>
+        <div class="totals-row hidden" id="om-annual-setup-row"><span>Set Up con 10% dto:</span><span id="om-disp-setup-dto" class="discount">—</span></div>
+        <div class="totals-row"><span>Fee Mensual del Plan:</span><span id="om-disp-fee">— Selecciona un plazo —</span></div>
+        <div class="totals-row hidden" id="om-annual-fee-row"><span>Fee Mensual con 10% dto:</span><span id="om-disp-fee-dto" class="discount">—</span></div>
+        <div class="totals-row" id="om-total-plazo-row" style="display:none;"><span id="om-total-plazo-label">Total comprometido (× meses):</span><span id="om-disp-total-plazo">—</span></div>
+        <div class="totals-row hidden" id="om-annual-row"><span>Total Anual Preferente (setup + 12 meses):</span><span id="om-disp-annual" class="discount">—</span></div>
+        <div class="totals-row hidden" id="om-saving-row"><span>Ahorro anual:</span><span id="om-disp-saving" style="color:#888;">—</span></div>
+        <div class="totals-row big om"><span>INVERSIÓN MENSUAL:</span><span id="om-disp-total">— Selecciona un plazo —</span></div>
+      </div>
+    </div>
+
+    <div class="actions" id="om-actions" style="display:none;">
+      <button class="btn-secondary" onclick="resetForm()">Limpiar</button>
+      <button class="btn-primary om" onclick="generateQuote('om')">📄 Generar Propuesta OMIA</button>
+    </div>
+  </div><!-- /section-om -->
 </div><!-- /app -->
 
 <!-- ========== QUOTATION ========== -->
@@ -683,6 +782,103 @@
     </div>
   </div><!-- /q-vi -->
 
+  <!-- ===== OM PAGES ===== -->
+  <div id="q-om">
+    <!-- PAGE 1 OM: Portada -->
+    <div class="q-page q-cover om">
+      <div class="logos"><img src="logos/averix.png" alt="Averix" onerror="this.style.display='none'"><img src="logos/omia.png" alt="OMIA" style="height:45px;object-fit:contain;filter:brightness(0) invert(1)" onerror="this.outerHTML='&lt;span style=&quot;font-size:1rem;font-weight:800;letter-spacing:3px;opacity:.85&quot;&gt;OMIA&lt;/span&gt;'"></div>
+      <div class="center-block"><div class="product-name">PLATAFORMA OMIA</div><h1>PROPUESTA COMERCIAL</h1><div class="prepared-for">PREPARADO PARA:</div><div class="client-name" id="om-q-client-name">— CLIENTE —</div><div style="margin-top:20px;opacity:.7;font-size:.9rem;" id="om-q-city-date">CDMX, MAYO 2026</div></div>
+      <div class="bottom"><div id="om-q-prepared-by">Averix</div><div class="confidential">CONFIDENCIAL</div></div>
+    </div>
+
+    <!-- PAGE 2 OM: Descripción y Alcance -->
+    <div class="q-page">
+      <div class="q-header om"><img src="logos/averix.png" alt="Averix" onerror="this.style.display='none'"><div><div class="header-title">PROPUESTA COMERCIAL</div><div class="header-sub">Plataforma OMIA</div></div></div>
+      <div class="q-section-title om">Descripción del Servicio</div>
+      <div class="q-body">
+        <p><strong>OMIA</strong> es una plataforma SAAS de Contact Center impulsada por Inteligencia Artificial, diseñada para gestionar y automatizar llamadas telefónicas salientes (Outbound) a escala, sin intervención humana.</p>
+        <p><strong>Capacidades principales:</strong></p>
+        <ul>
+          <li>Agente telefónico de IA capaz de realizar hasta 600 llamadas Outbound en paralelo</li>
+          <li>Agente de IA configurable mediante prompt personalizado por caso de uso</li>
+          <li>Respuestas inteligentes y personalizadas en tiempo real</li>
+          <li>Variables dinámicas para personalización de conversaciones</li>
+          <li>Dashboard de salientes, historial de conversaciones y reportes</li>
+          <li>Integraciones API con sistemas del cliente (hasta 3 hrs incluidas)</li>
+        </ul>
+      </div>
+      <div class="q-section-title om">Alcance de la Implementación</div>
+      <div class="q-body">
+        <div class="q-subsection">Configuración de arranque</div>
+        <ul>
+          <li>Habilitación del ambiente de la plataforma OMIA.</li>
+          <li>Configuración del agente de IA mediante prompt inicial.</li>
+          <li>Parametrización de usuarios, perfiles y accesos (Administrador).</li>
+          <li>Configuración de variables dinámicas para el caso de uso del cliente.</li>
+        </ul>
+        <div class="q-subsection">Puesta en marcha</div>
+        <ul>
+          <li>Pruebas funcionales previas a la salida a producción.</li>
+          <li>Acompañamiento durante arranque (Go-Live).</li>
+          <li>Capacitación inicial para usuarios administradores.</li>
+          <li>Soporte de estabilización inicial.</li>
+        </ul>
+      </div>
+      <div class="q-section-title om">Alcance Específico para "<span id="om-q-scope-title">el Cliente</span>"</div>
+      <div class="q-body"><p id="om-q-scope-text">La presente propuesta contempla el alcance acordado con el cliente.</p></div>
+      <div class="q-footer"><span>Averix — Confidencial</span><span id="om-q-footer-date">2026</span><span>Vigencia: 30 días naturales</span></div>
+    </div>
+
+    <!-- PAGE 3 OM: Inversión -->
+    <div class="q-page">
+      <div class="q-header om"><img src="logos/averix.png" alt="Averix" onerror="this.style.display='none'"><div><div class="header-title">PROPUESTA COMERCIAL</div><div class="header-sub" id="om-q-header-client">Cliente</div></div></div>
+      <div class="q-section-title om">Inversión</div>
+      <table class="inv-table om">
+        <thead><tr><th>Descripción</th><th>Precio MXN + IVA</th></tr></thead>
+        <tbody id="om-inv-tbody"></tbody>
+      </table>
+      <div class="annual-section" id="om-q-annual-section" style="display:none;"><h3>Plan Anual Preferente</h3><div id="om-q-annual-calcs"></div></div>
+      <div class="q-footer"><span>Averix — Confidencial</span><span id="om-q-footer-date2">2026</span><span>Vigencia: 30 días naturales</span></div>
+    </div>
+
+    <!-- PAGE 4 OM: Costos adicionales + Consideraciones + Aceptación -->
+    <div class="q-page">
+      <div class="q-header om"><img src="logos/averix.png" alt="Averix" onerror="this.style.display='none'"><div><div class="header-title">PROPUESTA COMERCIAL</div><div class="header-sub">Costos Adicionales y Consideraciones</div></div></div>
+
+      <div class="q-section-title om">Costos de Servicios Adicionales</div>
+      <div class="q-body" style="margin-bottom:8px;"><p>Los siguientes costos dependen del volumen de uso mensual y se cobran conforme al consumo.</p></div>
+      <table class="inv-table om" style="margin-top:4px;margin-bottom:16px;">
+        <thead><tr><th>Concepto</th><th>Costo Unitario</th></tr></thead>
+        <tbody>
+          <tr><td>Inicio de llamada Outbound (hasta 3 minutos)</td><td style="text-align:right;font-weight:700;color:#7c3aed;">$2.50 MXN</td></tr>
+          <tr><td>Minuto adicional de llamada Outbound</td><td style="text-align:right;font-weight:700;color:#7c3aed;">$2.50 MXN</td></tr>
+        </tbody>
+      </table>
+
+      <div class="q-section-title om">Consideraciones Comerciales</div>
+      <div class="q-body">
+        <ul>
+          <li>Los precios no incluyen impuestos y están expresados en MXN.</li>
+          <li>El fee mensual aplica desde la fecha de activación del servicio y es recurrente por el plazo contratado.</li>
+          <li>A partir de la hora 4 de integraciones API, se genera un costo adicional de $806/hr.</li>
+          <li>Las horas de desarrollo no están incluidas en el plan y se cotizan por separado.</li>
+          <li>La capacidad de 600 llamadas en paralelo aplica por agente de IA configurado.</li>
+          <li>Cualquier requerimiento fuera de alcance podrá evaluarse y cotizarse como adicional.</li>
+          <li>La activación del servicio estará sujeta a firma contractual o aceptación formal.</li>
+          <li><strong>Vigencia de esta propuesta: 30 días naturales.</strong></li>
+        </ul>
+      </div>
+
+      <div class="q-section-title om" style="margin-top:24px;">Aceptación</div>
+      <div class="q-body">
+        <p style="margin-bottom:16px;">Con mi firma confirmo haber leído, entendido y aceptado los términos de esta propuesta comercial.</p>
+        <div class="acceptance-row"><div class="acceptance-field"><label>Nombre</label><div class="line"></div></div><div class="acceptance-field"><label>Cargo</label><div class="line"></div></div></div>
+        <div class="acceptance-row" style="margin-top:24px;"><div class="acceptance-field"><label>Empresa</label><div class="line"></div></div><div class="acceptance-field"><label>Fecha</label><div class="line"></div></div></div>
+      </div>
+      <div class="q-footer"><span>Averix — Confidencial</span><span id="om-q-footer-date3">2026</span><span>Vigencia: 30 días naturales</span></div>
+    </div>
+  </div><!-- /q-om -->
+
   <div class="no-print" style="text-align:center;padding:20px;background:#f0f2f5;">
     <button class="btn-secondary" onclick="backToForm()" style="margin-right:12px;">← Editar</button>
     <button class="btn-primary" onclick="window.print()">🖨️ Imprimir / Guardar PDF</button>
@@ -709,6 +905,11 @@ const VI = {
   msgs: { mkt:.56, util:.16, auth:.16, svc:0 }
 };
 
+const OMIA = {
+  setup: 5000,
+  plazos: { 12:{fee:8998,desc:'Sin descuento'}, 24:{fee:8098,desc:'10% de descuento'}, 36:{fee:7198,desc:'20% de descuento'} }
+};
+
 function fmt(n) { return '$' + n.toLocaleString('es-MX', {minimumFractionDigits:2,maximumFractionDigits:2}); }
 function fmtU(n) { return '$' + n.toFixed(2); }
 function g(id) { return document.getElementById(id); }
@@ -722,9 +923,12 @@ function selectProduct(p) {
   currentProduct = p;
   g('ptab-bb').className = 'prod-tab' + (p==='bb' ? ' active-bb' : '');
   g('ptab-vi').className = 'prod-tab' + (p==='vi' ? ' active-vi' : '');
+  g('ptab-om').className = 'prod-tab' + (p==='om' ? ' active-om' : '');
   g('section-bb').classList.toggle('hidden', p!=='bb');
   g('section-vi').classList.toggle('hidden', p!=='vi');
+  g('section-om').classList.toggle('hidden', p!=='om');
   if (p==='vi') g('vi-actions').style.display = 'flex';
+  if (p==='om') g('om-actions').style.display = 'flex';
 }
 
 /* ===== BB ===== */
@@ -842,6 +1046,51 @@ function viRecalcAnual() {
   }
 }
 
+/* ===== OMIA ===== */
+let omSelectedPlazo = null;
+
+function omSelectPlazo(meses) {
+  if (!meses) return;
+  omSelectedPlazo = meses;
+  [12,24,36].forEach(m => {
+    const el = g('om-plazo-'+m);
+    el.classList.remove('selected','selected-om');
+    if (m === meses) el.classList.add('selected-om');
+  });
+  const pl = OMIA.plazos[meses];
+  const fee = pl.fee;
+  const desc = meses===12 ? '' : meses===24 ? ' (10% dto)' : ' (20% dto)';
+  s('om-disp-fee', fmt(fee) + '/mes' + desc);
+  const totalPlazo = OMIA.setup + fee * meses;
+  g('om-total-plazo-row').style.display = 'flex';
+  s('om-total-plazo-label', `Total comprometido (setup + ${meses} meses):`);
+  s('om-disp-total-plazo', fmt(totalPlazo));
+  s('om-disp-total', fmt(fee) + '/mes');
+  omRecalcAnual();
+}
+
+function omRecalcAnual() {
+  if (!omSelectedPlazo) return;
+  const isAnn = g('om-chk-annual').checked;
+  const fee = OMIA.plazos[omSelectedPlazo].fee;
+  const setupDto = OMIA.setup * 0.9;
+  const feeDto = fee * 0.9;
+  const totalAnual = setupDto + feeDto * 12;
+  const ahorro = (OMIA.setup - setupDto) + (fee - feeDto) * 12;
+  toggle('om-annual-setup-row', isAnn);
+  toggle('om-annual-fee-row', isAnn);
+  toggle('om-annual-row', isAnn);
+  toggle('om-saving-row', isAnn);
+  if (isAnn) {
+    s('om-disp-setup', fmt(setupDto) + ' (10% dto)');
+    s('om-disp-fee-dto', fmt(feeDto) + '/mes');
+    s('om-disp-annual', fmt(totalAnual) + ' (anual c/ dto)');
+    s('om-disp-saving', fmt(ahorro) + ' de ahorro');
+  } else {
+    s('om-disp-setup', fmt(OMIA.setup));
+  }
+}
+
 /* ===== GENERATE ===== */
 function generateQuote(product) {
   const clientName = g('clientName').value || 'Cliente';
@@ -850,11 +1099,13 @@ function generateQuote(product) {
   const preparedBy = g('preparedBy').value || 'Averix';
   const clientScope = g('clientScope').value || 'La presente propuesta contempla el alcance acordado con el cliente.';
   if (product==='bb') generateBBQuote(clientName,clientCity,propDate,preparedBy,clientScope);
-  else generateVIQuote(clientName,clientCity,propDate,preparedBy,clientScope);
+  else if(product==='vi') generateVIQuote(clientName,clientCity,propDate,preparedBy,clientScope);
+  else generateOMQuote(clientName,clientCity,propDate,preparedBy,clientScope);
   g('app').style.display='none';
   g('quotation').style.display='block';
   g('q-bb').style.display = product==='bb' ? 'block':'none';
   g('q-vi').style.display = product==='vi' ? 'block':'none';
+  g('q-om').style.display = product==='om' ? 'block':'none';
   window.scrollTo(0,0);
 }
 
@@ -974,6 +1225,52 @@ function generateVIQuote(clientName,clientCity,propDate,preparedBy,clientScope) 
   }
 }
 
+function generateOMQuote(clientName,clientCity,propDate,preparedBy,clientScope) {
+  if(!omSelectedPlazo){alert('Selecciona un plazo en la Sección 1 — OMIA.');return;}
+  s('om-q-client-name',clientName.toUpperCase());
+  s('om-q-city-date',`${clientCity.toUpperCase()}, ${propDate.toUpperCase()}`);
+  s('om-q-prepared-by',`Preparado por: ${preparedBy}`);
+  s('om-q-header-client',clientName);s('om-q-scope-title',clientName);s('om-q-scope-text',clientScope);
+  s('om-q-footer-date',propDate);s('om-q-footer-date2',propDate);s('om-q-footer-date3',propDate);
+
+  const tbody=g('om-inv-tbody');tbody.innerHTML='';
+  function row(d,p,sec,tot){const tr=document.createElement('tr');if(sec)tr.className='section-row';if(tot)tr.className='total-row';const t1=document.createElement('td'),t2=document.createElement('td');t1.textContent=d;t2.textContent=p;tr.appendChild(t1);tr.appendChild(t2);tbody.appendChild(tr);}
+
+  const pl = OMIA.plazos[omSelectedPlazo];
+  const fee = pl.fee;
+  const descLabel = omSelectedPlazo===24 ? ' (10% dto)' : omSelectedPlazo===36 ? ' (20% dto)' : '';
+  const isAnnOM = g('om-chk-annual').checked;
+  const setupFinal = isAnnOM ? OMIA.setup * 0.9 : OMIA.setup;
+  const feeFinal = isAnnOM ? fee * 0.9 : fee;
+
+  row('SET UP','PAGO ÚNICO',true);
+  row('Configuración de arranque. Habilitación de plataforma OMIA. Parametrización de usuarios y prompt inicial.','');
+  row('TOTAL SET UP',fmt(setupFinal) + (isAnnOM ? ' (10% dto)' : ''),false,true);
+
+  row(`PLAN OMIA BUSINESS (${omSelectedPlazo} meses)${descLabel}`,'FEE MENSUAL',true);
+  row('Fee Mensual del Plan a '+omSelectedPlazo+' meses'+descLabel, fmt(feeFinal)+'/mes');
+  row('INCLUYE: Plataforma SAAS IA Outbound, Agente IA configurable, 600 llamadas en paralelo, Dashboard, Historial, Reportes, Integraciones API hasta 3 hrs, Soporte Básico.','');
+  row('TOTAL FEE MENSUAL',fmt(feeFinal)+'/mes',false,true);
+
+  row('RESUMEN DE INVERSIÓN','',true);
+  row('Set Up (pago único):', isAnnOM ? fmt(setupFinal)+' (10% dto)' : fmt(OMIA.setup));
+  row(`Fee Mensual del Plan (${omSelectedPlazo} meses${descLabel}):`, fmt(feeFinal)+'/mes' + (isAnnOM ? ' (10% dto)' : ''));
+  row('TOTAL COMPROMETIDO (Setup + '+omSelectedPlazo+' meses):',fmt(setupFinal+feeFinal*omSelectedPlazo),false,true);
+
+  const annElOM = g('om-q-annual-section');
+  if (isAnnOM) {
+    annElOM.style.display = 'block';
+    const ahorro = (OMIA.setup - setupFinal) + (fee - feeFinal) * 12;
+    g('om-q-annual-calcs').innerHTML = `
+      <div class="calc-row"><span>Set Up con 10% dto:</span><span>${fmt(setupFinal)}</span></div>
+      <div class="calc-row"><span>Fee Mensual con 10% dto:</span><span>${fmt(feeFinal)}/mes</span></div>
+      <div class="calc-row highlight"><span>Total Anual Preferente (setup + 12 meses):</span><span>${fmt(setupFinal + feeFinal * 12)}</span></div>
+      <div class="calc-row saving"><span>Ahorro anual:</span><span>${fmt(ahorro)}</span></div>`;
+  } else {
+    annElOM.style.display = 'none';
+  }
+}
+
 function backToForm() { g('app').style.display='block'; g('quotation').style.display='none'; window.scrollTo(0,0); }
 
 function compartirWhatsApp() {
@@ -982,7 +1279,7 @@ function compartirWhatsApp() {
     ? (g('bb-q-client-name') ? g('bb-q-client-name').textContent.trim() : 'Cliente')
     : (g('vi-q-client-name') ? g('vi-q-client-name').textContent.trim() : 'Cliente');
   const nombreArchivo = `Propuesta_Averix_${producto.replace(/ /g,'_')}_${cliente.replace(/ /g,'_')}.pdf`;
-  const elemento = currentProduct === 'bb' ? g('q-bb') : g('q-vi');
+  const elemento = currentProduct === 'bb' ? g('q-bb') : currentProduct === 'vi' ? g('q-vi') : g('q-om');
   const btn = g('btn-whatsapp');
 
   btn.textContent = '⏳ Generando PDF...';
@@ -1032,7 +1329,7 @@ function descargarPDF(blob, nombre) {
 
 function resetForm() {
   if(!confirm('¿Limpiar todos los campos?')) return;
-  bbQuoteType=null;bbSelectedPlan=null;viSelectedPlazo=null;
+  bbQuoteType=null;bbSelectedPlan=null;viSelectedPlazo=null;omSelectedPlazo=null;
   document.querySelectorAll('input:not([type=checkbox])').forEach(i=>{if(!i.readOnly) i.value='';});
   document.querySelectorAll('input[type=checkbox]').forEach(i=>i.checked=false);
   document.querySelectorAll('select').forEach(s=>s.selectedIndex=0);
@@ -1040,6 +1337,7 @@ function resetForm() {
   ['bb-btn-od','bb-btn-pp'].forEach(id=>g(id).classList.remove('active'));
   g('bb-actions').style.display='none';
   [12,24,36].forEach(m=>g('vi-plazo-'+m).classList.remove('selected'));
+  [12,24,36].forEach(m=>g('om-plazo-'+m).classList.remove('selected-om'));
 }
 
 // Fix checkbox layout
