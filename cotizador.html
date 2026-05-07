@@ -384,6 +384,7 @@
     <div class="card hidden" id="bb-form-pp">
       <h2>3. Selección de Plan — Broadcaster Bot</h2>
       <div class="plan-cards">
+        <div class="plan-card" id="bb-plan-api" onclick="bbSelectPlan('api')"><h4>API</h4><div class="price">$3,999 <span>/mes</span></div><ul><li>Integración × API</li><li>1,000 conv. servicio</li><li>3 Agentes incluidos</li><li>Campañas masivas + Wizard</li><li class="no">Versión Móvil</li><li class="no">IA</li></ul></div>
         <div class="plan-card" id="bb-plan-business" onclick="bbSelectPlan('business')"><h4>Business</h4><div class="price">$5,999 <span>/mes</span></div><ul><li>Omnicanal (WA, FB, IG, Web)</li><li>1,000 conv. servicio</li><li>5 Agentes incluidos</li><li>Campañas masivas + Wizard</li><li class="no">Versión Móvil</li><li class="no">IA</li></ul></div>
         <div class="plan-card" id="bb-plan-enterprice" onclick="bbSelectPlan('enterprice')"><h4>Enterprice</h4><div class="price">$15,999 <span>/mes</span></div><ul><li>Omnicanal (WA, FB, IG, Web)</li><li>1,000 conv. servicio</li><li>10 Agentes incluidos</li><li>Campañas + Wizard + Móvil</li><li>Asignación automática</li><li class="no">IA / Repositorio</li></ul></div>
         <div class="plan-card" id="bb-plan-enterprice-pro" onclick="bbSelectPlan('enterprice-pro')"><h4>Enterprice Pro</h4><div class="price">$19,999 <span>/mes</span></div><ul><li>Omnicanal (WA, FB, IG, Web)</li><li>1,000 conv. servicio</li><li>15 Agentes incluidos</li><li>Campañas + Wizard + Móvil</li><li>Integraciones API</li><li>Repositorio + IA (10K conv)</li></ul></div>
@@ -697,7 +698,7 @@ let viSelectedPlazo = null;
 const BB = {
   alta:1999, hrsInfo:999, hrsInt:1200, hrsDev:2200, hrsSup:900,
   wizard:2000, api:3999, mobile:1999, apple:1999, repo:1999, amd:1999, webchat:1999, setup:1999,
-  plans: { business:{price:5999,label:'Plan Business'}, enterprice:{price:15999,label:'Plan Enterprice'}, 'enterprice-pro':{price:19999,label:'Plan Enterprice Pro'} },
+  plans: { api:{price:3999,label:'Plan API'}, business:{price:5999,label:'Plan Business'}, enterprice:{price:15999,label:'Plan Enterprice'}, 'enterprice-pro':{price:19999,label:'Plan Enterprice Pro'} },
   tplRanges:[[5000,.70,.25,.25,.20],[10000,.68,.22,.22,.18],[100000,.67,.20,.20,.16],[1000000,.65,.18,.18,.14]],
   tplPlan:{mkt:.99,util:.64,otp:.58,svc:.45}
 };
@@ -740,7 +741,7 @@ function bbSelectType(t) {
 
 function bbSelectPlan(p) {
   bbSelectedPlan = p;
-  ['business','enterprice','enterprice-pro'].forEach(x => g('bb-plan-'+x).classList.toggle('selected', x===p));
+  ['api','business','enterprice','enterprice-pro'].forEach(x => g('bb-plan-'+x).classList.toggle('selected', x===p));
   bbRecalcPlan();
 }
 
