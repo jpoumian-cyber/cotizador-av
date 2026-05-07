@@ -870,11 +870,10 @@ function generateBBQuote(clientName,clientCity,propDate,preparedBy,clientScope) 
     isAnnual=g('bb-chk-annual').checked;
     const hI=v('bb-hrs-info'),hN=v('bb-hrs-int'),hD=v('bb-hrs-dev'),hS=v('bb-hrs-sup');
     if(hD>0) hasDev=true;
-    const montoConfig=hI*BB.hrsInfo+hN*BB.hrsInt+hD*BB.hrsDev;
     const montoSoporte=hS*BB.hrsSup;
-    totalOnboard=BB.alta+montoConfig;
+    totalOnboard=BB.alta+hI*BB.hrsInfo+hN*BB.hrsInt+hD*BB.hrsDev;
     row('SET UP','PAGO ÚNICO',true);
-    row('Alta y configuración del número de WhatsApp en Meta. Habilitación de plataforma.',fmt(BB.alta));
+    row('Alta de cuenta WhatsApp en Meta. Habilitación y configuración de plataforma Broadcaster Bot.','');
     row('TOTAL SET UP',fmt(totalOnboard),false,true);
     const ea=v('bb-extra-agents'),stA=bbAgentPrice(ea),ia=+g('bb-sel-ia').value||0;
     let monthly=1999+stA+montoSoporte;
