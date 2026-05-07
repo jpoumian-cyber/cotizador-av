@@ -870,16 +870,14 @@ function generateBBQuote(clientName,clientCity,propDate,preparedBy,clientScope) 
     isAnnual=g('bb-chk-annual').checked;
     const hI=v('bb-hrs-info'),hN=v('bb-hrs-int'),hD=v('bb-hrs-dev'),hS=v('bb-hrs-sup');
     if(hD>0) hasDev=true;
-    totalOnboard=BB.alta+hI*BB.hrsInfo+hN*BB.hrsInt+hD*BB.hrsDev+hS*BB.hrsSup;
-    row('ONBOARDING','PAGO ÚNICO',true);
+    const montoConfig=hI*BB.hrsInfo+hN*BB.hrsInt+hD*BB.hrsDev;
+    const montoSoporte=hS*BB.hrsSup;
+    totalOnboard=BB.alta+montoConfig;
+    row('SET UP','PAGO ÚNICO',true);
     row('Alta y configuración del número de WhatsApp en Meta. Habilitación de plataforma.',fmt(BB.alta));
-    if(hI>0) row(`Configuración Bot — Informativo (${hI} hrs × $${BB.hrsInfo})`,fmt(hI*BB.hrsInfo));
-    if(hN>0) row(`Configuración Bot — Integraciones (${hN} hrs × $${BB.hrsInt})`,fmt(hN*BB.hrsInt));
-    if(hD>0) row(`Desarrollo a la medida (${hD} hrs × $${BB.hrsDev})`,fmt(hD*BB.hrsDev));
-    if(hS>0) row(`Soporte (${hS} hrs × $${BB.hrsSup})`,fmt(hS*BB.hrsSup));
-    row('SUBTOTAL ONBOARDING',fmt(totalOnboard),false,true);
+    row('TOTAL SET UP',fmt(totalOnboard),false,true);
     const ea=v('bb-extra-agents'),stA=bbAgentPrice(ea),ia=+g('bb-sel-ia').value||0;
-    let monthly=1999+stA;
+    let monthly=1999+stA+montoSoporte;
     const incl=['Omnicanal (WA/IG/FB/Webchat)','1,000 Conv. Servicio','3 Agentes','Campañas Masivas'];
     if(g('bb-chk-wizard').checked){monthly+=BB.wizard;incl.push('Wizard Bot');}
     if(g('bb-chk-api').checked){monthly+=BB.api;incl.push('Integración API');}
@@ -903,9 +901,9 @@ function generateBBQuote(clientName,clientCity,propDate,preparedBy,clientScope) 
     if(!bbSelectedPlan){alert('Selecciona un plan primero.');return;}
     const pl=BB.plans[bbSelectedPlan],ea=v('bb-plan-extra-agents'),stA=ea*500;
     totalOnboard=BB.setup;totalMonthly=pl.price+stA;
-    row('ONBOARDING','PAGO ÚNICO',true);
+    row('SET UP','PAGO ÚNICO',true);
     row('Alta y configuración de WhatsApp en Meta. Habilitación de plataforma.',fmt(BB.setup));
-    row('SUBTOTAL ONBOARDING',fmt(BB.setup),false,true);
+    row('TOTAL SET UP',fmt(BB.setup),false,true);
     row(pl.label.toUpperCase(),'PAGO MENSUAL',true);
     row('FUNCIONALIDADES: '+bbPlanFeatures(bbSelectedPlan)+(ea>0?` | +${ea} Agentes`:''),fmt(pl.price+stA));
     row('TOTAL PLAN MENSUAL',fmt(pl.price+stA),false,true);
