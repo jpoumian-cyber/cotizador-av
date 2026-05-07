@@ -76,7 +76,7 @@
   .plazo-card.selected .plazo-desc { color: #25a244; font-weight: 700; }
 
   /* PLAN CARDS BB */
-  .plan-cards { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; margin-bottom: 16px; }
+  .plan-cards { display: grid; grid-template-columns: repeat(4,1fr); gap: 12px; margin-bottom: 16px; }
   .plan-card { border: 2px solid #d0d5dd; border-radius: 10px; padding: 16px 14px; cursor: pointer; transition: all .2s; text-align: center; }
   .plan-card:hover { border-color: #1a2d6e; }
   .plan-card.selected { border-color: #1a2d6e; background: #eef1fa; }
@@ -921,7 +921,7 @@ function generateBBQuote(clientName,clientCity,propDate,preparedBy,clientScope) 
 }
 
 function bbPlanFeatures(p) {
-  return {business:'Omnicanal (WA/FB/IG/Web), 1,000 conv. servicio, 5 Agentes, Campañas Masivas, Wizard Bot',enterprice:'Omnicanal, 1,000 conv., 10 Agentes, Campañas, Wizard, Móvil, Asignación Auto.','enterprice-pro':'Omnicanal, 1,000 conv., 15 Agentes, Campañas, Wizard, Móvil, API, Repositorio, IA (10K)'}[p]||'';
+  return {api:'Integración × API, 1,000 conv. servicio, 3 Agentes, Campañas Masivas, Wizard Bot',business:'Omnicanal (WA/FB/IG/Web), 1,000 conv. servicio, 5 Agentes, Campañas Masivas, Wizard Bot',enterprice:'Omnicanal, 1,000 conv., 10 Agentes, Campañas, Wizard, Móvil, Asignación Auto.','enterprice-pro':'Omnicanal, 1,000 conv., 15 Agentes, Campañas, Wizard, Móvil, API, Repositorio, IA (10K)'}[p]||'';
 }
 
 function generateVIQuote(clientName,clientCity,propDate,preparedBy,clientScope) {
