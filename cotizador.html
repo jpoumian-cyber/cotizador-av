@@ -615,9 +615,9 @@
       <div class="q-footer"><span>Averix — Confidencial</span><span id="vi-q-footer-date">2026</span><span>Vigencia: 30 días naturales</span></div>
     </div>
 
-    <!-- PAGE 4 VI: Consideraciones y Aceptación -->
+    <!-- PAGE 4 VI: Costos por Uso -->
     <div class="q-page">
-      <div class="q-header vi"><img src="logos/averix.png" alt="Averix" onerror="this.style.display='none'"><div><div class="header-title">PROPUESTA COMERCIAL</div><div class="header-sub">Consideraciones y Aceptación</div></div></div>
+      <div class="q-header vi"><img src="logos/averix.png" alt="Averix" onerror="this.style.display='none'"><div><div class="header-title">PROPUESTA COMERCIAL</div><div class="header-sub">Sección 3 — Costos por Uso</div></div></div>
 
       <div class="q-section-title vi">Sección 3 — Costos por Uso (estimado mensual)</div>
       <div class="q-body" style="margin-bottom:6px;"><p>Los siguientes costos son variables y dependen del volumen de uso mensual. Se presentan como referencia para la planeación del cliente.</p></div>
@@ -643,12 +643,19 @@
       </div>
 
       <div class="q-section-title vi" style="font-size:.85rem;">Costo de Pasarela de Pago — Stripe</div>
-      <div class="cost-block" style="margin-bottom:20px;">
+      <div class="cost-block" style="margin-bottom:14px;">
         <div class="cost-block-row"><span>Comisión base</span><span style="font-weight:700;">3.6% + $3 MXN por pedido</span></div>
         <div class="cost-block-row"><span>Tarjetas internacionales</span><span style="font-weight:700;">+ 0.5%</span></div>
         <div class="cost-block-row"><span>Conversión de moneda</span><span style="font-weight:700;">+ 2.0%</span></div>
         <div class="cost-block-note">Sin costos fijos — esquema pay-as-you-go. * Precios sujetos a Stripe.</div>
       </div>
+
+      <div class="q-footer"><span>Averix — Confidencial</span><span id="vi-q-footer-date2">2026</span><span>Vigencia: 30 días naturales</span></div>
+    </div>
+
+    <!-- PAGE 5 VI: Consideraciones y Aceptación -->
+    <div class="q-page">
+      <div class="q-header vi"><img src="logos/averix.png" alt="Averix" onerror="this.style.display='none'"><div><div class="header-title">PROPUESTA COMERCIAL</div><div class="header-sub">Consideraciones y Aceptación</div></div></div>
 
       <div class="q-section-title vi">Consideraciones Comerciales</div>
       <div class="q-body">
@@ -671,7 +678,7 @@
         <div class="acceptance-row"><div class="acceptance-field"><label>Nombre</label><div class="line"></div></div><div class="acceptance-field"><label>Cargo</label><div class="line"></div></div></div>
         <div class="acceptance-row" style="margin-top:24px;"><div class="acceptance-field"><label>Empresa</label><div class="line"></div></div><div class="acceptance-field"><label>Fecha</label><div class="line"></div></div></div>
       </div>
-      <div class="q-footer"><span>Averix — Confidencial</span><span id="vi-q-footer-date2">2026</span><span>Vigencia: 30 días naturales</span></div>
+      <div class="q-footer"><span>Averix — Confidencial</span><span id="vi-q-footer-date3">2026</span><span>Vigencia: 30 días naturales</span></div>
     </div>
   </div><!-- /q-vi -->
 
@@ -925,7 +932,7 @@ function generateVIQuote(clientName,clientCity,propDate,preparedBy,clientScope) 
   s('vi-q-city-date',`${clientCity.toUpperCase()}, ${propDate.toUpperCase()}`);
   s('vi-q-prepared-by',`Preparado por: ${preparedBy}`);
   s('vi-q-header-client',clientName);s('vi-q-scope-title',clientName);s('vi-q-scope-text',clientScope);
-  s('vi-q-footer-date',propDate);s('vi-q-footer-date2',propDate);
+  s('vi-q-footer-date',propDate);s('vi-q-footer-date2',propDate);s('vi-q-footer-date3',propDate);
 
   const pl = VI.plazos[viSelectedPlazo];
   const fee = pl.fee;
