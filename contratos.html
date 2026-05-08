@@ -180,6 +180,7 @@ input[type=file]{display:none}
   .hdr,.stpr-wrap,.card:not(.viewer-card),.actions{display:none!important}
   .contract-viewer{height:auto;border:none;overflow:visible}
   #contract-out{padding:14px}
+  #contract-out .c-fill{background:none!important;border-bottom:none!important;color:#111!important;font-weight:normal!important;}
 }
 </style>
 </head>
@@ -726,10 +727,17 @@ function downloadPDF(){
   const tipo=clientType==='pf'?v('pf-nombre'):v('pm-razon');
   const nombre=`Contrato_Marco_Averix_${(tipo||'Cliente').replace(/\s+/g,'_')}.pdf`;
   showLoader('Generando PDF...');
+  // Quitar resaltado antes de generar PDF
+  const fills=document.querySelectorAll('#contract-out .c-fill');
+  fills.forEach(el=>{el.style.background='none';el.style.borderBottom='none';el.style.color='#111';el.style.fontWeight='normal';});
   html2pdf().set({margin:[14,14,14,14],filename:nombre,
     image:{type:'jpeg',quality:.95},html2canvas:{scale:2,useCORS:true},
     jsPDF:{unit:'mm',format:'a4',orientation:'portrait'}})
-  .from(document.getElementById('contract-out')).save().then(hideLoader);
+  .from(document.getElementById('contract-out')).save().then(()=>{
+    // Restaurar estilos después
+    fills.forEach(el=>{el.style.background='';el.style.borderBottom='';el.style.color='';el.style.fontWeight='';});
+    hideLoader();
+  });
 }
 function showLoader(t){document.getElementById('loader-txt').textContent=t;document.getElementById('loader').classList.add('on');}
 function hideLoader(){document.getElementById('loader').classList.remove('on');}
