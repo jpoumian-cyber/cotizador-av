@@ -395,9 +395,15 @@ function selectVig(n,lbl){
 }
 function onDoc(type,idx,inp){
   if(!inp.files||!inp.files[0]) return;
-  docFiles[type][idx]=inp.files[0];
+  const file=inp.files[0];
+  const maxMB=15;
+  if(file.size>maxMB*1024*1024){
+    alert(`El archivo "${file.name}" pesa ${(file.size/1024/1024).toFixed(1)}MB. El máximo es ${maxMB}MB. Comprime el archivo e intenta de nuevo.`);
+    inp.value=''; return;
+  }
+  docFiles[type][idx]=file;
   document.getElementById(`di-${type}-${idx}`).classList.add('ok');
-  document.getElementById(`ds-${type}-${idx}`).textContent='✓ '+inp.files[0].name;
+  document.getElementById(`ds-${type}-${idx}`).textContent=`✓ ${file.name} (${(file.size/1024/1024).toFixed(1)}MB)`;
 }
 
 // ── FILE TO BASE64 ──
@@ -455,12 +461,15 @@ async function startExtraction(){
       headers:{'Content-Type':'application/json'},
       body:JSON.stringify({clientType,files:filesData})
     });
-    result = await resp.json();
+    const rawText = await resp.text();
+    try { result = JSON.parse(rawText); } catch(e) {
+      throw new Error(`Respuesta inesperada del servidor (HTTP ${resp.status}): ${rawText.substring(0,150)}`);
+    }
     if(!result.success) throw new Error(result.error||'Error de API');
     setProcStep(2,'ok');setProcTxt(2,'Claude AI procesó los documentos');
   } catch(e){
     setProcStep(2,'err');setProcTxt(2,'Error: '+e.message);
-    alert('Error al conectar con la API: '+e.message+'\nVerifica que la variable ANTHROPIC_API_KEY esté configurada en Vercel.');
+    alert('Error: '+e.message);
     return;
   }
 
