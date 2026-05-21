@@ -248,6 +248,33 @@
     @page { margin: 0; size: A4; }
   }
 
+  /* ===== TABLET (641px – 860px) ===== */
+  @media (min-width: 641px) and (max-width: 860px) {
+    #app { padding: 18px 14px 50px; }
+
+    .app-header { padding: 14px 20px; }
+    .app-header h1 { font-size: 1.1rem; }
+    .app-header > span { font-size: .75rem; }
+
+    .product-tabs { gap: 8px; }
+    .prod-tab { padding: 11px 14px; }
+    .prod-tab h3 { font-size: .92rem; }
+    .prod-tab p { font-size: .7rem; }
+
+    .card { padding: 18px 20px; }
+
+    /* Plan cards: 4 cols → 2 cols en tablet */
+    .plan-cards { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+
+    /* Pricing rows: columnas fijas más angostas */
+    .pricing-row { grid-template-columns: 1fr 100px 110px; }
+
+    /* Actions: apilados en tablet angosto */
+    .actions { flex-wrap: wrap; gap: 10px; }
+    .btn-primary, .btn-secondary { flex: 1 1 auto; min-width: 180px; }
+  }
+
+  /* ===== MÓVIL (≤ 640px) ===== */
   @media (max-width: 640px) {
     #app { padding: 12px 10px 60px; }
 
@@ -456,12 +483,12 @@
       <div class="pricing-section vi">
         <h3>ONBOARDING — PAGO ÚNICO</h3>
         <div class="pricing-row" style="background:#f0fdf4;border-radius:7px;padding:10px 12px;">
-          <span class="label" style="font-weight:700;">Alta Cuenta WhatsApp Oficial &amp; Configuración de Plataforma</span>
-          <span class="unit-price" style="color:#15803d;font-weight:700;">$5,000.00</span>
-          <span class="subtotal vi" style="font-size:1.05rem;">$5,000.00</span>
+          <span class="label" style="font-weight:700;">Alta Cuenta WhatsApp Oficial &amp; Configuración de Plataforma VendIA</span>
+          <span class="unit-price" style="color:#15803d;font-weight:700;">$12,000.00</span>
+          <span class="subtotal vi" style="font-size:1.05rem;">$12,000.00</span>
         </div>
         <div style="margin-top:10px;padding:10px 12px;background:#fafafa;border-radius:7px;font-size:.8rem;color:#555;">
-          <strong style="color:#15803d;">Incluye:</strong> Soporte y acompañamiento en el proceso de alta · Capacitación para el manejo de la plataforma · Licencia de Administrador · Licencia de Supervisor · Wizard Bot (3 hrs configuración + seguimiento CS)
+          <strong style="color:#15803d;">Incluye:</strong> Alta Cuenta WhatsApp Oficial · Configuración de Plataforma · Catálogos de Productos/Servicios · Administración de Sucursales · Programas de Lealtad · Gestor de Órdenes · 1,000 Conversaciones WhatsApp (Servicio) · Integración con Pasarela de Pagos · Integración Delivery (última milla) · Capacitación para el manejo de la plataforma (20 hrs) · Soporte en proceso de alta · Licencias de Administrador y Supervisor
         </div>
       </div>
     </div>
@@ -475,47 +502,37 @@
         <div class="plazo-card" id="vi-plazo-12" onclick="viSelectPlazo(12)">
           <div class="plazo-label">Plazo</div>
           <div class="plazo-months">12 meses</div>
-          <div class="plazo-price">$9,747 <span style="font-size:.72rem;font-weight:400;color:#888;">/mes</span></div>
+          <div class="plazo-price">$6,000 <span style="font-size:.72rem;font-weight:400;color:#888;">/mes</span></div>
           <div class="plazo-desc">Sin descuento</div>
         </div>
         <div class="plazo-card" id="vi-plazo-24" onclick="viSelectPlazo(24)">
           <div class="plazo-label">Plazo</div>
           <div class="plazo-months">24 meses</div>
-          <div class="plazo-price">$8,772 <span style="font-size:.72rem;font-weight:400;color:#888;">/mes</span></div>
+          <div class="plazo-price">$5,400 <span style="font-size:.72rem;font-weight:400;color:#888;">/mes</span></div>
           <div class="plazo-desc">10% de descuento</div>
         </div>
         <div class="plazo-card" id="vi-plazo-36" onclick="viSelectPlazo(36)">
           <div class="plazo-label">Plazo</div>
           <div class="plazo-months">36 meses</div>
-          <div class="plazo-price">$7,798 <span style="font-size:.72rem;font-weight:400;color:#888;">/mes</span></div>
+          <div class="plazo-price">$4,800 <span style="font-size:.72rem;font-weight:400;color:#888;">/mes</span></div>
           <div class="plazo-desc">20% de descuento</div>
         </div>
       </div>
 
       <!-- Lo que incluye el plan -->
       <div style="background:#f0fdf4;border:1.5px solid #86efac;border-radius:10px;padding:16px 20px;margin-bottom:16px;">
-        <div style="font-size:.85rem;font-weight:700;color:#15803d;margin-bottom:12px;text-transform:uppercase;letter-spacing:.5px;">✓ Incluido en el Plan VendIA Business</div>
+        <div style="font-size:.85rem;font-weight:700;color:#15803d;margin-bottom:12px;text-transform:uppercase;letter-spacing:.5px;">✓ Incluido en el Plan VendIA Business (Fee Mensual)</div>
         <div class="includes-grid">
           <div class="includes-item"><span class="check">✓</span><span>Plataforma SAAS de cCommerce (WhatsApp)</span></div>
-          <div class="includes-item"><span class="check">✓</span><span>Módulo de Catálogos de Productos/Servicios</span></div>
-          <div class="includes-item"><span class="check">✓</span><span>Módulo de Administración de Sucursales</span></div>
-          <div class="includes-item"><span class="check">✓</span><span>Módulo de Programas de Lealtad</span></div>
-          <div class="includes-item"><span class="check">✓</span><span>Módulo Gestor de Órdenes</span></div>
           <div class="includes-item"><span class="check">✓</span><span>Dashboard y Reportes de Sistema</span></div>
-          <div class="includes-item"><span class="check">✓</span><span>1,000 Conversaciones WhatsApp (servicio)</span></div>
-          <div class="includes-item"><span class="check">✓</span><span>Integración con Pasarela de Pagos</span></div>
-          <div class="includes-item"><span class="check">✓</span><span>Integración Delivery (última milla / Uber)</span></div>
-          <div class="includes-item"><span class="check">✓</span><span>Integraciones API hasta 3 hrs (Gateway)</span></div>
           <div class="includes-item"><span class="check">✓</span><span>Soporte Básico (3 hrs / 8×5 días hábiles)</span></div>
-          <div class="includes-item"><span class="cross">✗</span><span>Horas de Desarrollo ($806/hr extra)</span></div>
         </div>
-        <div style="font-size:.75rem;color:#888;margin-top:10px;">* A partir de la hora 4 de integraciones API, costo adicional de $806/hr</div>
       </div>
 
       <div class="annual-box" style="margin-bottom:14px;"><label><input type="checkbox" id="vi-chk-annual" onchange="viRecalcAnual()"><strong>Plan Anual Preferente (10% descuento en setup + mensualidad)</strong></label><p>Aplica 10% de descuento sobre el Set Up y sobre la mensualidad del plazo seleccionado.</p></div>
 
       <div class="totals-box vi">
-        <div class="totals-row"><span>Set Up (Pago Único):</span><span id="vi-disp-setup">$5,000.00</span></div>
+        <div class="totals-row"><span>Set Up (Pago Único):</span><span id="vi-disp-setup">$12,000.00</span></div>
         <div class="totals-row hidden" id="vi-annual-setup-row"><span>Set Up con 10% dto:</span><span id="vi-disp-setup-dto" class="discount">—</span></div>
         <div class="totals-row"><span>Fee Mensual del Plan:</span><span id="vi-disp-fee">— Selecciona un plazo —</span></div>
         <div class="totals-row hidden" id="vi-annual-fee-row"><span>Fee Mensual con 10% dto:</span><span id="vi-disp-fee-dto" class="discount">—</span></div>
@@ -526,6 +543,28 @@
       </div>
     </div>
 
+
+    <!-- SECCIÓN 4: COSTOS REFERENCIA -->
+    <div class="card vi">
+      <h2>4. Sección 4 — Costos de Referencia</h2>
+      <p style="font-size:.83rem;color:#555;margin-bottom:16px;">Los siguientes costos son variables, dependen del uso y son contratados directamente por el cliente con el proveedor. Se incluyen como referencia para la planeación comercial.</p>
+
+      <div class="cost-info" style="margin-bottom:12px;">
+        <h4>🚚 Delivery — Última Milla (Uber Direct / similar)</h4>
+        <div class="cost-row"><span class="cost-label">1 – 2 km</span><span class="cost-val">~$40 – $60 MXN por envío</span></div>
+        <div class="cost-row"><span class="cost-label">3 – 5 km</span><span class="cost-val">~$60 – $90 MXN por envío</span></div>
+        <div class="cost-row"><span class="cost-label">5+ km</span><span class="cost-val">$90 – $130+ MXN por envío</span></div>
+        <p class="cost-note">Costo dinámico sujeto a distancia, demanda y horario. El cliente contrata directamente con el proveedor de última milla.</p>
+      </div>
+
+      <div class="cost-info">
+        <h4>💳 Pasarela de Pagos (Stripe / similar)</h4>
+        <div class="cost-row"><span class="cost-label">Comisión base</span><span class="cost-val">3.6% + $3.00 MXN por transacción</span></div>
+        <div class="cost-row"><span class="cost-label">Tarjetas internacionales</span><span class="cost-val">+ 0.5% adicional</span></div>
+        <div class="cost-row"><span class="cost-label">Conversión de moneda</span><span class="cost-val">+ 2.0% adicional</span></div>
+        <p class="cost-note">Sin costos fijos — esquema pay-as-you-go. El cliente contrata directamente con el proveedor de pagos elegido.</p>
+      </div>
+    </div>
 
     <div class="actions" id="vi-actions" style="display:none;">
       <button class="btn-secondary" onclick="resetForm()">Limpiar</button>
@@ -679,25 +718,26 @@
         <div class="vi-flow-arrow">›</div>
         <div class="vi-flow-step"><div class="step-num">4</div><div class="step-name">Entrega</div><div class="step-desc">Pedido procesado automáticamente</div></div>
       </div>
-      <div class="q-section-title vi" style="margin-top:20px;">Plan VendIA Business — Incluye</div>
+      <div class="q-section-title vi" style="margin-top:20px;">Sección 1 — Set Up (Pago Único) Incluye</div>
+      <div class="q-includes">
+        <div class="qi"><span class="ck">✓</span><span>Alta Cuenta WhatsApp Oficial</span></div>
+        <div class="qi"><span class="ck">✓</span><span>Configuración de Plataforma VendIA</span></div>
+        <div class="qi"><span class="ck">✓</span><span>Catálogos de Productos/Servicios</span></div>
+        <div class="qi"><span class="ck">✓</span><span>Administración de Sucursales</span></div>
+        <div class="qi"><span class="ck">✓</span><span>Programas de Lealtad</span></div>
+        <div class="qi"><span class="ck">✓</span><span>Gestor de Órdenes</span></div>
+        <div class="qi"><span class="ck">✓</span><span>1,000 Conversaciones WhatsApp (Servicio)</span></div>
+        <div class="qi"><span class="ck">✓</span><span>Integración con Pasarela de Pagos</span></div>
+        <div class="qi"><span class="ck">✓</span><span>Integración Delivery (última milla)</span></div>
+        <div class="qi"><span class="ck">✓</span><span>Capacitación para el manejo de la plataforma (20 hrs)</span></div>
+        <div class="qi"><span class="ck">✓</span><span>Soporte y acompañamiento en el alta</span></div>
+        <div class="qi"><span class="ck">✓</span><span>Licencia de Administrador y Supervisor</span></div>
+      </div>
+      <div class="q-section-title vi" style="margin-top:16px;">Sección 2 — Plan VendIA Business (Fee Mensual) Incluye</div>
       <div class="q-includes">
         <div class="qi"><span class="ck">✓</span><span>Plataforma SAAS de cCommerce (WhatsApp)</span></div>
-        <div class="qi"><span class="ck">✓</span><span>Módulo de Catálogos de Productos/Servicios</span></div>
-        <div class="qi"><span class="ck">✓</span><span>Módulo de Administración de Sucursales</span></div>
-        <div class="qi"><span class="ck">✓</span><span>Módulo de Programas de Lealtad</span></div>
-        <div class="qi"><span class="ck">✓</span><span>Módulo Gestor de Órdenes</span></div>
         <div class="qi"><span class="ck">✓</span><span>Dashboard y Reportes de Sistema</span></div>
-        <div class="qi"><span class="ck">✓</span><span>1,000 Conversaciones WhatsApp (servicio)</span></div>
-        <div class="qi"><span class="ck">✓</span><span>Wizard Bot (3 hrs configuración + CS)</span></div>
-        <div class="qi"><span class="ck">✓</span><span>Integración con Pasarela de Pagos</span></div>
-        <div class="qi"><span class="ck">✓</span><span>Integración Delivery (última milla / Uber)</span></div>
-        <div class="qi"><span class="ck">✓</span><span>Integraciones API hasta 3 hrs (Gateway)</span></div>
         <div class="qi"><span class="ck">✓</span><span>Soporte Básico (3 hrs / 8×5 días hábiles)</span></div>
-        <div class="qi"><span class="ck">✓</span><span>Soporte y acompañamiento en el alta</span></div>
-        <div class="qi"><span class="ck">✓</span><span>Capacitación para el manejo de plataforma</span></div>
-        <div class="qi"><span class="ck">✓</span><span>Licencia de Administrador</span></div>
-        <div class="qi"><span class="ck">✓</span><span>Licencia de Supervisor</span></div>
-        <div class="qi"><span class="cx">✗</span><span>Horas de Desarrollo ($806/hr adicional)</span></div>
       </div>
     </div>
 
@@ -717,9 +757,9 @@
 
     <!-- PAGE 4 VI: Costos por Uso -->
     <div class="q-page">
-      <div class="q-header vi"><img src="logos/averix.png" alt="Averix" onerror="this.style.display='none'"><div><div class="header-title">PROPUESTA COMERCIAL</div><div class="header-sub">Sección 3 — Costos por Uso</div></div></div>
+      <div class="q-header vi"><img src="logos/averix.png" alt="Averix" onerror="this.style.display='none'"><div><div class="header-title">PROPUESTA COMERCIAL</div><div class="header-sub">Secciones 3 y 4 — Costos de Referencia</div></div></div>
 
-      <div class="q-section-title vi">Sección 3 — Costos por Uso (estimado mensual)</div>
+      <div class="q-section-title vi">Sección 3 — Costos por Uso de Plantillas (estimado mensual)</div>
       <div class="q-body" style="margin-bottom:6px;"><p>Los siguientes costos son variables y dependen del volumen de uso mensual. Se presentan como referencia para la planeación del cliente.</p></div>
 
       <div class="q-section-title vi" style="font-size:.85rem;">TEMPLATES / PLANTILLAS — Por conversación (MXN)</div>
@@ -734,6 +774,8 @@
       </table>
       <p style="font-size:.72rem;color:#888;font-style:italic;margin-bottom:14px;">* Precios sujetos a META. Aplica por conversación de 24 hrs.</p>
 
+      <div class="q-section-title vi">Sección 4 — Costos de Referencia (contratación directa del cliente)</div>
+      <div class="q-body" style="margin-bottom:6px;"><p>Los siguientes costos son contratados directamente por el cliente con el proveedor correspondiente. Se incluyen como referencia para la planeación del proyecto.</p></div>
       <div class="q-section-title vi" style="font-size:.85rem;">Costo de Delivery — Uber Direct (última milla)</div>
       <div class="cost-block" style="margin-bottom:14px;">
         <div class="cost-block-row"><span>1 – 2 km</span><span style="font-weight:700;">~$40 – $60 MXN</span></div>
@@ -764,7 +806,7 @@
           <li>El fee mensual aplica desde la fecha de activación del servicio y es recurrente por el plazo contratado.</li>
           <li>La integración de pasarelas de pago requiere contrato activo del cliente con el proveedor de pagos elegido.</li>
           <li>La integración de delivery requiere contrato activo del cliente con el proveedor logístico.</li>
-          <li>A partir de la hora 4 de integraciones API, se genera un costo adicional de $806/hr.</li>
+          <li>El Set Up incluye 20 horas de capacitación para el manejo de la plataforma. Cualquier requerimiento de capacitación adicional se cotizará por separado.</li>
           <li>La carga inicial del catálogo de productos es responsabilidad del cliente; Averix apoya en la configuración de la plataforma.</li>
           <li>Cualquier requerimiento fuera de alcance podrá evaluarse y cotizarse como adicional.</li>
           <li>La activación del servicio estará sujeta a firma contractual o aceptación formal.</li>
@@ -900,8 +942,8 @@ const BB = {
 };
 
 const VI = {
-  setup: 5000,
-  plazos: { 12:{fee:9747,desc:'Sin descuento'}, 24:{fee:8772,desc:'10% de descuento'}, 36:{fee:7798,desc:'20% de descuento'} },
+  setup: 12000,
+  plazos: { 12:{fee:6000,desc:'Sin descuento'}, 24:{fee:5400,desc:'10% de descuento'}, 36:{fee:4800,desc:'20% de descuento'} },
   msgs: { mkt:.56, util:.16, auth:.16, svc:0 }
 };
 
@@ -1192,13 +1234,13 @@ function generateVIQuote(clientName,clientCity,propDate,preparedBy,clientScope) 
 
   // SECCIÓN 1: Set Up
   row('SECCIÓN 1 — SET UP','PAGO ÚNICO',true);
-  row('Alta Cuenta WhatsApp Oficial. Configuración de plataforma VendIA. Incluye: soporte de alta, capacitación, licencias de Administrador y Supervisor, Wizard Bot (3 hrs CS).',fmt(VI.setup));
+  row('Alta Cuenta WhatsApp Oficial. Configuración de plataforma VendIA. Incluye: Catálogos, Sucursales, Lealtad, Gestor de Órdenes, 1,000 Conv. Servicio, Integración Pagos, Integración Delivery, Capacitación para el manejo de la plataforma (20 hrs), soporte en alta, licencias de Administrador y Supervisor.',fmt(VI.setup));
   row('TOTAL SET UP',fmt(VI.setup),false,true);
 
   // SECCIÓN 2: Plan Mensual
   row(`SECCIÓN 2 — PLAN VENDIA BUSINESS (${viSelectedPlazo} meses)${descLabel}`,'FEE MENSUAL',true);
   row('Fee Mensual del Plan a '+viSelectedPlazo+' meses'+descLabel, fmt(fee)+'/mes');
-  row('INCLUYE: Plataforma SAAS cCommerce, Catálogos, Sucursales, Lealtad, Gestor de Órdenes, Dashboard, Reportes, 1,000 Conv. Servicio, Integración Pagos, Integración Delivery, API hasta 3 hrs, Soporte Básico.', '');
+  row('INCLUYE: Plataforma SAAS cCommerce (WhatsApp), Dashboard y Reportes de Sistema, Soporte Básico (3 hrs / 8×5 días hábiles).', '');
   row('TOTAL FEE MENSUAL',fmt(fee)+'/mes',false,true);
 
   // Resumen total
