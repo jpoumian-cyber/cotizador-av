@@ -240,10 +240,31 @@
   }
 
   @media print {
-    body { background: #fff; }
+    html, body { background: #fff; margin: 0 !important; padding: 0 !important; }
     #app { display: none !important; }
-    #quotation { display: block !important; }
-    .q-page { page-break-after: always; }
+    #quotation { display: block !important; max-width: none !important; margin: 0 !important; padding: 0 !important; }
+    /* Reset screen dimensions: usar unidades físicas para evitar hojas fantasma por overflow */
+    .q-page {
+      width: 100% !important;
+      min-height: 0 !important;
+      max-height: none !important;
+      padding: 12mm 14mm !important;
+      box-sizing: border-box !important;
+      page-break-after: always;
+      break-after: page;
+    }
+    /* Portadas ocupan una página completa */
+    .q-cover {
+      min-height: 100vh !important;
+      padding: 16mm !important;
+    }
+    /* Evita la hoja en blanco al final: la última .q-page del producto visible no fuerza salto */
+    #q-bb > .q-page:last-child,
+    #q-vi > .q-page:last-child,
+    #q-om > .q-page:last-child {
+      page-break-after: auto !important;
+      break-after: auto !important;
+    }
     .no-print { display: none !important; }
     @page { margin: 0; size: A4; }
   }
@@ -348,7 +369,7 @@
       <h1>Cotizador Averix</h1>
       <span>Plataforma de Comunicación Conversacional & Comercio Conversacional</span>
     </div>
-    <span style="font-size:.8rem;opacity:.5;">v2.1</span>
+    <span style="font-size:.8rem;opacity:.5;">v2.2</span>
   </div>
 
   <div class="product-tabs">
