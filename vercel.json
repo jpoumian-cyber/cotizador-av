@@ -1,6 +1,7 @@
 {
   "rewrites": [
-    { "source": "/", "destination": "/cotizador.html" },
-    { "source": "/contratos", "destination": "/contratos.html" }
+    { "source": "/",          "destination": "/cotizador.html" },
+    { "source": "/contratos", "destination": "/contratos.html" },
+    { "source": "/admin",     "destination": "/admin.html" }
   ]
 }

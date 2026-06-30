@@ -450,7 +450,7 @@
       <h1>Cotizador Averix</h1>
       <span>Plataforma de Comunicación Conversacional & Comercio Conversacional</span>
     </div>
-    <span style="font-size:.8rem;opacity:.5;">v2.9</span>
+    <span style="font-size:.8rem;opacity:.5;">v3.0</span>
   </div>
 
   <div class="channel-bar">
@@ -1057,6 +1057,17 @@ function applyChannel(channel) {
     return false;
   }
 
+  // Helpers para filtrar items con _deleted (soft delete del admin)
+  const live    = v => !(v && typeof v === 'object' && v._deleted);
+  const liveMap = m => {
+    const out = {};
+    if (!m) return out;
+    for (const k of Object.keys(m)) if (live(m[k])) out[k] = m[k];
+    return out;
+  };
+  const liveArr = a => Array.isArray(a) ? a.filter(live) : [];
+  const addOnPrice = ao => (ao && live(ao) && typeof ao.price === 'number') ? ao.price : 0;
+
   // --- BB adapter ---
   BB.alta    = bbC.set_up.alta_whatsapp;
   BB.setup   = bbC.set_up.setup_por_plan;
@@ -1066,17 +1077,27 @@ function applyChannel(channel) {
   BB.hrsDev  = bbC.set_up.horas.desarrollo;
   BB.baseOD  = bbC.monthly_fee.on_demand.plataforma_base;
   BB.descripcionBase = bbC.monthly_fee.on_demand.descripcion_base;
-  BB.soporteTiers = bbC.monthly_fee.on_demand.soporte_tiers || [];
-  BB.plans   = bbC.monthly_fee.por_plan.planes;
+  BB.soporteTiers = liveArr(bbC.monthly_fee.on_demand.soporte_tiers);
+  BB.plans   = liveMap(bbC.monthly_fee.por_plan.planes);
   BB.agentePorPlan = bbC.monthly_fee.por_plan.agente_adicional;
-  BB.wizard  = bbC.add_ons.wizard  ? bbC.add_ons.wizard.price  : 0;
-  BB.api     = bbC.add_ons.api     ? bbC.add_ons.api.price     : 0;
-  BB.mobile  = bbC.add_ons.mobile  ? bbC.add_ons.mobile.price  : 0;
-  BB.repo    = bbC.add_ons.repo    ? bbC.add_ons.repo.price    : 0;
-  BB.amd     = bbC.add_ons.amd     ? bbC.add_ons.amd.price     : 0;
-  BB.webchat = bbC.add_ons.webchat ? bbC.add_ons.webchat.price : 0;
-  BB.campanas = bbC.add_ons.campanas_masivas ? bbC.add_ons.campanas_masivas.price : 0;
-  BB.iaModulo = bbC.add_ons.ia_modulo || [{price:0,label:'No incluir'}];
+  BB.wizard   = addOnPrice(bbC.add_ons.wizard);
+  BB.api      = addOnPrice(bbC.add_ons.api);
+  BB.mobile   = addOnPrice(bbC.add_ons.mobile);
+  BB.repo     = addOnPrice(bbC.add_ons.repo);
+  BB.amd      = addOnPrice(bbC.add_ons.amd);
+  BB.webchat  = addOnPrice(bbC.add_ons.webchat);
+  BB.campanas = addOnPrice(bbC.add_ons.campanas_masivas);
+  BB.iaModulo = liveArr(bbC.add_ons.ia_modulo).length ? liveArr(bbC.add_ons.ia_modulo) : [{price:0,label:'No incluir'}];
+  // Marca de inactivo en addons (para ocultar checkboxes en applyPricesToUI si quieres más adelante)
+  BB.addOnsActive = {
+    wizard:  !!bbC.add_ons.wizard  && live(bbC.add_ons.wizard),
+    api:     !!bbC.add_ons.api     && live(bbC.add_ons.api),
+    mobile:  !!bbC.add_ons.mobile  && live(bbC.add_ons.mobile),
+    repo:    !!bbC.add_ons.repo    && live(bbC.add_ons.repo),
+    amd:     !!bbC.add_ons.amd     && live(bbC.add_ons.amd),
+    webchat: !!bbC.add_ons.webchat && live(bbC.add_ons.webchat),
+    campanas:!!bbC.add_ons.campanas_masivas && live(bbC.add_ons.campanas_masivas)
+  };
   BB.agentesTramos = bbC.transaccionalidad.agentes_extra_on_demand_tramos;
   BB.tplRanges = bbC.transaccionalidad.templates_on_demand_tramos.map(r =>
     [r.volumen_hasta, r.marketing, r.utilidad, r.otp, r.servicio]
@@ -1089,19 +1110,21 @@ function applyChannel(channel) {
   VI.plazos = {};
   for (const k of Object.keys(viC.monthly_fee.plazos)) {
     const p = viC.monthly_fee.plazos[k];
+    if (!live(p)) continue;
     VI.plazos[k] = { fee: p.fee, desc: p.desc, descuento_pct: p.descuento_pct };
   }
   VI.plantillasMeta = viC.transaccionalidad.plantillas_meta;
-  VI.deliveryUber   = viC.costos_extras.delivery_uber_direct;
+  VI.deliveryUber   = liveArr(viC.costos_extras.delivery_uber_direct);
   VI.pasarelaStripe = viC.costos_extras.pasarela_pago_stripe;
   VI.horaExtra      = viC.costos_extras.hora_desarrollo_adicional;
-  VI.atencionBcbot  = (viC.add_ons && viC.add_ons.atencion_bcbot) || null;
+  VI.atencionBcbot  = (viC.add_ons && viC.add_ons.atencion_bcbot && live(viC.add_ons.atencion_bcbot)) ? viC.add_ons.atencion_bcbot : null;
 
   // --- OMIA adapter ---
   OMIA.setup  = omC.set_up.set_up;
   OMIA.plazos = {};
   for (const k of Object.keys(omC.monthly_fee.plazos)) {
     const p = omC.monthly_fee.plazos[k];
+    if (!live(p)) continue;
     OMIA.plazos[k] = { fee: p.fee, desc: p.desc, descuento_pct: p.descuento_pct };
   }
   OMIA.llamada         = omC.transaccionalidad.llamada_outbound;

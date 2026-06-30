@@ -1,0 +1,652 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Admin · Cotizador Averix</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: #f4f6fb; color: #222; min-height: 100vh; }
+
+  /* Login */
+  .login-card { max-width: 380px; margin: 90px auto; background: #fff; padding: 32px 28px; border-radius: 14px; box-shadow: 0 6px 24px rgba(0,0,0,.08); }
+  .login-card h1 { font-size: 1.2rem; color: #1a2d6e; margin-bottom: 18px; text-align: center; }
+  .login-card label { display: block; font-size: .82rem; font-weight: 600; color: #444; margin: 12px 0 6px; }
+  .login-card input { width: 100%; padding: 10px 12px; border: 1.5px solid #d0d5dd; border-radius: 8px; font-size: .95rem; }
+  .login-card input:focus { outline: none; border-color: #1a2d6e; }
+  .login-card button { width: 100%; margin-top: 18px; padding: 11px; background: #1a2d6e; color: #fff; border: none; border-radius: 8px; font-weight: 700; font-size: 1rem; cursor: pointer; }
+  .login-card button:hover { background: #122059; }
+  .login-card .err { background: #fef2f2; color: #b91c1c; padding: 8px 12px; border-radius: 6px; font-size: .85rem; margin-top: 14px; display: none; }
+
+  /* App layout */
+  .app-header { background: #1a2d6e; color: #fff; padding: 12px 24px; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 2px 6px rgba(0,0,0,.1); }
+  .app-header h1 { font-size: 1rem; font-weight: 700; letter-spacing: .3px; }
+  .app-header .who { display: flex; align-items: center; gap: 12px; font-size: .85rem; }
+  .app-header .who button { background: rgba(255,255,255,.15); border: none; color: #fff; padding: 5px 12px; border-radius: 6px; font-size: .8rem; cursor: pointer; }
+  .app-header .who button:hover { background: rgba(255,255,255,.25); }
+
+  .tabs { background: #fff; border-bottom: 1.5px solid #e5e7eb; padding: 0 24px; display: flex; gap: 6px; }
+  .tab { background: transparent; border: none; padding: 14px 18px; font-size: .9rem; font-weight: 600; color: #666; cursor: pointer; border-bottom: 3px solid transparent; }
+  .tab.active { color: #1a2d6e; border-bottom-color: #1a2d6e; }
+
+  .container { max-width: 1180px; margin: 24px auto; padding: 0 24px; }
+
+  /* Toolbar */
+  .toolbar { background: #fff; padding: 14px 18px; border-radius: 10px; margin-bottom: 18px; display: flex; flex-wrap: wrap; gap: 12px; align-items: center; box-shadow: 0 1px 3px rgba(0,0,0,.05); }
+  .toolbar label { font-size: .82rem; font-weight: 600; color: #555; margin-right: 4px; }
+  .toolbar select { padding: 7px 10px; border: 1.5px solid #d0d5dd; border-radius: 7px; font-size: .9rem; background: #fff; }
+  .toolbar .spacer { flex: 1; }
+  .toolbar button { padding: 8px 16px; border-radius: 7px; border: none; font-weight: 700; font-size: .88rem; cursor: pointer; }
+  .toolbar .btn-save { background: #25a244; color: #fff; }
+  .toolbar .btn-save:hover { background: #1f8a3a; }
+  .toolbar .btn-save:disabled { background: #ddd; color: #888; cursor: not-allowed; }
+  .toolbar .btn-reload { background: #eef1fa; color: #1a2d6e; }
+  .toolbar .btn-reload:hover { background: #dde3f3; }
+  .toolbar .status { font-size: .8rem; color: #888; }
+
+  /* Sections */
+  .section { background: #fff; border-radius: 10px; margin-bottom: 14px; box-shadow: 0 1px 3px rgba(0,0,0,.05); overflow: hidden; }
+  .section h2 { font-size: .88rem; font-weight: 800; color: #1a2d6e; text-transform: uppercase; letter-spacing: .5px; padding: 12px 18px; background: #eef1fa; border-bottom: 1.5px solid #dde3f3; cursor: pointer; user-select: none; display: flex; justify-content: space-between; align-items: center; }
+  .section h2::after { content: '▾'; font-size: .9rem; transition: transform .15s; }
+  .section.collapsed h2::after { transform: rotate(-90deg); }
+  .section.collapsed .section-body { display: none; }
+  .section-body { padding: 14px 18px; }
+
+  .group { margin-bottom: 16px; }
+  .group:last-child { margin-bottom: 0; }
+  .group-title { font-size: .76rem; font-weight: 700; color: #555; text-transform: uppercase; letter-spacing: .3px; margin-bottom: 8px; padding-left: 8px; border-left: 3px solid #1a2d6e; }
+
+  .field { display: grid; grid-template-columns: 1fr 1fr auto; gap: 10px; align-items: center; padding: 7px 0; border-bottom: 1px dashed #eee; }
+  .field:last-child { border-bottom: none; }
+  .field .key { font-size: .85rem; color: #444; font-weight: 500; }
+  .field .key code { background: #f4f6fb; padding: 1px 6px; border-radius: 4px; font-size: .76rem; color: #1a2d6e; }
+  .field input[type="text"], .field input[type="number"], .field textarea, .field select { width: 100%; padding: 6px 9px; border: 1.5px solid #d0d5dd; border-radius: 6px; font-size: .85rem; background: #fff; }
+  .field input:focus, .field textarea:focus, .field select:focus { outline: none; border-color: #1a2d6e; }
+  .field .actions { display: flex; gap: 4px; }
+  .field button { padding: 4px 8px; border: none; border-radius: 5px; font-size: .72rem; font-weight: 600; cursor: pointer; }
+  .field .btn-del { background: #fef2f2; color: #b91c1c; }
+  .field .btn-del:hover { background: #fee2e2; }
+  .field .btn-undo { background: #ecfdf5; color: #047857; }
+  .field .btn-undo:hover { background: #d1fae5; }
+  .field.deleted { opacity: .45; text-decoration: line-through; }
+  .field.deleted input, .field.deleted textarea, .field.deleted select { background: #fafafa; pointer-events: none; }
+
+  .item-card { border: 1.5px solid #e5e7eb; border-radius: 8px; padding: 12px 14px; margin-bottom: 10px; background: #fdfdfd; }
+  .item-card.deleted { opacity: .45; }
+  .item-card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+  .item-card-header .item-title { font-weight: 700; font-size: .85rem; color: #1a2d6e; }
+  .item-card-header .item-key { font-size: .72rem; color: #888; font-family: monospace; margin-left: 8px; }
+
+  .add-row { background: #f0f3fc; color: #1a2d6e; border: 1.5px dashed #1a2d6e; border-radius: 7px; padding: 8px 14px; font-size: .85rem; cursor: pointer; text-align: center; margin-top: 8px; font-weight: 600; }
+  .add-row:hover { background: #dde3f3; }
+
+  /* Audit log */
+  .audit-table { width: 100%; background: #fff; border-radius: 10px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,.05); border-collapse: collapse; }
+  .audit-table th, .audit-table td { padding: 9px 14px; text-align: left; font-size: .82rem; border-bottom: 1px solid #f0f0f0; vertical-align: top; }
+  .audit-table th { background: #eef1fa; color: #1a2d6e; font-size: .75rem; font-weight: 800; text-transform: uppercase; letter-spacing: .3px; }
+  .audit-table tr:last-child td { border-bottom: none; }
+  .audit-table .path { font-family: monospace; font-size: .76rem; color: #1a2d6e; }
+  .audit-table .old { color: #b91c1c; font-family: monospace; }
+  .audit-table .new { color: #047857; font-family: monospace; }
+  .audit-table .ts { color: #888; font-size: .75rem; white-space: nowrap; }
+
+  /* Toast */
+  .toast { position: fixed; bottom: 24px; right: 24px; padding: 12px 20px; border-radius: 8px; font-size: .9rem; font-weight: 600; box-shadow: 0 4px 16px rgba(0,0,0,.15); z-index: 100; transform: translateY(100px); opacity: 0; transition: all .25s; }
+  .toast.show { transform: translateY(0); opacity: 1; }
+  .toast.ok { background: #25a244; color: #fff; }
+  .toast.err { background: #ef4444; color: #fff; }
+  .toast.info { background: #1a2d6e; color: #fff; }
+
+  .hidden { display: none !important; }
+  .muted { color: #888; font-size: .82rem; }
+  .empty { padding: 30px; text-align: center; color: #888; font-style: italic; }
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="login-view">
+  <div class="login-card">
+    <h1>🔐 Admin · Cotizador Averix</h1>
+    <form onsubmit="doLogin(event)">
+      <label for="lg-user">Usuario</label>
+      <input id="lg-user" type="text" autocomplete="username" required>
+      <label for="lg-pass">Contraseña</label>
+      <input id="lg-pass" type="password" autocomplete="current-password" required>
+      <button type="submit">Ingresar</button>
+      <div class="err" id="lg-err"></div>
+    </form>
+  </div>
+</div>
+
+<!-- APP -->
+<div id="app-view" class="hidden">
+  <header class="app-header">
+    <h1>Admin · Cotizador Averix</h1>
+    <div class="who">
+      <span id="who-label">—</span>
+      <button onclick="doLogout()">Salir</button>
+    </div>
+  </header>
+
+  <div class="tabs">
+    <button class="tab active" id="tab-btn-editor" onclick="showTab('editor')">📝 Editor</button>
+    <button class="tab" id="tab-btn-audit" onclick="showTab('audit')">📜 Auditoría</button>
+  </div>
+
+  <!-- EDITOR -->
+  <div class="container" id="tab-editor">
+    <div class="toolbar">
+      <label>Producto:</label>
+      <select id="sel-product" onchange="loadProduct()">
+        <option value="bbot">Broadcaster Bot</option>
+        <option value="vendia">VendIA</option>
+        <option value="omia">OMIA</option>
+      </select>
+      <label>Canal:</label>
+      <select id="sel-canal" onchange="renderEditor()">
+        <option value="averix_directo">Averix Directo</option>
+        <option value="telcel_reseller">Telcel Reseller</option>
+      </select>
+      <span class="spacer"></span>
+      <span class="status" id="status-bar">—</span>
+      <button class="btn-reload" onclick="loadProduct()">↻ Recargar</button>
+      <button class="btn-save" id="btn-save" onclick="saveChanges()" disabled>💾 Guardar Cambios</button>
+    </div>
+    <div id="editor-root">
+      <div class="empty">Cargando…</div>
+    </div>
+  </div>
+
+  <!-- AUDIT -->
+  <div class="container hidden" id="tab-audit">
+    <div class="toolbar">
+      <label>Filtrar por producto:</label>
+      <select id="sel-audit-prod" onchange="loadAudit()">
+        <option value="">Todos</option>
+        <option value="bbot">Broadcaster Bot</option>
+        <option value="vendia">VendIA</option>
+        <option value="omia">OMIA</option>
+      </select>
+      <label>Últimas:</label>
+      <select id="sel-audit-limit" onchange="loadAudit()">
+        <option value="50">50</option>
+        <option value="100">100</option>
+        <option value="200">200</option>
+        <option value="1000">1000</option>
+      </select>
+      <span class="spacer"></span>
+      <button class="btn-reload" onclick="loadAudit()">↻ Recargar</button>
+    </div>
+    <div id="audit-root">
+      <div class="empty">Cargando…</div>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+let currentSession = null;
+let currentJson    = null;   // JSON completo del producto (con ambos canales)
+let originalJson   = null;   // copia inmaculada para detectar cambios
+let currentProduct = 'bbot';
+let currentSha     = null;
+
+function $(id) { return document.getElementById(id); }
+
+// ----- API helpers -----
+async function api(path, opts = {}) {
+  const resp = await fetch(path, {
+    credentials: 'same-origin',
+    headers: { 'Content-Type': 'application/json', ...(opts.headers || {}) },
+    ...opts
+  });
+  let data = null;
+  try { data = await resp.json(); } catch {}
+  if (!resp.ok) {
+    const err = new Error(data?.error || `HTTP ${resp.status}`);
+    err.status = resp.status;
+    throw err;
+  }
+  return data;
+}
+
+// ----- Toast -----
+function toast(msg, type = 'info', ms = 3500) {
+  const t = $('toast');
+  t.textContent = msg;
+  t.className = `toast show ${type}`;
+  clearTimeout(window._toastTimer);
+  window._toastTimer = setTimeout(() => t.classList.remove('show'), ms);
+}
+
+// ----- Auth -----
+async function checkSession() {
+  try {
+    const me = await api('/api/auth');
+    currentSession = me;
+    $('who-label').textContent = `👤 ${me.user}`;
+    $('login-view').classList.add('hidden');
+    $('app-view').classList.remove('hidden');
+    loadProduct();
+    return true;
+  } catch (e) {
+    if (e.status === 401) {
+      $('login-view').classList.remove('hidden');
+      $('app-view').classList.add('hidden');
+    } else {
+      toast('Error verificando sesión: ' + e.message, 'err');
+    }
+    return false;
+  }
+}
+
+async function doLogin(ev) {
+  ev.preventDefault();
+  const u = $('lg-user').value.trim();
+  const p = $('lg-pass').value;
+  $('lg-err').style.display = 'none';
+  try {
+    await api('/api/auth', { method: 'POST', body: JSON.stringify({ action: 'login', username: u, password: p }) });
+    $('lg-pass').value = '';
+    await checkSession();
+  } catch (e) {
+    $('lg-err').textContent = e.message;
+    $('lg-err').style.display = 'block';
+  }
+}
+
+async function doLogout() {
+  try { await api('/api/auth', { method: 'POST', body: JSON.stringify({ action: 'logout' }) }); }
+  catch {}
+  location.reload();
+}
+
+// ----- Tabs -----
+function showTab(name) {
+  ['editor','audit'].forEach(n => {
+    $('tab-' + n).classList.toggle('hidden', n !== name);
+    $('tab-btn-' + n).classList.toggle('active', n === name);
+  });
+  if (name === 'audit') loadAudit();
+}
+
+// ----- Editor: cargar producto -----
+async function loadProduct() {
+  currentProduct = $('sel-product').value;
+  $('editor-root').innerHTML = '<div class="empty">Cargando…</div>';
+  $('btn-save').disabled = true;
+  $('status-bar').textContent = '—';
+  try {
+    const data = await api(`/api/pricing?product=${encodeURIComponent(currentProduct)}`);
+    currentJson  = data.content;
+    originalJson = JSON.parse(JSON.stringify(data.content));
+    currentSha   = data.sha;
+    renderEditor();
+  } catch (e) {
+    $('editor-root').innerHTML = `<div class="empty">Error: ${e.message}</div>`;
+  }
+}
+
+function markDirty() {
+  const dirty = JSON.stringify(currentJson) !== JSON.stringify(originalJson);
+  $('btn-save').disabled = !dirty;
+  $('status-bar').textContent = dirty ? '✏️ Cambios sin guardar' : '✓ Sin cambios';
+}
+
+// ----- Render editor -----
+function renderEditor() {
+  if (!currentJson) return;
+  const canal = $('sel-canal').value;
+  const channelData = currentJson[canal];
+  if (!channelData) {
+    $('editor-root').innerHTML = `<div class="empty">El canal "${canal}" no existe en este producto.</div>`;
+    return;
+  }
+  const root = $('editor-root');
+  root.innerHTML = '';
+
+  // Render _meta (sólo lectura, informativo)
+  if (currentJson._meta) {
+    root.appendChild(buildMetaSection(currentJson._meta));
+  }
+
+  // Render las 5 secciones
+  const sectionOrder = ['set_up', 'monthly_fee', 'transaccionalidad', 'add_ons', 'costos_extras'];
+  for (const key of sectionOrder) {
+    if (channelData[key] !== undefined) {
+      root.appendChild(buildSection(key, channelData[key], `${canal}.${key}`));
+    }
+  }
+  markDirty();
+}
+
+function buildMetaSection(meta) {
+  const sec = document.createElement('div');
+  sec.className = 'section';
+  sec.innerHTML = `<h2 onclick="this.parentElement.classList.toggle('collapsed')">_meta (sólo lectura)</h2>`;
+  const body = document.createElement('div');
+  body.className = 'section-body';
+  for (const k of Object.keys(meta)) {
+    const v = meta[k];
+    const row = document.createElement('div');
+    row.className = 'field';
+    row.innerHTML = `
+      <div class="key"><code>${k}</code></div>
+      <div><input type="text" value="${escapeHtml(typeof v === 'string' ? v : JSON.stringify(v))}" disabled></div>
+      <div></div>`;
+    body.appendChild(row);
+  }
+  sec.appendChild(body);
+  return sec;
+}
+
+function buildSection(name, value, basePath) {
+  const sec = document.createElement('div');
+  sec.className = 'section';
+  const titles = {
+    set_up:            '1. Set Up',
+    monthly_fee:       '2. Monthly Fee',
+    transaccionalidad: '3. Transaccionalidad',
+    add_ons:           '4. Add-ons',
+    costos_extras:     '5. Costos Extras'
+  };
+  sec.innerHTML = `<h2 onclick="this.parentElement.classList.toggle('collapsed')">${titles[name] || name}</h2>`;
+  const body = document.createElement('div');
+  body.className = 'section-body';
+  renderNode(body, value, basePath, '');
+  sec.appendChild(body);
+  return sec;
+}
+
+function renderNode(parent, node, fullPath, label) {
+  if (node === null || node === undefined) {
+    parent.appendChild(scalarField(label || '(null)', null, fullPath));
+    return;
+  }
+  if (Array.isArray(node)) {
+    renderArray(parent, node, fullPath, label);
+    return;
+  }
+  if (typeof node === 'object') {
+    renderObject(parent, node, fullPath, label);
+    return;
+  }
+  // Scalar
+  parent.appendChild(scalarField(label, node, fullPath));
+}
+
+function renderObject(parent, obj, fullPath, label) {
+  // Si el objeto se ve como item editable (tiene "price" o "label"), renderiza como item card
+  const hasItemShape = ('price' in obj) || ('label' in obj) || ('fee' in obj);
+
+  if (hasItemShape && label) {
+    parent.appendChild(buildItemCard(label, obj, fullPath));
+    return;
+  }
+
+  // Grupo nested
+  if (label) {
+    const grp = document.createElement('div');
+    grp.className = 'group';
+    grp.innerHTML = `<div class="group-title">${label}</div>`;
+    parent.appendChild(grp);
+    parent = grp;
+  }
+
+  // Render scalar children primero, después objetos/arrays
+  const scalarKeys = [], complexKeys = [];
+  for (const k of Object.keys(obj)) {
+    if (k.startsWith('_')) continue; // _meta, _nota, _deleted etc en este nivel
+    const v = obj[k];
+    if (v === null || typeof v !== 'object') scalarKeys.push(k);
+    else complexKeys.push(k);
+  }
+  for (const k of scalarKeys) {
+    parent.appendChild(scalarField(k, obj[k], fullPath ? `${fullPath}.${k}` : k));
+  }
+  for (const k of complexKeys) {
+    renderNode(parent, obj[k], fullPath ? `${fullPath}.${k}` : k, k);
+  }
+}
+
+function renderArray(parent, arr, fullPath, label) {
+  const grp = document.createElement('div');
+  grp.className = 'group';
+  grp.innerHTML = `<div class="group-title">${label || '(array)'} <span class="muted">[${arr.length} items]</span></div>`;
+  parent.appendChild(grp);
+
+  arr.forEach((item, idx) => {
+    const itemPath = `${fullPath}[${idx}]`;
+    if (item && typeof item === 'object' && !Array.isArray(item)) {
+      const titleParts = [];
+      if (item.label) titleParts.push(item.label);
+      else if (item.key) titleParts.push(item.key);
+      const title = titleParts.join(' · ') || `Item ${idx}`;
+      grp.appendChild(buildItemCard(title, item, itemPath));
+    } else {
+      // Array de scalares o arrays (ej. tplRanges)
+      const row = document.createElement('div');
+      row.className = 'field';
+      row.innerHTML = `
+        <div class="key"><code>${idx}</code></div>
+        <div><input type="text" value="${escapeHtml(JSON.stringify(item))}" data-path="${itemPath}" data-type="json" oninput="updateValue(this)"></div>
+        <div></div>`;
+      grp.appendChild(row);
+    }
+  });
+}
+
+function buildItemCard(title, obj, fullPath) {
+  const card = document.createElement('div');
+  card.className = 'item-card';
+  if (obj._deleted) card.classList.add('deleted');
+
+  const header = document.createElement('div');
+  header.className = 'item-card-header';
+  const titleEl = document.createElement('div');
+  titleEl.innerHTML = `<span class="item-title">${escapeHtml(title)}</span><span class="item-key">${fullPath}</span>`;
+  header.appendChild(titleEl);
+
+  const actions = document.createElement('div');
+  const isDeleted = !!obj._deleted;
+  if (isDeleted) {
+    actions.innerHTML = `<button class="btn-undo" onclick="undeleteItem('${fullPath}')">↺ Restaurar</button>`;
+  } else {
+    actions.innerHTML = `<button class="btn-del" onclick="deleteItem('${fullPath}')">🗑 Borrar</button>`;
+  }
+  header.appendChild(actions);
+  card.appendChild(header);
+
+  // Render keys del objeto (excepto _-prefijos)
+  for (const k of Object.keys(obj)) {
+    if (k.startsWith('_')) continue;
+    const v = obj[k];
+    if (v === null || typeof v !== 'object') {
+      card.appendChild(scalarField(k, v, `${fullPath}.${k}`));
+    } else {
+      // Nested complex children
+      renderNode(card, v, `${fullPath}.${k}`, k);
+    }
+  }
+  return card;
+}
+
+function scalarField(label, value, fullPath) {
+  const row = document.createElement('div');
+  row.className = 'field';
+  const type = typeof value;
+  let inputHtml = '';
+  if (type === 'boolean') {
+    inputHtml = `<select data-path="${fullPath}" data-type="boolean" onchange="updateValue(this)">
+      <option value="true"  ${value === true  ? 'selected' : ''}>true</option>
+      <option value="false" ${value === false ? 'selected' : ''}>false</option>
+    </select>`;
+  } else if (type === 'number') {
+    inputHtml = `<input type="number" step="any" value="${value}" data-path="${fullPath}" data-type="number" oninput="updateValue(this)">`;
+  } else if (value === null) {
+    inputHtml = `<input type="text" value="" placeholder="(null)" data-path="${fullPath}" data-type="string" oninput="updateValue(this)">`;
+  } else {
+    // string
+    const str = String(value);
+    if (str.length > 80) {
+      inputHtml = `<textarea data-path="${fullPath}" data-type="string" rows="2" oninput="updateValue(this)">${escapeHtml(str)}</textarea>`;
+    } else {
+      inputHtml = `<input type="text" value="${escapeHtml(str)}" data-path="${fullPath}" data-type="string" oninput="updateValue(this)">`;
+    }
+  }
+  row.innerHTML = `
+    <div class="key"><code>${escapeHtml(label)}</code></div>
+    <div>${inputHtml}</div>
+    <div></div>`;
+  return row;
+}
+
+function escapeHtml(s) {
+  return String(s)
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+}
+
+// ----- Path navigation -----
+function getByPath(obj, path) {
+  // path example: "averix_directo.set_up.alta_whatsapp" or "averix_directo.monthly_fee.por_plan.planes.api.price"
+  // o con índices: "transaccionalidad.templates_on_demand_tramos[0].marketing"
+  const tokens = parsePath(path);
+  let cur = obj;
+  for (const t of tokens) {
+    if (cur == null) return undefined;
+    cur = cur[t];
+  }
+  return cur;
+}
+
+function setByPath(obj, path, value) {
+  const tokens = parsePath(path);
+  let cur = obj;
+  for (let i = 0; i < tokens.length - 1; i++) {
+    if (cur[tokens[i]] == null) return false;
+    cur = cur[tokens[i]];
+  }
+  cur[tokens[tokens.length - 1]] = value;
+  return true;
+}
+
+function parsePath(path) {
+  const out = [];
+  const re = /([^.\[\]]+)|\[(\d+)\]/g;
+  let m;
+  while ((m = re.exec(path))) {
+    if (m[1] !== undefined) out.push(m[1]);
+    else out.push(parseInt(m[2], 10));
+  }
+  return out;
+}
+
+function updateValue(el) {
+  const path = el.dataset.path;
+  const type = el.dataset.type;
+  let v = el.value;
+  if (type === 'number')      v = v === '' ? null : Number(v);
+  else if (type === 'boolean')v = v === 'true';
+  else if (type === 'json') {
+    try { v = JSON.parse(v); el.style.borderColor = ''; }
+    catch { el.style.borderColor = '#ef4444'; return; }
+  }
+  setByPath(currentJson, path, v);
+  markDirty();
+}
+
+function deleteItem(path) {
+  const obj = getByPath(currentJson, path);
+  if (obj && typeof obj === 'object') {
+    obj._deleted = true;
+    obj._deleted_at = new Date().toISOString();
+    obj._deleted_by = currentSession?.user;
+    renderEditor();
+    markDirty();
+  }
+}
+
+function undeleteItem(path) {
+  const obj = getByPath(currentJson, path);
+  if (obj && typeof obj === 'object') {
+    delete obj._deleted;
+    delete obj._deleted_at;
+    delete obj._deleted_by;
+    renderEditor();
+    markDirty();
+  }
+}
+
+// ----- Save -----
+async function saveChanges() {
+  if (!confirm('¿Guardar los cambios?\n\nEsto creará 1-2 commits en el repositorio y disparará un nuevo deploy en Vercel (~30s).')) return;
+  $('btn-save').disabled = true;
+  $('status-bar').textContent = '⌛ Guardando…';
+  try {
+    const r = await api(`/api/pricing?product=${encodeURIComponent(currentProduct)}`, {
+      method: 'PUT',
+      body: JSON.stringify({ content: currentJson })
+    });
+    toast(`Guardado · ${r.changes} cambio(s) · commit ${r.commit?.slice(0,7) || ''}`, 'ok', 5000);
+    originalJson = JSON.parse(JSON.stringify(currentJson));
+    markDirty();
+  } catch (e) {
+    toast('Error guardando: ' + e.message, 'err', 6000);
+    $('btn-save').disabled = false;
+  }
+}
+
+// ----- Audit -----
+async function loadAudit() {
+  const prod  = $('sel-audit-prod').value;
+  const limit = $('sel-audit-limit').value;
+  const params = new URLSearchParams();
+  if (prod) params.set('product', prod);
+  if (limit) params.set('limit', limit);
+  $('audit-root').innerHTML = '<div class="empty">Cargando…</div>';
+  try {
+    const r = await api('/api/audit-log?' + params.toString());
+    renderAudit(r.entries || []);
+  } catch (e) {
+    $('audit-root').innerHTML = `<div class="empty">Error: ${e.message}</div>`;
+  }
+}
+
+function renderAudit(entries) {
+  if (!entries.length) {
+    $('audit-root').innerHTML = '<div class="empty">No hay entradas en el log.</div>';
+    return;
+  }
+  let html = `<table class="audit-table">
+    <thead><tr><th>Fecha</th><th>Usuario</th><th>Producto</th><th>Path</th><th>Anterior</th><th>Nuevo</th><th>Commit</th></tr></thead><tbody>`;
+  for (const e of entries) {
+    const ts = new Date(e.ts).toLocaleString('es-MX', { hour12: false });
+    html += `<tr>
+      <td class="ts">${escapeHtml(ts)}</td>
+      <td>${escapeHtml(e.user || '—')}</td>
+      <td>${escapeHtml(e.product || '—')}</td>
+      <td class="path">${escapeHtml(e.path || '—')}</td>
+      <td class="old">${fmtVal(e.old)}</td>
+      <td class="new">${fmtVal(e.new)}</td>
+      <td class="path">${e.commit ? escapeHtml(e.commit.slice(0,7)) : '—'}</td>
+    </tr>`;
+  }
+  html += '</tbody></table>';
+  $('audit-root').innerHTML = html;
+}
+
+function fmtVal(v) {
+  if (v === undefined) return '<em>—</em>';
+  if (v === null) return '<em>null</em>';
+  if (typeof v === 'object') return escapeHtml(JSON.stringify(v).slice(0, 80));
+  return escapeHtml(String(v));
+}
+
+// ----- Init -----
+checkSession();
+</script>
+</body>
+</html>
