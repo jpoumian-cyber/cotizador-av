@@ -29,7 +29,13 @@
       }
     },
 
-    "add_ons": {},
+    "add_ons": {
+      "atencion_bcbot": {
+        "label": "Plataforma de Atención a Cliente (BC Bot)",
+        "incluir_set_up": true,
+        "_nota": "Lee los planes y el set_up de pricing/bbot.json (mismo canal activo)."
+      }
+    },
 
     "costos_extras": {
       "delivery_uber_direct": [
@@ -75,7 +81,13 @@
       }
     },
 
-    "add_ons": {},
+    "add_ons": {
+      "atencion_bcbot": {
+        "label": "Plataforma de Atención a Cliente (BC Bot)",
+        "incluir_set_up": true,
+        "_nota": "Usa los planes Telcel BC Bot (Pyme / Business)."
+      }
+    },
 
     "costos_extras": {
       "delivery_uber_direct": [

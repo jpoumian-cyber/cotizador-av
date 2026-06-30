@@ -421,7 +421,7 @@
       <h1>Cotizador Averix</h1>
       <span>Plataforma de Comunicación Conversacional & Comercio Conversacional</span>
     </div>
-    <span style="font-size:.8rem;opacity:.5;">v2.7</span>
+    <span style="font-size:.8rem;opacity:.5;">v2.8</span>
   </div>
 
   <div class="channel-bar">
@@ -592,12 +592,28 @@
         </div>
       </div>
 
+      <!-- Add-on: Plataforma de Atención a Cliente (BC Bot) -->
+      <div class="cost-info" style="margin-bottom:14px;border:1.5px solid #1a2d6e;background:#f0f3fc;">
+        <label style="display:flex;align-items:center;gap:10px;cursor:pointer;font-weight:700;color:#1a2d6e;">
+          <input type="checkbox" id="vi-chk-bcbot" onchange="viToggleBcbot()" style="width:20px;height:20px;">
+          <span>Agregar Plataforma de Atención a Cliente (BC Bot)</span>
+        </label>
+        <p style="font-size:.78rem;color:#555;margin:8px 0 10px 30px;">Suma un plan de BC Bot para soporte/atención humana sobre las ventas automatizadas de VendIA.</p>
+        <div id="vi-bcbot-config" class="hidden" style="margin-left:30px;">
+          <div style="font-size:.78rem;color:#555;margin-bottom:6px;">Plan BC Bot:</div>
+          <select id="vi-sel-bcbot-plan" onchange="viSelectBcbotPlan()" style="max-width:380px;"></select>
+          <div style="font-size:.72rem;color:#888;margin-top:6px;" id="vi-bcbot-setup-hint">Incluye Set Up de BC Bot ($1,999) en pago único.</div>
+        </div>
+      </div>
+
       <div class="annual-box" style="margin-bottom:14px;"><label><input type="checkbox" id="vi-chk-annual" onchange="viRecalcAnual()"><strong>Plan Anual Preferente (10% descuento en setup + mensualidad)</strong></label><p>Aplica 10% de descuento sobre el Set Up y sobre la mensualidad del plazo seleccionado.</p></div>
 
       <div class="totals-box vi">
-        <div class="totals-row"><span>Set Up (Pago Único):</span><span id="vi-disp-setup">$12,000.00</span></div>
+        <div class="totals-row"><span>Set Up VendIA (Pago Único):</span><span id="vi-disp-setup">$12,000.00</span></div>
+        <div class="totals-row hidden" id="vi-bcbot-setup-row"><span>Set Up BC Bot (Atención a Cliente):</span><span id="vi-disp-bcbot-setup">—</span></div>
         <div class="totals-row hidden" id="vi-annual-setup-row"><span>Set Up con 10% dto:</span><span id="vi-disp-setup-dto" class="discount">—</span></div>
         <div class="totals-row"><span>Fee Mensual del Plan:</span><span id="vi-disp-fee">— Selecciona un plazo —</span></div>
+        <div class="totals-row hidden" id="vi-bcbot-fee-row"><span>Plan BC Bot Mensual (<span id="vi-disp-bcbot-name">—</span>):</span><span id="vi-disp-bcbot-fee">—</span></div>
         <div class="totals-row hidden" id="vi-annual-fee-row"><span>Fee Mensual con 10% dto:</span><span id="vi-disp-fee-dto" class="discount">—</span></div>
         <div class="totals-row" id="vi-total-plazo-row" style="display:none;"><span id="vi-total-plazo-label">Total comprometido (× meses):</span><span id="vi-disp-total-plazo">—</span></div>
         <div class="totals-row hidden" id="vi-annual-row"><span>Total Anual Preferente (setup + 12 meses):</span><span id="vi-disp-annual" class="discount">—</span></div>
@@ -951,8 +967,10 @@
       <table class="inv-table om" style="margin-top:4px;margin-bottom:16px;">
         <thead><tr><th>Concepto</th><th>Costo Unitario</th></tr></thead>
         <tbody>
-          <tr><td>Inicio de llamada Outbound (hasta 3 minutos)</td><td style="text-align:right;font-weight:700;color:#7c3aed;" id="om-print-call-start">$2.50 MXN</td></tr>
-          <tr><td>Minuto adicional de llamada Outbound</td><td style="text-align:right;font-weight:700;color:#7c3aed;" id="om-print-call-min">$2.50 MXN</td></tr>
+          <tr><td>Inicio de llamada <strong>Outbound</strong> (hasta 3 minutos)</td><td style="text-align:right;font-weight:700;color:#7c3aed;" id="om-print-call-start">$2.50 MXN</td></tr>
+          <tr><td>Minuto adicional de llamada <strong>Outbound</strong></td><td style="text-align:right;font-weight:700;color:#7c3aed;" id="om-print-call-min">$2.50 MXN</td></tr>
+          <tr><td>Inicio de llamada <strong>Inbound</strong> (hasta 3 minutos)</td><td style="text-align:right;font-weight:700;color:#7c3aed;" id="om-print-call-in-start">$2.50 MXN</td></tr>
+          <tr><td>Minuto adicional de llamada <strong>Inbound</strong></td><td style="text-align:right;font-weight:700;color:#7c3aed;" id="om-print-call-in-min">$2.50 MXN</td></tr>
         </tbody>
       </table>
 
@@ -1048,6 +1066,7 @@ function applyChannel(channel) {
   VI.deliveryUber   = viC.costos_extras.delivery_uber_direct;
   VI.pasarelaStripe = viC.costos_extras.pasarela_pago_stripe;
   VI.horaExtra      = viC.costos_extras.hora_desarrollo_adicional;
+  VI.atencionBcbot  = (viC.add_ons && viC.add_ons.atencion_bcbot) || null;
 
   // --- OMIA adapter ---
   OMIA.setup  = omC.set_up.set_up;
@@ -1056,8 +1075,9 @@ function applyChannel(channel) {
     const p = omC.monthly_fee.plazos[k];
     OMIA.plazos[k] = { fee: p.fee, desc: p.desc, descuento_pct: p.descuento_pct };
   }
-  OMIA.llamada = omC.transaccionalidad.llamada_outbound;
-  OMIA.horaExtra = omC.costos_extras.hora_desarrollo_adicional;
+  OMIA.llamada         = omC.transaccionalidad.llamada_outbound;
+  OMIA.llamadaInbound  = omC.transaccionalidad.llamada_inbound;
+  OMIA.horaExtra       = omC.costos_extras.hora_desarrollo_adicional;
   return true;
 }
 
@@ -1106,8 +1126,10 @@ function setChannel(channel) {
         s('bb-p-disp-setup', fmt2(BB.setup));
       }
     }
-  } else if (currentProduct === 'vi' && viSelectedPlazo) {
-    viSelectPlazo(viSelectedPlazo);
+  } else if (currentProduct === 'vi') {
+    // Si el add-on BC Bot está activo, repueblar el select con los planes del nuevo canal
+    if (viBcbotEnabled) viToggleBcbot();
+    if (viSelectedPlazo) viSelectPlazo(viSelectedPlazo);
   } else if (currentProduct === 'om' && omSelectedPlazo) {
     omSelectPlazo(omSelectedPlazo);
   }
@@ -1285,6 +1307,10 @@ function applyPricesToUI() {
     s('om-print-call-start', `${fmt2(OMIA.llamada.inicio_hasta_3_min)} MXN`);
     s('om-print-call-min',   `${fmt2(OMIA.llamada.minuto_adicional)} MXN`);
   }
+  if (OMIA.llamadaInbound) {
+    s('om-print-call-in-start', `${fmt2(OMIA.llamadaInbound.inicio_hasta_3_min)} MXN`);
+    s('om-print-call-in-min',   `${fmt2(OMIA.llamadaInbound.minuto_adicional)} MXN`);
+  }
 }
 
 function fmt(n) { return '$' + n.toLocaleString('es-MX', {minimumFractionDigits:2,maximumFractionDigits:2}); }
@@ -1433,6 +1459,53 @@ function bbRecalcPlan() {
 }
 
 /* ===== VI ===== */
+let viBcbotEnabled = false;
+let viBcbotPlanKey = null;
+
+function viToggleBcbot() {
+  viBcbotEnabled = g('vi-chk-bcbot').checked;
+  const cfg = g('vi-bcbot-config');
+  if (cfg) cfg.classList.toggle('hidden', !viBcbotEnabled);
+  if (viBcbotEnabled) {
+    // Poblar el select con los planes BC Bot del canal activo
+    const sel = g('vi-sel-bcbot-plan');
+    if (sel && BB.plans) {
+      sel.innerHTML = '';
+      const keys = Object.keys(BB.plans);
+      for (const k of keys) {
+        const p = BB.plans[k];
+        const o = document.createElement('option');
+        o.value = k;
+        o.textContent = `${p.label} — $${p.price.toLocaleString('es-MX')}/mes`;
+        sel.appendChild(o);
+      }
+      // Si la selección previa ya no existe en este canal, tomar la primera
+      if (!viBcbotPlanKey || !BB.plans[viBcbotPlanKey]) viBcbotPlanKey = keys[0] || null;
+      sel.value = viBcbotPlanKey || '';
+    }
+  } else {
+    viBcbotPlanKey = null;
+  }
+  if (viSelectedPlazo) viSelectPlazo(viSelectedPlazo);
+}
+
+function viSelectBcbotPlan() {
+  const sel = g('vi-sel-bcbot-plan');
+  if (sel) viBcbotPlanKey = sel.value;
+  if (viSelectedPlazo) viSelectPlazo(viSelectedPlazo);
+}
+
+function viGetBcbotExtras() {
+  // Devuelve { setup, monthly, planLabel } o null si no aplica
+  if (!viBcbotEnabled || !viBcbotPlanKey || !BB.plans || !BB.plans[viBcbotPlanKey]) return null;
+  const incSetup = !!(VI.atencionBcbot && VI.atencionBcbot.incluir_set_up);
+  return {
+    setup:    incSetup ? (BB.setup || 0) : 0,
+    monthly:  BB.plans[viBcbotPlanKey].price || 0,
+    planLabel: BB.plans[viBcbotPlanKey].label || viBcbotPlanKey
+  };
+}
+
 function viSelectPlazo(meses) {
   if (!meses) return;
   viSelectedPlazo = meses;
@@ -1441,11 +1514,26 @@ function viSelectPlazo(meses) {
   const fee = pl.fee;
   const desc = meses===12 ? '' : meses===24 ? ' (10% dto)' : ' (20% dto)';
   s('vi-disp-fee', fmt(fee) + '/mes' + desc);
-  const totalPlazo = VI.setup + fee * meses;
+
+  // Add-on BC Bot (Plataforma de Atención a Cliente)
+  const bb = viGetBcbotExtras();
+  const setupBcbot   = bb ? bb.setup   : 0;
+  const monthlyBcbot = bb ? bb.monthly : 0;
+  toggle('vi-bcbot-setup-row', !!bb && setupBcbot > 0);
+  toggle('vi-bcbot-fee-row',   !!bb);
+  if (bb) {
+    s('vi-disp-bcbot-setup', fmt(setupBcbot));
+    s('vi-disp-bcbot-name',  bb.planLabel);
+    s('vi-disp-bcbot-fee',   fmt(monthlyBcbot) + '/mes');
+  }
+
+  const setupTotal   = VI.setup + setupBcbot;
+  const monthlyTotal = fee + monthlyBcbot;
+  const totalPlazo   = setupTotal + monthlyTotal * meses;
   g('vi-total-plazo-row').style.display = 'flex';
   s('vi-total-plazo-label', `Total comprometido (setup + ${meses} meses):`);
   s('vi-disp-total-plazo', fmt(totalPlazo));
-  s('vi-disp-total', fmt(fee) + '/mes');
+  s('vi-disp-total', fmt(monthlyTotal) + '/mes');
   viRecalcAnual();
 }
 
@@ -1453,17 +1541,20 @@ function viRecalcAnual() {
   if (!viSelectedPlazo) return;
   const isAnn = g('vi-chk-annual').checked;
   const fee = VI.plazos[viSelectedPlazo].fee;
-  const setupDto = VI.setup * 0.9;
-  const feeDto = fee * 0.9;
-  const totalAnual = setupDto + feeDto * 12;
-  const ahorro = (VI.setup - setupDto) + (fee - feeDto) * 12;
+  const bb = viGetBcbotExtras();
+  const setupTotal   = VI.setup + (bb ? bb.setup   : 0);
+  const monthlyTotal = fee      + (bb ? bb.monthly : 0);
+  const setupDto = setupTotal * 0.9;
+  const monthlyDto = monthlyTotal * 0.9;
+  const totalAnual = setupDto + monthlyDto * 12;
+  const ahorro = (setupTotal - setupDto) + (monthlyTotal - monthlyDto) * 12;
   toggle('vi-annual-setup-row', isAnn);
   toggle('vi-annual-fee-row', isAnn);
   toggle('vi-annual-row', isAnn);
   toggle('vi-saving-row', isAnn);
   if (isAnn) {
-    s('vi-disp-setup', fmt(setupDto) + ' (10% dto)');
-    s('vi-disp-fee-dto', fmt(feeDto) + '/mes');
+    s('vi-disp-setup', fmt(setupDto) + ' (10% dto, incluye BC Bot si aplica)');
+    s('vi-disp-fee-dto', fmt(monthlyDto) + '/mes');
     s('vi-disp-annual', fmt(totalAnual) + ' (anual c/ dto)');
     s('vi-disp-saving', fmt(ahorro) + ' de ahorro');
   } else {
@@ -1639,36 +1730,52 @@ function generateVIQuote(clientName,clientCity,propDate,preparedBy,clientScope) 
   const tbody=g('vi-inv-tbody');tbody.innerHTML='';
   function row(d,p,sec,tot){const tr=document.createElement('tr');if(sec)tr.className='section-row';if(tot)tr.className='total-row';const t1=document.createElement('td'),t2=document.createElement('td');t1.textContent=d;t2.textContent=p;tr.appendChild(t1);tr.appendChild(t2);tbody.appendChild(tr);}
 
+  // Add-on BC Bot (opcional)
+  const bbExt = viGetBcbotExtras();
+  const setupBcbot   = bbExt ? bbExt.setup   : 0;
+  const monthlyBcbot = bbExt ? bbExt.monthly : 0;
+  const setupTotal   = VI.setup + setupBcbot;
+  const monthlyTotal = fee      + monthlyBcbot;
+
   // SECCIÓN 1: Set Up
   row('SECCIÓN 1 — SET UP','PAGO ÚNICO',true);
   row('Alta Cuenta WhatsApp Oficial. Configuración de plataforma VendIA. Incluye: Catálogos, Sucursales, Lealtad, Gestor de Órdenes, 1,000 Conv. Servicio, Integración Pagos, Integración Delivery, Capacitación para el manejo de la plataforma, Soporte en configuración inicial y acompañamiento en el alta (hasta 20 hrs), licencias de Administrador y Supervisor.',fmt(VI.setup));
-  row('TOTAL SET UP',fmt(VI.setup),false,true);
+  if (bbExt && setupBcbot > 0) {
+    row(`Set Up Plataforma de Atención a Cliente — BC Bot (${bbExt.planLabel}). Alta cuenta WhatsApp + habilitación de plataforma.`, fmt(setupBcbot));
+  }
+  row('TOTAL SET UP',fmt(setupTotal),false,true);
 
   // SECCIÓN 2: Plan Mensual
   row(`SECCIÓN 2 — PLAN VENDIA BUSINESS (${viSelectedPlazo} meses)${descLabel}`,'FEE MENSUAL',true);
   row('Fee Mensual del Plan a '+viSelectedPlazo+' meses'+descLabel, fmt(fee)+'/mes');
   row('INCLUYE: Plataforma SAAS cCommerce (WhatsApp), Dashboard y Reportes de Sistema, Soporte Básico (3 hrs / 8×5 días hábiles).', '');
-  row('TOTAL FEE MENSUAL',fmt(fee)+'/mes',false,true);
+  if (bbExt) {
+    row(`Plataforma de Atención a Cliente — BC Bot (${bbExt.planLabel}).`, fmt(monthlyBcbot)+'/mes');
+  }
+  row('TOTAL FEE MENSUAL',fmt(monthlyTotal)+'/mes',false,true);
 
   // Resumen total
   const isAnnVI = g('vi-chk-annual').checked;
-  const setupFinal = isAnnVI ? VI.setup * 0.9 : VI.setup;
-  const feeFinal = isAnnVI ? fee * 0.9 : fee;
+  const setupFinal   = isAnnVI ? setupTotal * 0.9   : setupTotal;
+  const monthlyFinal = isAnnVI ? monthlyTotal * 0.9 : monthlyTotal;
   row('RESUMEN DE INVERSIÓN','',true);
-  row('Set Up (pago único):', isAnnVI ? fmt(setupFinal) + ' (10% dto)' : fmt(VI.setup));
-  row(`Fee Mensual del Plan (${viSelectedPlazo} meses${descLabel}):`, fmt(feeFinal)+'/mes' + (isAnnVI ? ' (10% dto)' : ''));
-  row('TOTAL COMPROMETIDO (Setup + '+viSelectedPlazo+' meses):',fmt(setupFinal+feeFinal*viSelectedPlazo),false,true);
+  row('Set Up (pago único):' + (bbExt ? ' VendIA + BC Bot' : ''), isAnnVI ? fmt(setupFinal) + ' (10% dto)' : fmt(setupTotal));
+  row(`Fee Mensual del Plan (${viSelectedPlazo} meses${descLabel})${bbExt ? ' + BC Bot' : ''}:`, fmt(monthlyFinal)+'/mes' + (isAnnVI ? ' (10% dto)' : ''));
+  row('TOTAL COMPROMETIDO (Setup + '+viSelectedPlazo+' meses):',fmt(setupFinal + monthlyFinal*viSelectedPlazo),false,true);
 
-  // Sección anual en propuesta
+  // Sección anual en propuesta — resta verificable
   const annElVI = g('vi-q-annual-section');
   if (isAnnVI) {
     annElVI.style.display = 'block';
-    const ahorro = (VI.setup - setupFinal) + (fee - feeFinal) * 12;
+    const rT   = setupTotal + monthlyTotal * 12;
+    const aT   = setupFinal + monthlyFinal * 12;
+    const save = rT - aT;
     g('vi-q-annual-calcs').innerHTML = `
-      <div class="calc-row"><span>Set Up con 10% dto:</span><span>${fmt(setupFinal)}</span></div>
-      <div class="calc-row"><span>Fee Mensual con 10% dto:</span><span>${fmt(feeFinal)}/mes</span></div>
-      <div class="calc-row highlight"><span>Total Anual Preferente (setup + 12 meses):</span><span>${fmt(setupFinal + feeFinal * 12)}</span></div>
-      <div class="calc-row saving"><span>Ahorro anual:</span><span>${fmt(ahorro)}</span></div>`;
+      <div class="calc-row"><span>Set Up (pago único)${bbExt ? ' VendIA + BC Bot' : ''}:</span><span>${fmt(setupTotal)}</span></div>
+      <div class="calc-row"><span>Mensual × 12${bbExt ? ' (VendIA + BC Bot)' : ''}:</span><span>${fmt(monthlyTotal)} × 12 = ${fmt(monthlyTotal*12)}</span></div>
+      <div class="calc-row"><span><strong>Subtotal año 1 sin descuento:</strong></span><span><strong>${fmt(rT)}</strong></span></div>
+      <div class="calc-row highlight"><span>Total Anual Preferente (10% dto):</span><span>${fmt(aT)}</span></div>
+      <div class="calc-row saving"><span>Ahorro anual (10%):</span><span>${fmt(save)}</span></div>`;
   } else {
     annElVI.style.display = 'none';
   }

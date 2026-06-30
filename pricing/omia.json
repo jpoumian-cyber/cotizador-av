@@ -25,6 +25,11 @@
         "inicio_hasta_3_min": 2.50,
         "minuto_adicional":   2.50,
         "unidad": "MXN"
+      },
+      "llamada_inbound": {
+        "inicio_hasta_3_min": 2.50,
+        "minuto_adicional":   2.50,
+        "unidad": "MXN"
       }
     },
 
@@ -56,6 +61,11 @@
 
     "transaccionalidad": {
       "llamada_outbound": {
+        "inicio_hasta_3_min": 2.50,
+        "minuto_adicional":   2.50,
+        "unidad": "MXN"
+      },
+      "llamada_inbound": {
         "inicio_hasta_3_min": 2.50,
         "minuto_adicional":   2.50,
         "unidad": "MXN"
