@@ -8,7 +8,13 @@ const TOKEN_TTL_SEC = 60 * 60 * 8; // 8 hours
 
 function need(name) {
   const v = process.env[name];
-  if (!v) throw new Error(`Missing env var: ${name}`);
+  if (!v) {
+    // Diagnóstico: lista nombres (no valores) de env vars relevantes que SÍ están seteadas
+    const relevant = Object.keys(process.env)
+      .filter(k => /^(ADMIN|JWT|GITHUB|VERCEL)/i.test(k))
+      .sort();
+    throw new Error(`Missing env var: ${name}. Detectadas: [${relevant.join(', ') || '(ninguna)'}]`);
+  }
   return v;
 }
 
