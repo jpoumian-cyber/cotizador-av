@@ -369,7 +369,7 @@
       <h1>Cotizador Averix</h1>
       <span>Plataforma de Comunicación Conversacional & Comercio Conversacional</span>
     </div>
-    <span style="font-size:.8rem;opacity:.5;">v2.3</span>
+    <span style="font-size:.8rem;opacity:.5;">v2.4</span>
   </div>
 
   <div class="product-tabs">
@@ -410,7 +410,7 @@
     <div class="card">
       <h2>2. Tipo de Cotización — Broadcaster Bot</h2>
       <div class="type-selector">
-        <div class="type-btn" id="bb-btn-od" onclick="bbSelectType('on-demand')"><h3>ON DEMAND</h3><p>Cotización personalizada por horas y funcionalidades. Plan base $1,999/mes.</p></div>
+        <div class="type-btn" id="bb-btn-od" onclick="bbSelectType('on-demand')"><h3>ON DEMAND</h3><p>Cotización personalizada por horas y funcionalidades. Plan base <span id="bb-od-base-hint">$1,999</span>/mes.</p></div>
         <div class="type-btn" id="bb-btn-pp" onclick="bbSelectType('por-plan')"><h3>POR PLAN</h3><p>Plan predefinido: Business, Enterprice o Enterprice Pro.</p></div>
       </div>
     </div>
@@ -421,25 +421,25 @@
       <div class="pricing-section">
         <h3>ONBOARDING — PAGO ÚNICO</h3>
         <div class="pricing-row" style="background:#f8f9fa;border-radius:7px;padding:8px 10px;font-weight:700;font-size:.8rem;color:#666;"><span>Concepto</span><span style="text-align:right">Precio Unit.</span><span style="text-align:right">Subtotal</span></div>
-        <div class="pricing-row"><span class="label">Alta de cuenta WhatsApp (fijo)</span><span class="unit-price">$1,999.00</span><span class="subtotal" id="bb-st-alta">$1,999.00</span></div>
-        <div class="pricing-row"><span class="label">Config. Bot — Informativo (hrs × $999/hr)</span><input type="number" id="bb-hrs-info" min="0" value="0" oninput="bbRecalc()" style="max-width:80px;margin:0 auto;"><span class="subtotal" id="bb-st-info">$0.00</span></div>
-        <div class="pricing-row"><span class="label">Config. Bot — Integraciones (hrs × $1,200/hr)</span><input type="number" id="bb-hrs-int" min="0" value="0" oninput="bbRecalc()" style="max-width:80px;margin:0 auto;"><span class="subtotal" id="bb-st-int">$0.00</span></div>
-        <div class="pricing-row"><span class="label">Desarrollo a la medida (hrs × $2,200/hr)</span><input type="number" id="bb-hrs-dev" min="0" value="0" oninput="bbRecalc()" style="max-width:80px;margin:0 auto;"><span class="subtotal" id="bb-st-dev">$0.00</span></div>
-        <div class="pricing-row"><span class="label">Soporte (hrs × $900/hr)</span><input type="number" id="bb-hrs-sup" min="0" value="0" oninput="bbRecalc()" style="max-width:80px;margin:0 auto;"><span class="subtotal" id="bb-st-sup">$0.00</span></div>
+        <div class="pricing-row"><span class="label">Alta de cuenta WhatsApp (fijo)</span><span class="unit-price" id="bb-up-alta">$1,999.00</span><span class="subtotal" id="bb-st-alta">$1,999.00</span></div>
+        <div class="pricing-row"><span class="label">Config. Bot — Informativo (hrs × <span id="bb-rate-info">$999</span>/hr)</span><input type="number" id="bb-hrs-info" min="0" value="0" oninput="bbRecalc()" style="max-width:80px;margin:0 auto;"><span class="subtotal" id="bb-st-info">$0.00</span></div>
+        <div class="pricing-row"><span class="label">Config. Bot — Integraciones (hrs × <span id="bb-rate-int">$1,200</span>/hr)</span><input type="number" id="bb-hrs-int" min="0" value="0" oninput="bbRecalc()" style="max-width:80px;margin:0 auto;"><span class="subtotal" id="bb-st-int">$0.00</span></div>
+        <div class="pricing-row"><span class="label">Desarrollo a la medida (hrs × <span id="bb-rate-dev">$2,200</span>/hr)</span><input type="number" id="bb-hrs-dev" min="0" value="0" oninput="bbRecalc()" style="max-width:80px;margin:0 auto;"><span class="subtotal" id="bb-st-dev">$0.00</span></div>
+        <div class="pricing-row"><span class="label">Soporte (hrs × <span id="bb-rate-sup">$900</span>/hr)</span><input type="number" id="bb-hrs-sup" min="0" value="0" oninput="bbRecalc()" style="max-width:80px;margin:0 auto;"><span class="subtotal" id="bb-st-sup">$0.00</span></div>
         <div class="pricing-row" style="background:#eef1fa;border-radius:7px;padding:8px 10px;"><span style="font-weight:700;color:#1a2d6e;">TOTAL ONBOARDING</span><span></span><span class="subtotal" id="bb-total-onboarding" style="font-size:1rem;">$1,999.00</span></div>
       </div>
       <div class="pricing-section">
         <h3>PLAN MENSUAL — BASE + ADICIONALES</h3>
-        <p style="font-size:.8rem;color:#666;margin-bottom:12px;">Base $1,999/mes: Omnicanal (WA/IG/FB/Web), 1,000 conv. servicio, 3 agentes, campañas masivas.</p>
-        <div class="pricing-row"><span class="label" style="font-weight:700;">Plataforma Omnicanal (base)</span><span class="unit-price">$1,999.00</span><span class="subtotal">$1,999.00</span></div>
-        <div class="pricing-row"><span class="label">Agentes adicionales (1-20: $500, 21-30: $400, 31-50: $300)</span><input type="number" id="bb-extra-agents" min="0" value="0" oninput="bbRecalc()" style="max-width:80px;margin:0 auto;"><span class="subtotal" id="bb-st-agents">$0.00</span></div>
+        <p style="font-size:.8rem;color:#666;margin-bottom:12px;">Base <span id="bb-od-base-hint2">$1,999</span>/mes: Omnicanal (WA/IG/FB/Web), 1,000 conv. servicio, 3 agentes, campañas masivas.</p>
+        <div class="pricing-row"><span class="label" style="font-weight:700;">Plataforma Omnicanal (base)</span><span class="unit-price" id="bb-up-base">$1,999.00</span><span class="subtotal" id="bb-base-disp">$1,999.00</span></div>
+        <div class="pricing-row"><span class="label" id="bb-agent-tiers-label">Agentes adicionales (1-20: $500, 21-30: $400, 31-50: $300)</span><input type="number" id="bb-extra-agents" min="0" value="0" oninput="bbRecalc()" style="max-width:80px;margin:0 auto;"><span class="subtotal" id="bb-st-agents">$0.00</span></div>
         <div class="pricing-row"><span class="label">Wizard Bot</span><input type="checkbox" id="bb-chk-wizard" onchange="bbRecalc()" style="width:20px;height:20px;margin:0 auto;"><span class="subtotal" id="bb-st-wizard">$0.00</span></div>
         <div class="pricing-row"><span class="label">Integración API</span><input type="checkbox" id="bb-chk-api" onchange="bbRecalc()" style="width:20px;height:20px;margin:0 auto;"><span class="subtotal" id="bb-st-api">$0.00</span></div>
         <div class="pricing-row"><span class="label">Versión Móvil</span><input type="checkbox" id="bb-chk-mobile" onchange="bbRecalc()" style="width:20px;height:20px;margin:0 auto;"><span class="subtotal" id="bb-st-mobile">$0.00</span></div>
         <div class="pricing-row"><span class="label">Apple Business</span><input type="checkbox" id="bb-chk-apple" onchange="bbRecalc()" style="width:20px;height:20px;margin:0 auto;"><span class="subtotal" id="bb-st-apple">$0.00</span></div>
         <div class="pricing-row"><span class="label">Repositorio de Información</span><input type="checkbox" id="bb-chk-repo" onchange="bbRecalc()" style="width:20px;height:20px;margin:0 auto;"><span class="subtotal" id="bb-st-repo">$0.00</span></div>
         <div class="pricing-row"><span class="label">AMD — Gestión de Filas</span><input type="checkbox" id="bb-chk-amd" onchange="bbRecalc()" style="width:20px;height:20px;margin:0 auto;"><span class="subtotal" id="bb-st-amd">$0.00</span></div>
-        <div class="pricing-row"><span class="label">Módulo de IA</span><select id="bb-sel-ia" onchange="bbRecalc()"><option value="0">No incluir</option><option value="2999">Pymes (&lt;10K) — $2,999/mes</option><option value="5999">Medianas (10K–50K) — $5,999/mes</option><option value="9999">Grandes (50K–100K) — $9,999/mes</option></select><span class="subtotal" id="bb-st-ia">$0.00</span></div>
+        <div class="pricing-row"><span class="label">Módulo de IA</span><select id="bb-sel-ia" onchange="bbRecalc()"><option value="0">No incluir</option></select><span class="subtotal" id="bb-st-ia">$0.00</span></div>
         <div class="pricing-row"><span class="label">Web Chat</span><input type="checkbox" id="bb-chk-webchat" onchange="bbRecalc()" style="width:20px;height:20px;margin:0 auto;"><span class="subtotal" id="bb-st-webchat">$0.00</span></div>
         <div class="pricing-row" style="background:#eef1fa;border-radius:7px;padding:8px 10px;"><span style="font-weight:700;color:#1a2d6e;">TOTAL MENSUAL</span><span></span><span class="subtotal" id="bb-total-monthly" style="font-size:1rem;">$1,999.00</span></div>
       </div>
@@ -465,12 +465,12 @@
     <div class="card hidden" id="bb-form-pp">
       <h2>3. Selección de Plan — Broadcaster Bot</h2>
       <div class="plan-cards">
-        <div class="plan-card" id="bb-plan-api" onclick="bbSelectPlan('api')"><h4>API</h4><div class="price">$3,999 <span>/mes</span></div><ul><li>Integración × API</li><li>1,000 conv. servicio</li><li>3 Agentes incluidos</li><li>Campañas masivas + Wizard</li><li class="no">Versión Móvil</li><li class="no">IA</li></ul></div>
-        <div class="plan-card" id="bb-plan-business" onclick="bbSelectPlan('business')"><h4>Business</h4><div class="price">$5,999 <span>/mes</span></div><ul><li>Omnicanal (WA, FB, IG, Web)</li><li>1,000 conv. servicio</li><li>5 Agentes incluidos</li><li>Campañas masivas + Wizard</li><li class="no">Versión Móvil</li><li class="no">IA</li></ul></div>
-        <div class="plan-card" id="bb-plan-enterprice" onclick="bbSelectPlan('enterprice')"><h4>Enterprice</h4><div class="price">$15,999 <span>/mes</span></div><ul><li>Omnicanal (WA, FB, IG, Web)</li><li>1,000 conv. servicio</li><li>10 Agentes incluidos</li><li>Campañas + Wizard + Móvil</li><li>Asignación automática</li><li class="no">IA / Repositorio</li></ul></div>
-        <div class="plan-card" id="bb-plan-enterprice-pro" onclick="bbSelectPlan('enterprice-pro')"><h4>Enterprice Pro</h4><div class="price">$19,999 <span>/mes</span></div><ul><li>Omnicanal (WA, FB, IG, Web)</li><li>1,000 conv. servicio</li><li>15 Agentes incluidos</li><li>Campañas + Wizard + Móvil</li><li>Integraciones API</li><li>Repositorio + IA (10K conv)</li></ul></div>
+        <div class="plan-card" id="bb-plan-api" onclick="bbSelectPlan('api')"><h4>API</h4><div class="price"><span id="bb-plan-api-price">$3,999</span> <span>/mes</span></div><ul><li>Integración × API</li><li>1,000 conv. servicio</li><li>3 Agentes incluidos</li><li>Campañas masivas + Wizard</li><li class="no">Versión Móvil</li><li class="no">IA</li></ul></div>
+        <div class="plan-card" id="bb-plan-business" onclick="bbSelectPlan('business')"><h4>Business</h4><div class="price"><span id="bb-plan-business-price">$5,999</span> <span>/mes</span></div><ul><li>Omnicanal (WA, FB, IG, Web)</li><li>1,000 conv. servicio</li><li>5 Agentes incluidos</li><li>Campañas masivas + Wizard</li><li class="no">Versión Móvil</li><li class="no">IA</li></ul></div>
+        <div class="plan-card" id="bb-plan-enterprice" onclick="bbSelectPlan('enterprice')"><h4>Enterprice</h4><div class="price"><span id="bb-plan-enterprice-price">$15,999</span> <span>/mes</span></div><ul><li>Omnicanal (WA, FB, IG, Web)</li><li>1,000 conv. servicio</li><li>10 Agentes incluidos</li><li>Campañas + Wizard + Móvil</li><li>Asignación automática</li><li class="no">IA / Repositorio</li></ul></div>
+        <div class="plan-card" id="bb-plan-enterprice-pro" onclick="bbSelectPlan('enterprice-pro')"><h4>Enterprice Pro</h4><div class="price"><span id="bb-plan-enterprice-pro-price">$19,999</span> <span>/mes</span></div><ul><li>Omnicanal (WA, FB, IG, Web)</li><li>1,000 conv. servicio</li><li>15 Agentes incluidos</li><li>Campañas + Wizard + Móvil</li><li>Integraciones API</li><li>Repositorio + IA (10K conv)</li></ul></div>
       </div>
-      <div class="form-grid"><div><label>Agentes adicionales</label><input type="number" id="bb-plan-extra-agents" min="0" value="0" oninput="bbRecalcPlan()"></div><div><label>Precio x agente adicional</label><input type="text" value="$500.00 MXN/mes" readonly></div></div>
+      <div class="form-grid"><div><label>Agentes adicionales</label><input type="number" id="bb-plan-extra-agents" min="0" value="0" oninput="bbRecalcPlan()"></div><div><label>Precio x agente adicional</label><input type="text" id="bb-agent-pp-disp" value="$500.00 MXN/mes" readonly></div></div>
       <div class="pricing-section" style="margin-top:20px;"><h3>TEMPLATES / PLANTILLAS</h3>
         <div class="pricing-row"><span class="label">Plantilla Marketing</span><input type="number" id="bb-pv-mkt" min="0" value="0" oninput="bbRecalcPlan()" style="max-width:100px;"><span class="subtotal" id="bb-pst-mkt">$0.00</span></div>
         <div class="pricing-row"><span class="label">Plantilla Utilidad</span><input type="number" id="bb-pv-util" min="0" value="0" oninput="bbRecalcPlan()" style="max-width:100px;"><span class="subtotal" id="bb-pst-util">$0.00</span></div>
@@ -507,20 +507,20 @@
         <div class="plazo-card" id="vi-plazo-12" onclick="viSelectPlazo(12)">
           <div class="plazo-label">Plazo</div>
           <div class="plazo-months">12 meses</div>
-          <div class="plazo-price">$6,000 <span style="font-size:.72rem;font-weight:400;color:#888;">/mes</span></div>
-          <div class="plazo-desc">Sin descuento</div>
+          <div class="plazo-price"><span id="vi-plazo-12-price">$6,000</span> <span style="font-size:.72rem;font-weight:400;color:#888;">/mes</span></div>
+          <div class="plazo-desc" id="vi-plazo-12-desc">Sin descuento</div>
         </div>
         <div class="plazo-card" id="vi-plazo-24" onclick="viSelectPlazo(24)">
           <div class="plazo-label">Plazo</div>
           <div class="plazo-months">24 meses</div>
-          <div class="plazo-price">$5,400 <span style="font-size:.72rem;font-weight:400;color:#888;">/mes</span></div>
-          <div class="plazo-desc">10% de descuento</div>
+          <div class="plazo-price"><span id="vi-plazo-24-price">$5,400</span> <span style="font-size:.72rem;font-weight:400;color:#888;">/mes</span></div>
+          <div class="plazo-desc" id="vi-plazo-24-desc">10% de descuento</div>
         </div>
         <div class="plazo-card" id="vi-plazo-36" onclick="viSelectPlazo(36)">
           <div class="plazo-label">Plazo</div>
           <div class="plazo-months">36 meses</div>
-          <div class="plazo-price">$4,800 <span style="font-size:.72rem;font-weight:400;color:#888;">/mes</span></div>
-          <div class="plazo-desc">20% de descuento</div>
+          <div class="plazo-price"><span id="vi-plazo-36-price">$4,800</span> <span style="font-size:.72rem;font-weight:400;color:#888;">/mes</span></div>
+          <div class="plazo-desc" id="vi-plazo-36-desc">20% de descuento</div>
         </div>
       </div>
 
@@ -556,17 +556,15 @@
 
       <div class="cost-info" style="margin-bottom:12px;">
         <h4>🚚 Delivery — Última Milla (Uber Direct / similar)</h4>
-        <div class="cost-row"><span class="cost-label">1 – 2 km</span><span class="cost-val">~$40 – $60 MXN por envío</span></div>
-        <div class="cost-row"><span class="cost-label">3 – 5 km</span><span class="cost-val">~$60 – $90 MXN por envío</span></div>
-        <div class="cost-row"><span class="cost-label">5+ km</span><span class="cost-val">$90 – $130+ MXN por envío</span></div>
+        <div id="vi-delivery-rows"></div>
         <p class="cost-note">Costo dinámico sujeto a distancia, demanda y horario. El cliente contrata directamente con el proveedor de última milla.</p>
       </div>
 
       <div class="cost-info">
         <h4>💳 Pasarela de Pagos (Stripe / similar)</h4>
-        <div class="cost-row"><span class="cost-label">Comisión base</span><span class="cost-val">3.6% + $3.00 MXN por transacción</span></div>
-        <div class="cost-row"><span class="cost-label">Tarjetas internacionales</span><span class="cost-val">+ 0.5% adicional</span></div>
-        <div class="cost-row"><span class="cost-label">Conversión de moneda</span><span class="cost-val">+ 2.0% adicional</span></div>
+        <div class="cost-row"><span class="cost-label">Comisión base</span><span class="cost-val" id="vi-stripe-base">—</span></div>
+        <div class="cost-row"><span class="cost-label">Tarjetas internacionales</span><span class="cost-val" id="vi-stripe-intl">—</span></div>
+        <div class="cost-row"><span class="cost-label">Conversión de moneda</span><span class="cost-val" id="vi-stripe-conv">—</span></div>
         <p class="cost-note">Sin costos fijos — esquema pay-as-you-go. El cliente contrata directamente con el proveedor de pagos elegido.</p>
       </div>
     </div>
@@ -585,20 +583,20 @@
         <div class="plazo-card" id="om-plazo-12" onclick="omSelectPlazo(12)">
           <div class="plazo-label">Plazo</div>
           <div class="plazo-months">12 meses</div>
-          <div class="plazo-price">$8,998/mes</div>
-          <div class="plazo-desc">Sin descuento</div>
+          <div class="plazo-price"><span id="om-plazo-12-price">$8,998</span>/mes</div>
+          <div class="plazo-desc" id="om-plazo-12-desc">Sin descuento</div>
         </div>
         <div class="plazo-card" id="om-plazo-24" onclick="omSelectPlazo(24)">
           <div class="plazo-label">Plazo</div>
           <div class="plazo-months">24 meses</div>
-          <div class="plazo-price">$8,098/mes</div>
-          <div class="plazo-desc">10% de descuento</div>
+          <div class="plazo-price"><span id="om-plazo-24-price">$8,098</span>/mes</div>
+          <div class="plazo-desc" id="om-plazo-24-desc">10% de descuento</div>
         </div>
         <div class="plazo-card" id="om-plazo-36" onclick="omSelectPlazo(36)">
           <div class="plazo-label">Plazo</div>
           <div class="plazo-months">36 meses</div>
-          <div class="plazo-price">$7,198/mes</div>
-          <div class="plazo-desc">20% de descuento</div>
+          <div class="plazo-price"><span id="om-plazo-36-price">$7,198</span>/mes</div>
+          <div class="plazo-desc" id="om-plazo-36-desc">20% de descuento</div>
         </div>
       </div>
 
@@ -618,9 +616,9 @@
           <div class="includes-item"><span class="check-om">✓</span><span>Licencia de Administrador</span></div>
           <div class="includes-item"><span class="check-om">✓</span><span>Integraciones API hasta 3 hrs (Gateway)</span></div>
           <div class="includes-item"><span class="check-om">✓</span><span>Soporte Básico (3 hrs / 8×5 días hábiles)</span></div>
-          <div class="includes-item"><span class="cross">✗</span><span>Horas de Desarrollo ($806/hr extra)</span></div>
+          <div class="includes-item"><span class="cross">✗</span><span>Horas de Desarrollo (<span id="om-hora-extra-inc">$806</span>/hr extra)</span></div>
         </div>
-        <div style="font-size:.75rem;color:#888;margin-top:10px;">* A partir de la hora 4 de integraciones API, costo adicional de $806/hr</div>
+        <div style="font-size:.75rem;color:#888;margin-top:10px;" id="om-hora-extra-nota">* A partir de la hora 4 de integraciones API, costo adicional de $806/hr</div>
       </div>
 
       <div class="annual-box om" style="margin-bottom:14px;"><label><input type="checkbox" id="om-chk-annual" onchange="omRecalcAnual()"><strong>Plan Anual Preferente (10% descuento en setup + mensualidad)</strong></label><p>Aplica 10% de descuento sobre el Set Up y sobre la mensualidad del plazo seleccionado.</p></div>
@@ -770,11 +768,11 @@
       <div class="q-section-title vi" style="font-size:.85rem;">TEMPLATES / PLANTILLAS — Por conversación (MXN)</div>
       <table class="inv-table vi" style="margin-top:4px;margin-bottom:4px;">
         <thead><tr><th>Tipo de Plantilla</th><th>Costo Unitario</th></tr></thead>
-        <tbody>
-          <tr><td>Plantilla Marketing</td><td style="text-align:right;font-weight:700;color:#15803d;">$0.70 por conversación</td></tr>
-          <tr><td>Plantilla Utilidad</td><td style="text-align:right;font-weight:700;color:#15803d;">$0.25 por conversación</td></tr>
-          <tr><td>Plantilla OTP / Autenticación</td><td style="text-align:right;font-weight:700;color:#15803d;">$0.25 por conversación</td></tr>
-          <tr><td>Conversaciones de Servicio</td><td style="text-align:right;font-weight:700;color:#15803d;">$0.20 por conversación</td></tr>
+        <tbody id="vi-print-tpl-tbody">
+          <tr><td>Plantilla Marketing</td><td style="text-align:right;font-weight:700;color:#15803d;" id="vi-print-tpl-mkt">$0.70 por conversación</td></tr>
+          <tr><td>Plantilla Utilidad</td><td style="text-align:right;font-weight:700;color:#15803d;" id="vi-print-tpl-util">$0.25 por conversación</td></tr>
+          <tr><td>Plantilla OTP / Autenticación</td><td style="text-align:right;font-weight:700;color:#15803d;" id="vi-print-tpl-otp">$0.25 por conversación</td></tr>
+          <tr><td>Conversaciones de Servicio</td><td style="text-align:right;font-weight:700;color:#15803d;" id="vi-print-tpl-svc">$0.20 por conversación</td></tr>
         </tbody>
       </table>
       <p style="font-size:.72rem;color:#888;font-style:italic;margin-bottom:14px;">* Precios sujetos a META. Aplica por conversación de 24 hrs.</p>
@@ -783,17 +781,15 @@
       <div class="q-body" style="margin-bottom:6px;"><p>Los siguientes costos son contratados directamente por el cliente con el proveedor correspondiente. Se incluyen como referencia para la planeación del proyecto.</p></div>
       <div class="q-section-title vi" style="font-size:.85rem;">Costo de Delivery — Uber Direct (última milla)</div>
       <div class="cost-block" style="margin-bottom:14px;">
-        <div class="cost-block-row"><span>1 – 2 km</span><span style="font-weight:700;">~$40 – $60 MXN</span></div>
-        <div class="cost-block-row"><span>3 – 5 km</span><span style="font-weight:700;">~$60 – $90 MXN</span></div>
-        <div class="cost-block-row"><span>5+ km</span><span style="font-weight:700;">$90 – $130+ MXN</span></div>
+        <div id="vi-print-delivery"></div>
         <div class="cost-block-note">El costo de entrega es dinámico y depende de distancia, demanda y horario. * Precios sujetos a Uber Direct.</div>
       </div>
 
       <div class="q-section-title vi" style="font-size:.85rem;">Costo de Pasarela de Pago — Stripe</div>
       <div class="cost-block" style="margin-bottom:14px;">
-        <div class="cost-block-row"><span>Comisión base</span><span style="font-weight:700;">3.6% + $3 MXN por pedido</span></div>
-        <div class="cost-block-row"><span>Tarjetas internacionales</span><span style="font-weight:700;">+ 0.5%</span></div>
-        <div class="cost-block-row"><span>Conversión de moneda</span><span style="font-weight:700;">+ 2.0%</span></div>
+        <div class="cost-block-row"><span>Comisión base</span><span style="font-weight:700;" id="vi-print-stripe-base">—</span></div>
+        <div class="cost-block-row"><span>Tarjetas internacionales</span><span style="font-weight:700;" id="vi-print-stripe-intl">—</span></div>
+        <div class="cost-block-row"><span>Conversión de moneda</span><span style="font-weight:700;" id="vi-print-stripe-conv">—</span></div>
         <div class="cost-block-note">Sin costos fijos — esquema pay-as-you-go. * Precios sujetos a Stripe.</div>
       </div>
 
@@ -897,8 +893,8 @@
       <table class="inv-table om" style="margin-top:4px;margin-bottom:16px;">
         <thead><tr><th>Concepto</th><th>Costo Unitario</th></tr></thead>
         <tbody>
-          <tr><td>Inicio de llamada Outbound (hasta 3 minutos)</td><td style="text-align:right;font-weight:700;color:#7c3aed;">$2.50 MXN</td></tr>
-          <tr><td>Minuto adicional de llamada Outbound</td><td style="text-align:right;font-weight:700;color:#7c3aed;">$2.50 MXN</td></tr>
+          <tr><td>Inicio de llamada Outbound (hasta 3 minutos)</td><td style="text-align:right;font-weight:700;color:#7c3aed;" id="om-print-call-start">$2.50 MXN</td></tr>
+          <tr><td>Minuto adicional de llamada Outbound</td><td style="text-align:right;font-weight:700;color:#7c3aed;" id="om-print-call-min">$2.50 MXN</td></tr>
         </tbody>
       </table>
 
@@ -907,7 +903,7 @@
         <ul>
           <li>Los precios no incluyen impuestos y están expresados en MXN.</li>
           <li>El fee mensual aplica desde la fecha de activación del servicio y es recurrente por el plazo contratado.</li>
-          <li>A partir de la hora 4 de integraciones API, se genera un costo adicional de $806/hr.</li>
+          <li id="om-print-hora-extra">A partir de la hora 4 de integraciones API, se genera un costo adicional de $806/hr.</li>
           <li>Las horas de desarrollo no están incluidas en el plan y se cotizan por separado.</li>
           <li>La capacidad de 600 llamadas en paralelo aplica por agente de IA configurado.</li>
           <li>Cualquier requerimiento fuera de alcance podrá evaluarse y cotizarse como adicional.</li>
@@ -939,8 +935,11 @@ let bbQuoteType = null, bbSelectedPlan = null;
 let viSelectedPlazo = null;
 
 /* Esquemas comerciales: se cargan desde /pricing/*.json al iniciar la app.
-   Editar precios en pricing/{bbot,vendia,omia}.json. */
+   Editar precios en pricing/{bbot,vendia,omia}.json (estructura: set_up, monthly_fee,
+   transaccionalidad, add_ons, costos_extras). El adapter de abajo los transforma al
+   shape interno que consumen los calculadores y la propuesta. */
 let BB = {}, VI = {}, OMIA = {};
+let BB_RAW = {}, VI_RAW = {}, OMIA_RAW = {};
 let pricingReady = false;
 
 async function loadPricing() {
@@ -950,16 +949,187 @@ async function loadPricing() {
       fetch('pricing/vendia.json', {cache:'no-cache'}).then(r => { if(!r.ok) throw new Error('vendia.json '+r.status); return r.json(); }),
       fetch('pricing/omia.json',   {cache:'no-cache'}).then(r => { if(!r.ok) throw new Error('omia.json '+r.status);   return r.json(); })
     ]);
-    Object.assign(BB, bb);
-    Object.assign(VI, vi);
-    Object.assign(OMIA, om);
+    BB_RAW = bb; VI_RAW = vi; OMIA_RAW = om;
+
+    // --- BB adapter ---
+    BB.alta    = bb.set_up.alta_whatsapp;
+    BB.setup   = bb.set_up.setup_por_plan;
+    BB.hrsInfo = bb.set_up.horas.config_bot_informativo;
+    BB.hrsInt  = bb.set_up.horas.integraciones;
+    BB.hrsDev  = bb.set_up.horas.desarrollo;
+    BB.hrsSup  = bb.set_up.horas.soporte;
+    BB.baseOD  = bb.monthly_fee.on_demand.plataforma_base;
+    BB.plans   = bb.monthly_fee.por_plan.planes;
+    BB.agentePorPlan = bb.monthly_fee.por_plan.agente_adicional;
+    BB.wizard  = bb.add_ons.wizard.price;
+    BB.api     = bb.add_ons.api.price;
+    BB.mobile  = bb.add_ons.mobile.price;
+    BB.apple   = bb.add_ons.apple.price;
+    BB.repo    = bb.add_ons.repo.price;
+    BB.amd     = bb.add_ons.amd.price;
+    BB.webchat = bb.add_ons.webchat.price;
+    BB.iaModulo = bb.add_ons.ia_modulo;
+    BB.agentesTramos = bb.transaccionalidad.agentes_extra_on_demand_tramos;
+    BB.tplRanges = bb.transaccionalidad.templates_on_demand_tramos.map(r =>
+      [r.volumen_hasta, r.marketing, r.utilidad, r.otp, r.servicio]
+    );
+    const tp = bb.transaccionalidad.templates_por_plan;
+    BB.tplPlan = { mkt: tp.marketing, util: tp.utilidad, otp: tp.otp, svc: tp.servicio };
+
+    // --- VI adapter ---
+    VI.setup  = vi.set_up.set_up;
+    VI.plazos = {};
+    for (const k of Object.keys(vi.monthly_fee.plazos)) {
+      const p = vi.monthly_fee.plazos[k];
+      VI.plazos[k] = { fee: p.fee, desc: p.desc, descuento_pct: p.descuento_pct };
+    }
+    VI.plantillasMeta  = vi.transaccionalidad.plantillas_meta;
+    VI.deliveryUber    = vi.costos_extras.delivery_uber_direct;
+    VI.pasarelaStripe  = vi.costos_extras.pasarela_pago_stripe;
+
+    // --- OMIA adapter ---
+    OMIA.setup  = om.set_up.set_up;
+    OMIA.plazos = {};
+    for (const k of Object.keys(om.monthly_fee.plazos)) {
+      const p = om.monthly_fee.plazos[k];
+      OMIA.plazos[k] = { fee: p.fee, desc: p.desc, descuento_pct: p.descuento_pct };
+    }
+    OMIA.llamada = om.transaccionalidad.llamada_outbound;
+    OMIA.horaExtra = om.costos_extras.hora_desarrollo_adicional;
+
     pricingReady = true;
+    applyPricesToUI();
   } catch (e) {
     console.error('Error cargando esquemas comerciales:', e);
     alert('No se pudieron cargar los precios. Refresca la página o avisa a soporte.');
   }
 }
 loadPricing();
+
+function fmtInt(n) { return '$' + Math.round(n).toLocaleString('es-MX'); }
+function fmt2(n)   { return '$' + n.toLocaleString('es-MX', {minimumFractionDigits:2, maximumFractionDigits:2}); }
+
+function applyPricesToUI() {
+  // ===== BBot =====
+  s('bb-od-base-hint',  fmtInt(BB.baseOD));
+  s('bb-od-base-hint2', fmtInt(BB.baseOD));
+  s('bb-up-alta',  fmt2(BB.alta));
+  s('bb-st-alta',  fmt2(BB.alta));
+  s('bb-rate-info', fmtInt(BB.hrsInfo));
+  s('bb-rate-int',  fmtInt(BB.hrsInt));
+  s('bb-rate-dev',  fmtInt(BB.hrsDev));
+  s('bb-rate-sup',  fmtInt(BB.hrsSup));
+  s('bb-total-onboarding', fmt2(BB.alta));
+  s('bb-up-base',    fmt2(BB.baseOD));
+  s('bb-base-disp',  fmt2(BB.baseOD));
+  s('bb-total-monthly', fmt2(BB.baseOD));
+  s('bb-disp-onboard',  fmt2(BB.alta));
+  s('bb-disp-monthly',  fmt2(BB.baseOD));
+  s('bb-disp-total-month', fmt2(BB.baseOD));
+  s('bb-p-disp-setup', fmt2(BB.setup));
+
+  // Agentes adicionales — label dinámico desde tramos
+  const tramos = BB.agentesTramos || [];
+  if (tramos.length) {
+    const acc = []; let lo = 1;
+    for (const t of tramos) {
+      if (t.hasta_agentes == null) { acc.push(`${lo}+: ${fmtInt(t.precio_por_agente)}`); break; }
+      acc.push(`${lo}-${lo + t.hasta_agentes - 1}: ${fmtInt(t.precio_por_agente)}`);
+      lo += t.hasta_agentes;
+    }
+    s('bb-agent-tiers-label', `Agentes adicionales (${acc.join(', ')})`);
+  }
+
+  // Módulo IA — repoblar opciones del select
+  const selIA = g('bb-sel-ia');
+  if (selIA && BB.iaModulo) {
+    selIA.innerHTML = '';
+    for (const opt of BB.iaModulo) {
+      const o = document.createElement('option');
+      o.value = String(opt.price);
+      o.textContent = opt.label;
+      selIA.appendChild(o);
+    }
+  }
+
+  // Plan cards
+  for (const k of Object.keys(BB.plans || {})) {
+    s(`bb-plan-${k}-price`, fmtInt(BB.plans[k].price));
+  }
+  const ppDisp = g('bb-agent-pp-disp');
+  if (ppDisp) ppDisp.value = fmt2(BB.agentePorPlan) + ' MXN/mes';
+
+  // ===== VendIA =====
+  s('vi-disp-setup', fmt2(VI.setup));
+  for (const m of ['12','24','36']) {
+    if (!VI.plazos[m]) continue;
+    s(`vi-plazo-${m}-price`, fmtInt(VI.plazos[m].fee));
+    s(`vi-plazo-${m}-desc`,  VI.plazos[m].desc);
+  }
+  // Costos extras VI — formulario
+  const delRoot = g('vi-delivery-rows');
+  if (delRoot && VI.deliveryUber) {
+    delRoot.innerHTML = '';
+    for (const r of VI.deliveryUber) {
+      const div = document.createElement('div');
+      div.className = 'cost-row';
+      const tail = r.max_open ? '+' : '';
+      div.innerHTML = `<span class="cost-label">${r.rango}</span><span class="cost-val">~$${r.min} – $${r.max}${tail} ${r.unidad}</span>`;
+      delRoot.appendChild(div);
+    }
+  }
+  if (VI.pasarelaStripe) {
+    const p = VI.pasarelaStripe;
+    s('vi-stripe-base', `${p.comision_base_pct}% + ${fmt2(p.comision_base_fija_mxn)} MXN por transacción`);
+    s('vi-stripe-intl', `+ ${p.tarjetas_internacionales_pct_extra}% adicional`);
+    s('vi-stripe-conv', `+ ${p.conversion_moneda_pct_extra.toFixed(1)}% adicional`);
+  }
+
+  // Propuesta impresa VI — plantillas Meta
+  if (VI.plantillasMeta) {
+    const pm = VI.plantillasMeta;
+    s('vi-print-tpl-mkt',  `${fmt2(pm.marketing.precio)} ${pm.marketing.unidad}`);
+    s('vi-print-tpl-util', `${fmt2(pm.utilidad.precio)} ${pm.utilidad.unidad}`);
+    s('vi-print-tpl-otp',  `${fmt2(pm.otp.precio)} ${pm.otp.unidad}`);
+    s('vi-print-tpl-svc',  `${fmt2(pm.servicio.precio)} ${pm.servicio.unidad}`);
+  }
+  // Propuesta impresa VI — delivery
+  const printDel = g('vi-print-delivery');
+  if (printDel && VI.deliveryUber) {
+    printDel.innerHTML = '';
+    for (const r of VI.deliveryUber) {
+      const div = document.createElement('div');
+      div.className = 'cost-block-row';
+      const tail = r.max_open ? '+' : '';
+      div.innerHTML = `<span>${r.rango}</span><span style="font-weight:700;">~$${r.min} – $${r.max}${tail} MXN</span>`;
+      printDel.appendChild(div);
+    }
+  }
+  // Propuesta impresa VI — Stripe
+  if (VI.pasarelaStripe) {
+    const p = VI.pasarelaStripe;
+    s('vi-print-stripe-base', `${p.comision_base_pct}% + $${p.comision_base_fija_mxn} MXN por pedido`);
+    s('vi-print-stripe-intl', `+ ${p.tarjetas_internacionales_pct_extra}%`);
+    s('vi-print-stripe-conv', `+ ${p.conversion_moneda_pct_extra.toFixed(1)}%`);
+  }
+
+  // ===== OMIA =====
+  s('om-disp-setup', fmt2(OMIA.setup));
+  for (const m of ['12','24','36']) {
+    if (!OMIA.plazos[m]) continue;
+    s(`om-plazo-${m}-price`, fmtInt(OMIA.plazos[m].fee));
+    s(`om-plazo-${m}-desc`,  OMIA.plazos[m].desc);
+  }
+  if (OMIA.horaExtra) {
+    s('om-hora-extra-inc', fmtInt(OMIA.horaExtra.precio));
+    s('om-hora-extra-nota', `* ${OMIA.horaExtra.nota}, costo adicional de ${fmtInt(OMIA.horaExtra.precio)}/hr`);
+    s('om-print-hora-extra', `${OMIA.horaExtra.nota}, se genera un costo adicional de ${fmtInt(OMIA.horaExtra.precio)}/hr.`);
+  }
+  if (OMIA.llamada) {
+    s('om-print-call-start', `${fmt2(OMIA.llamada.inicio_hasta_3_min)} MXN`);
+    s('om-print-call-min',   `${fmt2(OMIA.llamada.minuto_adicional)} MXN`);
+  }
+}
 
 function fmt(n) { return '$' + n.toLocaleString('es-MX', {minimumFractionDigits:2,maximumFractionDigits:2}); }
 function fmtU(n) { return '$' + n.toFixed(2); }
@@ -1002,10 +1172,15 @@ function bbSelectPlan(p) {
 }
 
 function bbAgentPrice(n) {
-  if (n<=0) return 0;
+  if (n<=0 || !BB.agentesTramos) return 0;
   let total=0, rem=n;
-  for (const [cap,price] of [[20,500],[10,400],[20,300],[50,250]]) { const u=Math.min(rem,cap); total+=u*price; rem-=u; if(rem<=0) break; }
-  if (rem>0) total+=rem*250;
+  for (const t of BB.agentesTramos) {
+    if (t.hasta_agentes == null) { total += rem * t.precio_por_agente; rem = 0; break; }
+    const u = Math.min(rem, t.hasta_agentes);
+    total += u * t.precio_por_agente;
+    rem -= u;
+    if (rem <= 0) break;
+  }
   return total;
 }
 
@@ -1021,7 +1196,7 @@ function bbRecalc() {
   const onboard=BB.alta+stI+stN+stD+stS;
   s('bb-st-info',fmt(stI));s('bb-st-int',fmt(stN));s('bb-st-dev',fmt(stD));s('bb-st-sup',fmt(stS));
   s('bb-total-onboarding',fmt(onboard));
-  let monthly=1999;
+  let monthly=BB.baseOD;
   const ea=v('bb-extra-agents'),stA=bbAgentPrice(ea);s('bb-st-agents',fmt(stA));monthly+=stA;
   monthly+=chk('bb-chk-wizard',BB.wizard,'bb-st-wizard');
   monthly+=chk('bb-chk-api',BB.api,'bb-st-api');
@@ -1046,7 +1221,7 @@ function bbRecalc() {
 
 function bbRecalcPlan() {
   if(!bbSelectedPlan) return;
-  const pl=BB.plans[bbSelectedPlan],ea=v('bb-plan-extra-agents'),stA=ea*500;
+  const pl=BB.plans[bbSelectedPlan],ea=v('bb-plan-extra-agents'),stA=ea*BB.agentePorPlan;
   s('bb-p-disp-setup',fmt(BB.setup));s('bb-p-disp-plan',fmt(pl.price));s('bb-p-disp-agents',fmt(stA));
   const tp=BB.tplPlan,vM=v('bb-pv-mkt'),vU=v('bb-pv-util'),vO=v('bb-pv-otp'),vV=v('bb-pv-svc');
   const sM=vM*tp.mkt,sU=vU*tp.util,sO=vO*tp.otp,sV=vV*tp.svc;
@@ -1180,7 +1355,7 @@ function generateBBQuote(clientName,clientCity,propDate,preparedBy,clientScope) 
     row('Alta de cuenta WhatsApp en Meta. Habilitación y configuración de plataforma Broadcaster Bot.','');
     row('TOTAL SET UP',fmt(totalOnboard),false,true);
     const ea=v('bb-extra-agents'),stA=bbAgentPrice(ea),ia=+g('bb-sel-ia').value||0;
-    let monthly=1999+stA+montoSoporte;
+    let monthly=BB.baseOD+stA+montoSoporte;
     const incl=['Omnicanal (WA/IG/FB/Webchat)','1,000 Conv. Servicio','3 Agentes','Campañas Masivas'];
     if(g('bb-chk-wizard').checked){monthly+=BB.wizard;incl.push('Wizard Bot');}
     if(g('bb-chk-api').checked){monthly+=BB.api;incl.push('Integración API');}
@@ -1202,7 +1377,7 @@ function generateBBQuote(clientName,clientCity,propDate,preparedBy,clientScope) 
   } else {
     isAnnual=g('bb-plan-annual').checked;
     if(!bbSelectedPlan){alert('Selecciona un plan primero.');return;}
-    const pl=BB.plans[bbSelectedPlan],ea=v('bb-plan-extra-agents'),stA=ea*500;
+    const pl=BB.plans[bbSelectedPlan],ea=v('bb-plan-extra-agents'),stA=ea*BB.agentePorPlan;
     totalOnboard=BB.setup;totalMonthly=pl.price+stA;
     row('SET UP','PAGO ÚNICO',true);
     row('Alta y configuración de WhatsApp en Meta. Habilitación de plataforma.',fmt(BB.setup));
@@ -1224,7 +1399,7 @@ function generateBBQuote(clientName,clientCity,propDate,preparedBy,clientScope) 
 }
 
 function bbPlanFeatures(p) {
-  return {api:'Integración × API, 1,000 conv. servicio, 3 Agentes, Campañas Masivas, Wizard Bot',business:'Omnicanal (WA/FB/IG/Web), 1,000 conv. servicio, 5 Agentes, Campañas Masivas, Wizard Bot',enterprice:'Omnicanal, 1,000 conv., 10 Agentes, Campañas, Wizard, Móvil, Asignación Auto.','enterprice-pro':'Omnicanal, 1,000 conv., 15 Agentes, Campañas, Wizard, Móvil, API, Repositorio, IA (10K)'}[p]||'';
+  return (BB.plans && BB.plans[p] && BB.plans[p].features) || '';
 }
 
 function generateVIQuote(clientName,clientCity,propDate,preparedBy,clientScope) {

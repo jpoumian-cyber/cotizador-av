@@ -5,13 +5,40 @@
     "descuento_anual_pct": 10
   },
 
-  "setup": 12000,
-
-  "plazos": {
-    "12": { "fee": 6000, "desc": "Sin descuento" },
-    "24": { "fee": 5400, "desc": "10% de descuento" },
-    "36": { "fee": 4800, "desc": "20% de descuento" }
+  "set_up": {
+    "set_up": 12000
   },
 
-  "msgs": { "mkt": 0.56, "util": 0.16, "auth": 0.16, "svc": 0 }
+  "monthly_fee": {
+    "plazos": {
+      "12": { "fee": 6000, "descuento_pct": 0,  "desc": "Sin descuento" },
+      "24": { "fee": 5400, "descuento_pct": 10, "desc": "10% de descuento" },
+      "36": { "fee": 4800, "descuento_pct": 20, "desc": "20% de descuento" }
+    }
+  },
+
+  "transaccionalidad": {
+    "plantillas_meta": {
+      "marketing": { "precio": 0.70, "unidad": "por conversación" },
+      "utilidad":  { "precio": 0.25, "unidad": "por conversación" },
+      "otp":       { "precio": 0.25, "unidad": "por conversación" },
+      "servicio":  { "precio": 0.20, "unidad": "por conversación" }
+    }
+  },
+
+  "add_ons": {},
+
+  "costos_extras": {
+    "delivery_uber_direct": [
+      { "rango": "1 – 2 km", "min": 40, "max": 60,  "unidad": "MXN por envío" },
+      { "rango": "3 – 5 km", "min": 60, "max": 90,  "unidad": "MXN por envío" },
+      { "rango": "5+ km",    "min": 90, "max": 130, "unidad": "MXN por envío", "max_open": true }
+    ],
+    "pasarela_pago_stripe": {
+      "comision_base_pct": 3.6,
+      "comision_base_fija_mxn": 3,
+      "tarjetas_internacionales_pct_extra": 0.5,
+      "conversion_moneda_pct_extra": 2.0
+    }
+  }
 }

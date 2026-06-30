@@ -5,11 +5,33 @@
     "descuento_anual_pct": 10
   },
 
-  "setup": 5000,
+  "set_up": {
+    "set_up": 5000
+  },
 
-  "plazos": {
-    "12": { "fee": 8998, "desc": "Sin descuento" },
-    "24": { "fee": 8098, "desc": "10% de descuento" },
-    "36": { "fee": 7198, "desc": "20% de descuento" }
+  "monthly_fee": {
+    "plazos": {
+      "12": { "fee": 8998, "descuento_pct": 0,  "desc": "Sin descuento" },
+      "24": { "fee": 8098, "descuento_pct": 10, "desc": "10% de descuento" },
+      "36": { "fee": 7198, "descuento_pct": 20, "desc": "20% de descuento" }
+    }
+  },
+
+  "transaccionalidad": {
+    "llamada_outbound": {
+      "inicio_hasta_3_min": 2.50,
+      "minuto_adicional":   2.50,
+      "unidad": "MXN"
+    }
+  },
+
+  "add_ons": {},
+
+  "costos_extras": {
+    "hora_desarrollo_adicional": {
+      "precio": 806,
+      "unidad": "MXN/hr",
+      "nota": "A partir de la hora 4 de integraciones API"
+    }
   }
 }

@@ -2,39 +2,68 @@
   "_meta": {
     "producto": "Broadcaster Bot",
     "moneda": "MXN",
-    "descuento_anual_pct": 10,
-    "nota_tplRanges": "tplRanges es array de [volumen_hasta, marketing, utilidad, otp, servicio]"
+    "descuento_anual_pct": 10
   },
 
-  "alta": 1999,
-  "setup": 1999,
-
-  "hrsInfo": 999,
-  "hrsInt": 1200,
-  "hrsDev": 2200,
-  "hrsSup": 900,
-
-  "wizard": 2000,
-  "api": 3999,
-  "mobile": 1999,
-  "apple": 1999,
-  "repo": 1999,
-  "amd": 1999,
-  "webchat": 1999,
-
-  "plans": {
-    "api":            { "price": 3999,  "label": "Plan API" },
-    "business":       { "price": 5999,  "label": "Plan Business" },
-    "enterprice":     { "price": 15999, "label": "Plan Enterprice" },
-    "enterprice-pro": { "price": 19999, "label": "Plan Enterprice Pro" }
+  "set_up": {
+    "alta_whatsapp": 1999,
+    "setup_por_plan": 1999,
+    "horas": {
+      "config_bot_informativo": 999,
+      "integraciones": 1200,
+      "desarrollo": 2200,
+      "soporte": 900
+    }
   },
 
-  "tplRanges": [
-    [5000,    0.70, 0.25, 0.25, 0.20],
-    [10000,   0.68, 0.22, 0.22, 0.18],
-    [100000,  0.67, 0.20, 0.20, 0.16],
-    [1000000, 0.65, 0.18, 0.18, 0.14]
-  ],
+  "monthly_fee": {
+    "on_demand": {
+      "plataforma_base": 1999,
+      "descripcion_base": "Omnicanal (WA/IG/FB/Web), 1,000 conv. servicio, 3 agentes, campañas masivas"
+    },
+    "por_plan": {
+      "agente_adicional": 500,
+      "planes": {
+        "api":            { "price": 3999,  "label": "Plan API",            "features": "Integración × API, 1,000 conv. servicio, 3 Agentes, Campañas Masivas, Wizard Bot" },
+        "business":       { "price": 5999,  "label": "Plan Business",       "features": "Omnicanal (WA/FB/IG/Web), 1,000 conv. servicio, 5 Agentes, Campañas Masivas, Wizard Bot" },
+        "enterprice":     { "price": 15999, "label": "Plan Enterprice",     "features": "Omnicanal, 1,000 conv., 10 Agentes, Campañas, Wizard, Móvil, Asignación Auto." },
+        "enterprice-pro": { "price": 19999, "label": "Plan Enterprice Pro", "features": "Omnicanal, 1,000 conv., 15 Agentes, Campañas, Wizard, Móvil, API, Repositorio, IA (10K)" }
+      }
+    }
+  },
 
-  "tplPlan": { "mkt": 0.99, "util": 0.64, "otp": 0.58, "svc": 0.45 }
+  "transaccionalidad": {
+    "agentes_extra_on_demand_tramos": [
+      { "hasta_agentes": 20,   "precio_por_agente": 500 },
+      { "hasta_agentes": 10,   "precio_por_agente": 400 },
+      { "hasta_agentes": 20,   "precio_por_agente": 300 },
+      { "hasta_agentes": 50,   "precio_por_agente": 250 },
+      { "hasta_agentes": null, "precio_por_agente": 250 }
+    ],
+    "templates_on_demand_tramos": [
+      { "volumen_hasta": 5000,    "marketing": 0.70, "utilidad": 0.25, "otp": 0.25, "servicio": 0.20 },
+      { "volumen_hasta": 10000,   "marketing": 0.68, "utilidad": 0.22, "otp": 0.22, "servicio": 0.18 },
+      { "volumen_hasta": 100000,  "marketing": 0.67, "utilidad": 0.20, "otp": 0.20, "servicio": 0.16 },
+      { "volumen_hasta": 1000000, "marketing": 0.65, "utilidad": 0.18, "otp": 0.18, "servicio": 0.14 }
+    ],
+    "templates_por_plan": { "marketing": 0.99, "utilidad": 0.64, "otp": 0.58, "servicio": 0.45 }
+  },
+
+  "add_ons": {
+    "wizard":  { "price": 2000, "label": "Wizard Bot" },
+    "api":     { "price": 3999, "label": "Integración API" },
+    "mobile":  { "price": 1999, "label": "Versión Móvil" },
+    "apple":   { "price": 1999, "label": "Apple Business" },
+    "repo":    { "price": 1999, "label": "Repositorio de Información" },
+    "amd":     { "price": 1999, "label": "AMD — Gestión de Filas" },
+    "webchat": { "price": 1999, "label": "Web Chat" },
+    "ia_modulo": [
+      { "price": 0,    "label": "No incluir" },
+      { "price": 2999, "label": "Pymes (<10K) — $2,999/mes" },
+      { "price": 5999, "label": "Medianas (10K–50K) — $5,999/mes" },
+      { "price": 9999, "label": "Grandes (50K–100K) — $9,999/mes" }
+    ]
+  },
+
+  "costos_extras": {}
 }
