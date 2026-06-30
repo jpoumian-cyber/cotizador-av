@@ -248,7 +248,7 @@
       width: 100% !important;
       min-height: 0 !important;
       max-height: none !important;
-      padding: 12mm 14mm !important;
+      padding: 10mm 14mm !important;
       box-sizing: border-box !important;
       page-break-after: always;
       break-after: page;
@@ -265,6 +265,35 @@
       page-break-after: auto !important;
       break-after: auto !important;
     }
+    /* Aprieta espaciados verticales para ganar mm en print */
+    .q-section-title { margin: 16px 0 10px !important; padding: 7px 12px !important; }
+    .q-body          { font-size: .85rem !important; line-height: 1.55 !important; }
+    .annual-section  { padding: 14px 20px !important; margin: 16px 0 !important; }
+    .annual-section h3 { font-size: .9rem !important; margin-bottom: 10px !important; }
+    .annual-section .calc-row { padding: 3px 0 !important; }
+    .q-footer        { margin-top: 22px !important; padding-top: 9px !important; }
+    .inv-table th, .inv-table td { padding: 7px 12px !important; }
+
+    /* Clase aplicada por fitPagesForPrint() si una página excede A4 */
+    .q-page-compact .q-section-title { margin: 10px 0 6px !important; padding: 5px 10px !important; font-size: .85rem !important; }
+    .q-page-compact .q-body          { font-size: .76rem !important; line-height: 1.4 !important; }
+    .q-page-compact .q-body p        { margin-bottom: 6px !important; }
+    .q-page-compact .q-body ul       { margin-bottom: 6px !important; }
+    .q-page-compact .q-body ul li    { margin-bottom: 2px !important; }
+    .q-page-compact .annual-section  { padding: 10px 16px !important; margin: 10px 0 !important; }
+    .q-page-compact .annual-section h3 { font-size: .82rem !important; margin-bottom: 6px !important; }
+    .q-page-compact .annual-section .calc-row { padding: 2px 0 !important; font-size: .82rem !important; }
+    .q-page-compact .inv-table       { font-size: .78rem !important; }
+    .q-page-compact .inv-table th, .q-page-compact .inv-table td { padding: 5px 10px !important; }
+    .q-page-compact .q-footer        { margin-top: 14px !important; padding-top: 6px !important; font-size: .68rem !important; }
+    .q-page-compact .q-subsection    { margin: 10px 0 5px !important; }
+    .q-page-compact .acceptance-row  { margin-top: 14px !important; }
+    .q-page-compact .acceptance-field .line { height: 22px !important; }
+    .q-page-compact .q-includes      { gap: 2px 12px !important; font-size: .76rem !important; }
+    .q-page-compact .vi-flow         { margin: 10px 0 !important; }
+    .q-page-compact .cost-block      { padding: 8px 12px !important; margin: 8px 0 !important; }
+    .q-page-compact .cost-block-row  { font-size: .78rem !important; padding: 2px 0 !important; }
+
     .no-print { display: none !important; }
     @page { margin: 0; size: A4; }
   }
@@ -421,7 +450,7 @@
       <h1>Cotizador Averix</h1>
       <span>Plataforma de Comunicación Conversacional & Comercio Conversacional</span>
     </div>
-    <span style="font-size:.8rem;opacity:.5;">v2.8</span>
+    <span style="font-size:.8rem;opacity:.5;">v2.9</span>
   </div>
 
   <div class="channel-bar">
@@ -1000,7 +1029,7 @@
 
   <div class="no-print" style="text-align:center;padding:20px;background:#f0f2f5;">
     <button class="btn-secondary" onclick="backToForm()" style="margin-right:12px;">← Editar</button>
-    <button class="btn-primary" onclick="window.print()">🖨️ Imprimir / Guardar PDF</button>
+    <button class="btn-primary" onclick="preparePrint()">🖨️ Imprimir / Guardar PDF</button>
     <button class="btn-whatsapp" onclick="compartirWhatsApp()" id="btn-whatsapp">📲 Enviar por WhatsApp</button>
   </div>
 </div><!-- /quotation -->
@@ -1828,6 +1857,85 @@ function generateOMQuote(clientName,clientCity,propDate,preparedBy,clientScope) 
 }
 
 function backToForm() { g('app').style.display='block'; g('quotation').style.display='none'; window.scrollTo(0,0); }
+
+/* ===== PRINT SAFETY: medir y compactar páginas que excedan A4 =====
+   Una hoja A4 es 297mm de alto. Con padding 10mm arriba/abajo, el contenedor
+   .q-page debe quedar <= 297mm para no spillearse a una página siguiente y
+   provocar hojas en blanco. Antes de imprimir, medimos cada .q-page y, si
+   excede, le agregamos la clase .q-page-compact que reduce font-size/padding
+   en sus hijos. Después de imprimir, removemos la clase. */
+function fitPagesForPrint() {
+  const PX_PER_MM = 96 / 25.4;
+  const A4_HEIGHT_MM = 297;
+  const SAFETY_MM = 4;                   // margen de seguridad
+  const MAX_PAGE_PX = (A4_HEIGHT_MM - SAFETY_MM) * PX_PER_MM;  // ~1107 px
+
+  // Solo el producto visible
+  let container = null;
+  if (currentProduct === 'bb')      container = g('q-bb');
+  else if (currentProduct === 'vi') container = g('q-vi');
+  else if (currentProduct === 'om') container = g('q-om');
+  if (!container) return { adjusted: 0, overflow: 0 };
+
+  // Para medir con dimensiones reales de impresión, forzamos layout A4 temporal
+  const measureStyle = document.createElement('style');
+  measureStyle.id = '_print-measure-style';
+  measureStyle.textContent = `
+    #quotation { display: block !important; }
+    .q-page {
+      width: 210mm !important;
+      padding: 10mm 14mm !important;
+      min-height: 0 !important;
+      max-height: none !important;
+      box-sizing: border-box !important;
+    }
+    .q-cover { min-height: 297mm !important; padding: 16mm !important; }
+  `;
+  document.head.appendChild(measureStyle);
+
+  // Asegurar que el quotation esté visible para que scrollHeight refleje algo
+  const prevDisplay = g('quotation').style.display;
+  g('quotation').style.display = 'block';
+  container.style.display = 'block';
+
+  // Limpiar marcas previas
+  const pages = container.querySelectorAll('.q-page:not(.q-cover)');
+  pages.forEach(p => p.classList.remove('q-page-compact'));
+
+  let adjusted = 0, stillOverflow = 0;
+  pages.forEach(p => {
+    const h = p.scrollHeight;
+    if (h > MAX_PAGE_PX) {
+      p.classList.add('q-page-compact');
+      adjusted++;
+      // Re-medir
+      if (p.scrollHeight > MAX_PAGE_PX) {
+        stillOverflow++;
+        console.warn('[print] Página sigue excediendo A4 incluso compacta:',
+                     p.scrollHeight, 'px >', MAX_PAGE_PX, 'px', p);
+      }
+    }
+  });
+
+  // Restaurar estado visual
+  g('quotation').style.display = prevDisplay;
+  measureStyle.remove();
+  return { adjusted, overflow: stillOverflow };
+}
+
+function resetPagesAfterPrint() {
+  document.querySelectorAll('.q-page-compact').forEach(p => p.classList.remove('q-page-compact'));
+}
+
+function preparePrint() {
+  fitPagesForPrint();
+  // Dos rAF para asegurar que el layout aplicó la clase antes de imprimir
+  requestAnimationFrame(() => requestAnimationFrame(() => window.print()));
+}
+
+// Hooks: si el usuario presiona Cmd/Ctrl+P o "Imprimir" del navegador, también ajustamos
+window.addEventListener('beforeprint', fitPagesForPrint);
+window.addEventListener('afterprint',  resetPagesAfterPrint);
 
 function compartirWhatsApp() {
   const producto = currentProduct === 'bb' ? 'Broadcaster Bot' : 'VendIA';
