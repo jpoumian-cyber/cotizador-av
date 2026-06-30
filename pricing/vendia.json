@@ -2,43 +2,99 @@
   "_meta": {
     "producto": "VendIA",
     "moneda": "MXN",
-    "descuento_anual_pct": 10
+    "descuento_anual_pct": 10,
+    "canal_activo": "averix_directo",
+    "canales_disponibles": ["averix_directo", "telcel_reseller"]
   },
 
-  "set_up": {
-    "set_up": 12000
-  },
+  "averix_directo": {
+    "set_up": {
+      "set_up": 12000
+    },
 
-  "monthly_fee": {
-    "plazos": {
-      "12": { "fee": 6000, "descuento_pct": 0,  "desc": "Sin descuento" },
-      "24": { "fee": 5400, "descuento_pct": 10, "desc": "10% de descuento" },
-      "36": { "fee": 4800, "descuento_pct": 20, "desc": "20% de descuento" }
+    "monthly_fee": {
+      "plazos": {
+        "12": { "fee": 6000, "descuento_pct": 0,  "desc": "Sin descuento" },
+        "24": { "fee": 5400, "descuento_pct": 10, "desc": "10% de descuento" },
+        "36": { "fee": 4800, "descuento_pct": 20, "desc": "20% de descuento" }
+      }
+    },
+
+    "transaccionalidad": {
+      "plantillas_meta": {
+        "marketing": { "precio": 0.70, "unidad": "por conversación" },
+        "utilidad":  { "precio": 0.25, "unidad": "por conversación" },
+        "otp":       { "precio": 0.25, "unidad": "por conversación" },
+        "servicio":  { "precio": 0.20, "unidad": "por conversación" }
+      }
+    },
+
+    "add_ons": {},
+
+    "costos_extras": {
+      "delivery_uber_direct": [
+        { "rango": "1 – 2 km", "min": 40, "max": 60,  "unidad": "MXN por envío" },
+        { "rango": "3 – 5 km", "min": 60, "max": 90,  "unidad": "MXN por envío" },
+        { "rango": "5+ km",    "min": 90, "max": 130, "unidad": "MXN por envío", "max_open": true }
+      ],
+      "pasarela_pago_stripe": {
+        "comision_base_pct": 3.6,
+        "comision_base_fija_mxn": 3,
+        "tarjetas_internacionales_pct_extra": 0.5,
+        "conversion_moneda_pct_extra": 2.0
+      },
+      "hora_desarrollo_adicional": {
+        "precio": 806,
+        "unidad": "MXN/hr",
+        "nota": "A partir de la hora 4 de integraciones API"
+      }
     }
   },
 
-  "transaccionalidad": {
-    "plantillas_meta": {
-      "marketing": { "precio": 0.70, "unidad": "por conversación" },
-      "utilidad":  { "precio": 0.25, "unidad": "por conversación" },
-      "otp":       { "precio": 0.25, "unidad": "por conversación" },
-      "servicio":  { "precio": 0.20, "unidad": "por conversación" }
-    }
-  },
+  "telcel_reseller": {
+    "_nota": "Plan Telcel VendIA — Reseller. Fuente: PRICING AVERIX/TELCEL.xlsx",
 
-  "add_ons": {},
+    "set_up": {
+      "set_up": 5000
+    },
 
-  "costos_extras": {
-    "delivery_uber_direct": [
-      { "rango": "1 – 2 km", "min": 40, "max": 60,  "unidad": "MXN por envío" },
-      { "rango": "3 – 5 km", "min": 60, "max": 90,  "unidad": "MXN por envío" },
-      { "rango": "5+ km",    "min": 90, "max": 130, "unidad": "MXN por envío", "max_open": true }
-    ],
-    "pasarela_pago_stripe": {
-      "comision_base_pct": 3.6,
-      "comision_base_fija_mxn": 3,
-      "tarjetas_internacionales_pct_extra": 0.5,
-      "conversion_moneda_pct_extra": 2.0
+    "monthly_fee": {
+      "plazos": {
+        "12": { "fee": 9747, "descuento_pct": 0,  "desc": "Sin descuento" },
+        "24": { "fee": 8772, "descuento_pct": 10, "desc": "10% de descuento" },
+        "36": { "fee": 7798, "descuento_pct": 20, "desc": "20% de descuento" }
+      }
+    },
+
+    "transaccionalidad": {
+      "plantillas_meta": {
+        "marketing": { "precio": 1.13, "unidad": "por conversación" },
+        "utilidad":  { "precio": 0.71, "unidad": "por conversación" },
+        "otp":       { "precio": 0.64, "unidad": "por conversación" },
+        "servicio":  { "precio": 0.39, "unidad": "por conversación" }
+      }
+    },
+
+    "add_ons": {},
+
+    "costos_extras": {
+      "delivery_uber_direct": [
+        { "rango": "1 – 2 km", "min": 40,  "max": 60,  "unidad": "MXN por envío" },
+        { "rango": "3 – 5 km", "min": 60,  "max": 90,  "unidad": "MXN por envío" },
+        { "rango": "5+ km",    "min": 90,  "max": 130, "unidad": "MXN por envío", "max_open": true },
+        { "rango": "rango simplificado Telcel", "min": 50, "max": 150, "unidad": "MXN por pedido" }
+      ],
+      "pasarela_pago_stripe": {
+        "comision_base_pct": 3.6,
+        "comision_base_fija_mxn": 3,
+        "tarjetas_internacionales_pct_extra": 0.5,
+        "conversion_moneda_pct_extra": 2.0
+      },
+      "hora_desarrollo_adicional": {
+        "precio": 806,
+        "unidad": "MXN/hr",
+        "nota": "A partir de la hora 4 de integraciones API; horas de desarrollo no incluidas"
+      }
     }
   }
 }

@@ -369,7 +369,7 @@
       <h1>Cotizador Averix</h1>
       <span>Plataforma de Comunicación Conversacional & Comercio Conversacional</span>
     </div>
-    <span style="font-size:.8rem;opacity:.5;">v2.4</span>
+    <span style="font-size:.8rem;opacity:.5;">v2.5</span>
   </div>
 
   <div class="product-tabs">
@@ -951,51 +951,57 @@ async function loadPricing() {
     ]);
     BB_RAW = bb; VI_RAW = vi; OMIA_RAW = om;
 
+    // Resuelve canal comercial activo por producto (averix_directo / telcel_reseller)
+    const bbC = bb[bb._meta.canal_activo];
+    const viC = vi[vi._meta.canal_activo];
+    const omC = om[om._meta.canal_activo];
+
     // --- BB adapter ---
-    BB.alta    = bb.set_up.alta_whatsapp;
-    BB.setup   = bb.set_up.setup_por_plan;
-    BB.hrsInfo = bb.set_up.horas.config_bot_informativo;
-    BB.hrsInt  = bb.set_up.horas.integraciones;
-    BB.hrsDev  = bb.set_up.horas.desarrollo;
-    BB.hrsSup  = bb.set_up.horas.soporte;
-    BB.baseOD  = bb.monthly_fee.on_demand.plataforma_base;
-    BB.plans   = bb.monthly_fee.por_plan.planes;
-    BB.agentePorPlan = bb.monthly_fee.por_plan.agente_adicional;
-    BB.wizard  = bb.add_ons.wizard.price;
-    BB.api     = bb.add_ons.api.price;
-    BB.mobile  = bb.add_ons.mobile.price;
-    BB.apple   = bb.add_ons.apple.price;
-    BB.repo    = bb.add_ons.repo.price;
-    BB.amd     = bb.add_ons.amd.price;
-    BB.webchat = bb.add_ons.webchat.price;
-    BB.iaModulo = bb.add_ons.ia_modulo;
-    BB.agentesTramos = bb.transaccionalidad.agentes_extra_on_demand_tramos;
-    BB.tplRanges = bb.transaccionalidad.templates_on_demand_tramos.map(r =>
+    BB.alta    = bbC.set_up.alta_whatsapp;
+    BB.setup   = bbC.set_up.setup_por_plan;
+    BB.hrsInfo = bbC.set_up.horas.config_bot_informativo;
+    BB.hrsInt  = bbC.set_up.horas.integraciones;
+    BB.hrsDev  = bbC.set_up.horas.desarrollo;
+    BB.hrsSup  = bbC.set_up.horas.soporte;
+    BB.baseOD  = bbC.monthly_fee.on_demand.plataforma_base;
+    BB.plans   = bbC.monthly_fee.por_plan.planes;
+    BB.agentePorPlan = bbC.monthly_fee.por_plan.agente_adicional;
+    BB.wizard  = bbC.add_ons.wizard  ? bbC.add_ons.wizard.price  : 0;
+    BB.api     = bbC.add_ons.api     ? bbC.add_ons.api.price     : 0;
+    BB.mobile  = bbC.add_ons.mobile  ? bbC.add_ons.mobile.price  : 0;
+    BB.apple   = bbC.add_ons.apple   ? bbC.add_ons.apple.price   : 0;
+    BB.repo    = bbC.add_ons.repo    ? bbC.add_ons.repo.price    : 0;
+    BB.amd     = bbC.add_ons.amd     ? bbC.add_ons.amd.price     : 0;
+    BB.webchat = bbC.add_ons.webchat ? bbC.add_ons.webchat.price : 0;
+    BB.iaModulo = bbC.add_ons.ia_modulo || [{price:0,label:'No incluir'}];
+    BB.agentesTramos = bbC.transaccionalidad.agentes_extra_on_demand_tramos;
+    BB.tplRanges = bbC.transaccionalidad.templates_on_demand_tramos.map(r =>
       [r.volumen_hasta, r.marketing, r.utilidad, r.otp, r.servicio]
     );
-    const tp = bb.transaccionalidad.templates_por_plan;
+    const tp = bbC.transaccionalidad.templates_por_plan;
     BB.tplPlan = { mkt: tp.marketing, util: tp.utilidad, otp: tp.otp, svc: tp.servicio };
 
     // --- VI adapter ---
-    VI.setup  = vi.set_up.set_up;
+    VI.setup  = viC.set_up.set_up;
     VI.plazos = {};
-    for (const k of Object.keys(vi.monthly_fee.plazos)) {
-      const p = vi.monthly_fee.plazos[k];
+    for (const k of Object.keys(viC.monthly_fee.plazos)) {
+      const p = viC.monthly_fee.plazos[k];
       VI.plazos[k] = { fee: p.fee, desc: p.desc, descuento_pct: p.descuento_pct };
     }
-    VI.plantillasMeta  = vi.transaccionalidad.plantillas_meta;
-    VI.deliveryUber    = vi.costos_extras.delivery_uber_direct;
-    VI.pasarelaStripe  = vi.costos_extras.pasarela_pago_stripe;
+    VI.plantillasMeta = viC.transaccionalidad.plantillas_meta;
+    VI.deliveryUber   = viC.costos_extras.delivery_uber_direct;
+    VI.pasarelaStripe = viC.costos_extras.pasarela_pago_stripe;
+    VI.horaExtra      = viC.costos_extras.hora_desarrollo_adicional;
 
     // --- OMIA adapter ---
-    OMIA.setup  = om.set_up.set_up;
+    OMIA.setup  = omC.set_up.set_up;
     OMIA.plazos = {};
-    for (const k of Object.keys(om.monthly_fee.plazos)) {
-      const p = om.monthly_fee.plazos[k];
+    for (const k of Object.keys(omC.monthly_fee.plazos)) {
+      const p = omC.monthly_fee.plazos[k];
       OMIA.plazos[k] = { fee: p.fee, desc: p.desc, descuento_pct: p.descuento_pct };
     }
-    OMIA.llamada = om.transaccionalidad.llamada_outbound;
-    OMIA.horaExtra = om.costos_extras.hora_desarrollo_adicional;
+    OMIA.llamada = omC.transaccionalidad.llamada_outbound;
+    OMIA.horaExtra = omC.costos_extras.hora_desarrollo_adicional;
 
     pricingReady = true;
     applyPricesToUI();

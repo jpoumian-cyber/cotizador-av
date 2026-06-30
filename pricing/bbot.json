@@ -2,68 +2,142 @@
   "_meta": {
     "producto": "Broadcaster Bot",
     "moneda": "MXN",
-    "descuento_anual_pct": 10
+    "descuento_anual_pct": 10,
+    "canal_activo": "averix_directo",
+    "canales_disponibles": ["averix_directo", "telcel_reseller"]
   },
 
-  "set_up": {
-    "alta_whatsapp": 1999,
-    "setup_por_plan": 1999,
-    "horas": {
-      "config_bot_informativo": 999,
-      "integraciones": 1200,
-      "desarrollo": 2200,
-      "soporte": 900
-    }
-  },
-
-  "monthly_fee": {
-    "on_demand": {
-      "plataforma_base": 1999,
-      "descripcion_base": "Omnicanal (WA/IG/FB/Web), 1,000 conv. servicio, 3 agentes, campañas masivas"
+  "averix_directo": {
+    "set_up": {
+      "alta_whatsapp": 1999,
+      "setup_por_plan": 1999,
+      "horas": {
+        "config_bot_informativo": 999,
+        "integraciones": 1200,
+        "desarrollo": 2200,
+        "soporte": 900
+      }
     },
-    "por_plan": {
-      "agente_adicional": 500,
-      "planes": {
-        "api":            { "price": 3999,  "label": "Plan API",            "features": "Integración × API, 1,000 conv. servicio, 3 Agentes, Campañas Masivas, Wizard Bot" },
-        "business":       { "price": 5999,  "label": "Plan Business",       "features": "Omnicanal (WA/FB/IG/Web), 1,000 conv. servicio, 5 Agentes, Campañas Masivas, Wizard Bot" },
-        "enterprice":     { "price": 15999, "label": "Plan Enterprice",     "features": "Omnicanal, 1,000 conv., 10 Agentes, Campañas, Wizard, Móvil, Asignación Auto." },
-        "enterprice-pro": { "price": 19999, "label": "Plan Enterprice Pro", "features": "Omnicanal, 1,000 conv., 15 Agentes, Campañas, Wizard, Móvil, API, Repositorio, IA (10K)" }
+
+    "monthly_fee": {
+      "on_demand": {
+        "plataforma_base": 1999,
+        "descripcion_base": "Omnicanal (WA/IG/FB/Web), 1,000 conv. servicio, 3 agentes, campañas masivas"
+      },
+      "por_plan": {
+        "agente_adicional": 500,
+        "planes": {
+          "api":            { "price": 3999,  "label": "Plan API",            "features": "Integración × API, 1,000 conv. servicio, 3 Agentes, Campañas Masivas, Wizard Bot" },
+          "business":       { "price": 5999,  "label": "Plan Business",       "features": "Omnicanal (WA/FB/IG/Web), 1,000 conv. servicio, 5 Agentes, Campañas Masivas, Wizard Bot" },
+          "enterprice":     { "price": 15999, "label": "Plan Enterprice",     "features": "Omnicanal, 1,000 conv., 10 Agentes, Campañas, Wizard, Móvil, Asignación Auto." },
+          "enterprice-pro": { "price": 19999, "label": "Plan Enterprice Pro", "features": "Omnicanal, 1,000 conv., 15 Agentes, Campañas, Wizard, Móvil, API, Repositorio, IA (10K)" }
+        }
+      }
+    },
+
+    "transaccionalidad": {
+      "agentes_extra_on_demand_tramos": [
+        { "hasta_agentes": 20,   "precio_por_agente": 500 },
+        { "hasta_agentes": 10,   "precio_por_agente": 400 },
+        { "hasta_agentes": 20,   "precio_por_agente": 300 },
+        { "hasta_agentes": 50,   "precio_por_agente": 250 },
+        { "hasta_agentes": null, "precio_por_agente": 250 }
+      ],
+      "templates_on_demand_tramos": [
+        { "volumen_hasta": 5000,    "marketing": 0.70, "utilidad": 0.25, "otp": 0.25, "servicio": 0.20 },
+        { "volumen_hasta": 10000,   "marketing": 0.68, "utilidad": 0.22, "otp": 0.22, "servicio": 0.18 },
+        { "volumen_hasta": 100000,  "marketing": 0.67, "utilidad": 0.20, "otp": 0.20, "servicio": 0.16 },
+        { "volumen_hasta": 1000000, "marketing": 0.65, "utilidad": 0.18, "otp": 0.18, "servicio": 0.14 }
+      ],
+      "templates_por_plan": { "marketing": 0.99, "utilidad": 0.64, "otp": 0.58, "servicio": 0.45 }
+    },
+
+    "add_ons": {
+      "wizard":  { "price": 2000, "label": "Wizard Bot" },
+      "api":     { "price": 3999, "label": "Integración API" },
+      "mobile":  { "price": 1999, "label": "Versión Móvil" },
+      "apple":   { "price": 1999, "label": "Apple Business" },
+      "repo":    { "price": 1999, "label": "Repositorio de Información" },
+      "amd":     { "price": 1999, "label": "AMD — Gestión de Filas" },
+      "webchat": { "price": 1999, "label": "Web Chat" },
+      "ia_modulo": [
+        { "price": 0,    "label": "No incluir" },
+        { "price": 2999, "label": "Pymes (<10K) — $2,999/mes" },
+        { "price": 5999, "label": "Medianas (10K–50K) — $5,999/mes" },
+        { "price": 9999, "label": "Grandes (50K–100K) — $9,999/mes" }
+      ]
+    },
+
+    "costos_extras": {}
+  },
+
+  "telcel_reseller": {
+    "_nota": "Plan Telcel BC Bot — Reseller. Fuente: PRICING AVERIX/TELCEL.xlsx, FINANZAS PRECIOS telcel.xlsx",
+
+    "set_up": {
+      "alta_whatsapp": 1999,
+      "setup_por_plan": 1999,
+      "horas": {
+        "config_bot_informativo": 999,
+        "integraciones": 1200,
+        "desarrollo": 2200,
+        "soporte": 900
+      }
+    },
+
+    "monthly_fee": {
+      "on_demand": {
+        "plataforma_base": 1999,
+        "descripcion_base": "Omnicanal Telcel (WA/FB/IG/Web), 1,000 conv. servicio, agentes según plan"
+      },
+      "por_plan": {
+        "agente_adicional": 599,
+        "planes": {
+          "pyme": {
+            "price": 6000,
+            "label": "Plan Telcel Pyme",
+            "features": "Plataforma Omnicanal, 1 Admin + 1 Supervisor + 1 Agente, soporte y capacitación incluidos",
+            "fee_12_meses": 6000,
+            "fee_24_meses": 5400,
+            "fee_36_meses": 4800
+          },
+          "business": {
+            "price": 9000,
+            "label": "Plan Telcel Business",
+            "features": "Plataforma Omnicanal, 1 Admin + 1 Supervisor + 3 Agentes, Wizard Bot con IA, Plataforma móvil IOS/Android, AMD, Integraciones API hasta 3 hrs",
+            "fee_12_meses": 9000,
+            "fee_24_meses": 8100,
+            "fee_36_meses": 7200
+          }
+        }
+      }
+    },
+
+    "transaccionalidad": {
+      "agentes_extra_on_demand_tramos": [
+        { "hasta_agentes": null, "precio_por_agente": 599 }
+      ],
+      "templates_on_demand_tramos": [
+        { "volumen_hasta": null, "marketing": 1.13, "utilidad": 0.71, "otp": 0.64, "servicio": 0.39 }
+      ],
+      "templates_por_plan": { "marketing": 1.13, "utilidad": 0.71, "otp": 0.64, "servicio": 0.39 }
+    },
+
+    "add_ons": {
+      "wizard":  { "price": 0, "label": "Wizard Bot", "_nota": "Incluido en Plan Business" },
+      "api":     { "price": 0, "label": "Integración API", "_nota": "Hasta 3 hrs incluidas; hora 4+ en costos_extras" },
+      "mobile":  { "price": 0, "label": "Versión Móvil", "_nota": "Incluido en Plan Business" },
+      "apple":   { "price": null, "label": "Apple Business Chat", "_nota": "Próximamente" },
+      "webchat": { "price": null, "label": "Web Chat",            "_nota": "Próximamente" },
+      "amd":     { "price": 0, "label": "AMD — Gestión de Filas", "_nota": "Incluido en Plan Business" }
+    },
+
+    "costos_extras": {
+      "hora_desarrollo_adicional": {
+        "precio": 806,
+        "unidad": "MXN/hr",
+        "nota": "A partir de la hora 4 de integraciones API; horas de desarrollo no incluidas en plan"
       }
     }
-  },
-
-  "transaccionalidad": {
-    "agentes_extra_on_demand_tramos": [
-      { "hasta_agentes": 20,   "precio_por_agente": 500 },
-      { "hasta_agentes": 10,   "precio_por_agente": 400 },
-      { "hasta_agentes": 20,   "precio_por_agente": 300 },
-      { "hasta_agentes": 50,   "precio_por_agente": 250 },
-      { "hasta_agentes": null, "precio_por_agente": 250 }
-    ],
-    "templates_on_demand_tramos": [
-      { "volumen_hasta": 5000,    "marketing": 0.70, "utilidad": 0.25, "otp": 0.25, "servicio": 0.20 },
-      { "volumen_hasta": 10000,   "marketing": 0.68, "utilidad": 0.22, "otp": 0.22, "servicio": 0.18 },
-      { "volumen_hasta": 100000,  "marketing": 0.67, "utilidad": 0.20, "otp": 0.20, "servicio": 0.16 },
-      { "volumen_hasta": 1000000, "marketing": 0.65, "utilidad": 0.18, "otp": 0.18, "servicio": 0.14 }
-    ],
-    "templates_por_plan": { "marketing": 0.99, "utilidad": 0.64, "otp": 0.58, "servicio": 0.45 }
-  },
-
-  "add_ons": {
-    "wizard":  { "price": 2000, "label": "Wizard Bot" },
-    "api":     { "price": 3999, "label": "Integración API" },
-    "mobile":  { "price": 1999, "label": "Versión Móvil" },
-    "apple":   { "price": 1999, "label": "Apple Business" },
-    "repo":    { "price": 1999, "label": "Repositorio de Información" },
-    "amd":     { "price": 1999, "label": "AMD — Gestión de Filas" },
-    "webchat": { "price": 1999, "label": "Web Chat" },
-    "ia_modulo": [
-      { "price": 0,    "label": "No incluir" },
-      { "price": 2999, "label": "Pymes (<10K) — $2,999/mes" },
-      { "price": 5999, "label": "Medianas (10K–50K) — $5,999/mes" },
-      { "price": 9999, "label": "Grandes (50K–100K) — $9,999/mes" }
-    ]
-  },
-
-  "costos_extras": {}
+  }
 }

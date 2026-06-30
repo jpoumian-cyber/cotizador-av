@@ -2,36 +2,74 @@
   "_meta": {
     "producto": "OMIA",
     "moneda": "MXN",
-    "descuento_anual_pct": 10
+    "descuento_anual_pct": 10,
+    "canal_activo": "averix_directo",
+    "canales_disponibles": ["averix_directo", "telcel_reseller"]
   },
 
-  "set_up": {
-    "set_up": 5000
-  },
+  "averix_directo": {
+    "set_up": {
+      "set_up": 5000
+    },
 
-  "monthly_fee": {
-    "plazos": {
-      "12": { "fee": 8998, "descuento_pct": 0,  "desc": "Sin descuento" },
-      "24": { "fee": 8098, "descuento_pct": 10, "desc": "10% de descuento" },
-      "36": { "fee": 7198, "descuento_pct": 20, "desc": "20% de descuento" }
+    "monthly_fee": {
+      "plazos": {
+        "12": { "fee": 8998, "descuento_pct": 0,  "desc": "Sin descuento" },
+        "24": { "fee": 8098, "descuento_pct": 10, "desc": "10% de descuento" },
+        "36": { "fee": 7198, "descuento_pct": 20, "desc": "20% de descuento" }
+      }
+    },
+
+    "transaccionalidad": {
+      "llamada_outbound": {
+        "inicio_hasta_3_min": 2.50,
+        "minuto_adicional":   2.50,
+        "unidad": "MXN"
+      }
+    },
+
+    "add_ons": {},
+
+    "costos_extras": {
+      "hora_desarrollo_adicional": {
+        "precio": 806,
+        "unidad": "MXN/hr",
+        "nota": "A partir de la hora 4 de integraciones API"
+      }
     }
   },
 
-  "transaccionalidad": {
-    "llamada_outbound": {
-      "inicio_hasta_3_min": 2.50,
-      "minuto_adicional":   2.50,
-      "unidad": "MXN"
-    }
-  },
+  "telcel_reseller": {
+    "_nota": "Plan Telcel OMIA — Reseller. Fuente: PRICING AVERIX/TELCEL.xlsx (precios coinciden con Averix Directo actuales)",
 
-  "add_ons": {},
+    "set_up": {
+      "set_up": 5000
+    },
 
-  "costos_extras": {
-    "hora_desarrollo_adicional": {
-      "precio": 806,
-      "unidad": "MXN/hr",
-      "nota": "A partir de la hora 4 de integraciones API"
+    "monthly_fee": {
+      "plazos": {
+        "12": { "fee": 8998, "descuento_pct": 0,  "desc": "Sin descuento" },
+        "24": { "fee": 8098, "descuento_pct": 10, "desc": "10% de descuento" },
+        "36": { "fee": 7198, "descuento_pct": 20, "desc": "20% de descuento" }
+      }
+    },
+
+    "transaccionalidad": {
+      "llamada_outbound": {
+        "inicio_hasta_3_min": 2.50,
+        "minuto_adicional":   2.50,
+        "unidad": "MXN"
+      }
+    },
+
+    "add_ons": {},
+
+    "costos_extras": {
+      "hora_desarrollo_adicional": {
+        "precio": 806,
+        "unidad": "MXN/hr",
+        "nota": "A partir de la hora 4 de integraciones API; horas de desarrollo no incluidas"
+      }
     }
   }
 }
