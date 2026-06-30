@@ -1,0 +1,17 @@
+{
+  "_meta": {
+    "producto": "VendIA",
+    "moneda": "MXN",
+    "descuento_anual_pct": 10
+  },
+
+  "setup": 12000,
+
+  "plazos": {
+    "12": { "fee": 6000, "desc": "Sin descuento" },
+    "24": { "fee": 5400, "desc": "10% de descuento" },
+    "36": { "fee": 4800, "desc": "20% de descuento" }
+  },
+
+  "msgs": { "mkt": 0.56, "util": 0.16, "auth": 0.16, "svc": 0 }
+}

@@ -1,0 +1,15 @@
+{
+  "_meta": {
+    "producto": "OMIA",
+    "moneda": "MXN",
+    "descuento_anual_pct": 10
+  },
+
+  "setup": 5000,
+
+  "plazos": {
+    "12": { "fee": 8998, "desc": "Sin descuento" },
+    "24": { "fee": 8098, "desc": "10% de descuento" },
+    "36": { "fee": 7198, "desc": "20% de descuento" }
+  }
+}

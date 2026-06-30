@@ -369,7 +369,7 @@
       <h1>Cotizador Averix</h1>
       <span>Plataforma de Comunicación Conversacional & Comercio Conversacional</span>
     </div>
-    <span style="font-size:.8rem;opacity:.5;">v2.2</span>
+    <span style="font-size:.8rem;opacity:.5;">v2.3</span>
   </div>
 
   <div class="product-tabs">
@@ -938,24 +938,28 @@ let currentProduct = null;
 let bbQuoteType = null, bbSelectedPlan = null;
 let viSelectedPlazo = null;
 
-const BB = {
-  alta:1999, hrsInfo:999, hrsInt:1200, hrsDev:2200, hrsSup:900,
-  wizard:2000, api:3999, mobile:1999, apple:1999, repo:1999, amd:1999, webchat:1999, setup:1999,
-  plans: { api:{price:3999,label:'Plan API'}, business:{price:5999,label:'Plan Business'}, enterprice:{price:15999,label:'Plan Enterprice'}, 'enterprice-pro':{price:19999,label:'Plan Enterprice Pro'} },
-  tplRanges:[[5000,.70,.25,.25,.20],[10000,.68,.22,.22,.18],[100000,.67,.20,.20,.16],[1000000,.65,.18,.18,.14]],
-  tplPlan:{mkt:.99,util:.64,otp:.58,svc:.45}
-};
+/* Esquemas comerciales: se cargan desde /pricing/*.json al iniciar la app.
+   Editar precios en pricing/{bbot,vendia,omia}.json. */
+let BB = {}, VI = {}, OMIA = {};
+let pricingReady = false;
 
-const VI = {
-  setup: 12000,
-  plazos: { 12:{fee:6000,desc:'Sin descuento'}, 24:{fee:5400,desc:'10% de descuento'}, 36:{fee:4800,desc:'20% de descuento'} },
-  msgs: { mkt:.56, util:.16, auth:.16, svc:0 }
-};
-
-const OMIA = {
-  setup: 5000,
-  plazos: { 12:{fee:8998,desc:'Sin descuento'}, 24:{fee:8098,desc:'10% de descuento'}, 36:{fee:7198,desc:'20% de descuento'} }
-};
+async function loadPricing() {
+  try {
+    const [bb, vi, om] = await Promise.all([
+      fetch('pricing/bbot.json',   {cache:'no-cache'}).then(r => { if(!r.ok) throw new Error('bbot.json '+r.status);   return r.json(); }),
+      fetch('pricing/vendia.json', {cache:'no-cache'}).then(r => { if(!r.ok) throw new Error('vendia.json '+r.status); return r.json(); }),
+      fetch('pricing/omia.json',   {cache:'no-cache'}).then(r => { if(!r.ok) throw new Error('omia.json '+r.status);   return r.json(); })
+    ]);
+    Object.assign(BB, bb);
+    Object.assign(VI, vi);
+    Object.assign(OMIA, om);
+    pricingReady = true;
+  } catch (e) {
+    console.error('Error cargando esquemas comerciales:', e);
+    alert('No se pudieron cargar los precios. Refresca la página o avisa a soporte.');
+  }
+}
+loadPricing();
 
 function fmt(n) { return '$' + n.toLocaleString('es-MX', {minimumFractionDigits:2,maximumFractionDigits:2}); }
 function fmtU(n) { return '$' + n.toFixed(2); }
@@ -967,6 +971,7 @@ function chk(id, price, dispId) { const on=g(id).checked; s(dispId, on ? fmt(pri
 
 /* PRODUCT SELECTION */
 function selectProduct(p) {
+  if (!pricingReady) { alert('Cargando esquema comercial… intenta de nuevo en un segundo.'); return; }
   currentProduct = p;
   g('ptab-bb').className = 'prod-tab' + (p==='bb' ? ' active-bb' : '');
   g('ptab-vi').className = 'prod-tab' + (p==='vi' ? ' active-vi' : '');
