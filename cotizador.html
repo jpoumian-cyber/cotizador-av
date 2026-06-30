@@ -421,7 +421,7 @@
       <h1>Cotizador Averix</h1>
       <span>Plataforma de Comunicación Conversacional & Comercio Conversacional</span>
     </div>
-    <span style="font-size:.8rem;opacity:.5;">v2.6</span>
+    <span style="font-size:.8rem;opacity:.5;">v2.7</span>
   </div>
 
   <div class="channel-bar">
@@ -482,22 +482,22 @@
       <div class="pricing-section">
         <h3>ONBOARDING — PAGO ÚNICO</h3>
         <div class="pricing-row" style="background:#f8f9fa;border-radius:7px;padding:8px 10px;font-weight:700;font-size:.8rem;color:#666;"><span>Concepto</span><span style="text-align:right">Precio Unit.</span><span style="text-align:right">Subtotal</span></div>
-        <div class="pricing-row"><span class="label">Alta de cuenta WhatsApp (fijo)</span><span class="unit-price" id="bb-up-alta">$1,999.00</span><span class="subtotal" id="bb-st-alta">$1,999.00</span></div>
+        <div class="pricing-row"><span class="label">Incluir Alta de cuenta WhatsApp (<span id="bb-up-alta">$1,999</span>)</span><input type="checkbox" id="bb-chk-alta" onchange="bbRecalc()" style="width:20px;height:20px;margin:0 auto;"><span class="subtotal" id="bb-st-alta">$0.00</span></div>
         <div class="pricing-row"><span class="label">Config. Bot — Informativo (hrs × <span id="bb-rate-info">$999</span>/hr)</span><input type="number" id="bb-hrs-info" min="0" value="0" oninput="bbRecalc()" style="max-width:80px;margin:0 auto;"><span class="subtotal" id="bb-st-info">$0.00</span></div>
         <div class="pricing-row"><span class="label">Config. Bot — Integraciones (hrs × <span id="bb-rate-int">$1,200</span>/hr)</span><input type="number" id="bb-hrs-int" min="0" value="0" oninput="bbRecalc()" style="max-width:80px;margin:0 auto;"><span class="subtotal" id="bb-st-int">$0.00</span></div>
         <div class="pricing-row"><span class="label">Desarrollo a la medida (hrs × <span id="bb-rate-dev">$2,200</span>/hr)</span><input type="number" id="bb-hrs-dev" min="0" value="0" oninput="bbRecalc()" style="max-width:80px;margin:0 auto;"><span class="subtotal" id="bb-st-dev">$0.00</span></div>
-        <div class="pricing-row"><span class="label">Soporte (hrs × <span id="bb-rate-sup">$900</span>/hr)</span><input type="number" id="bb-hrs-sup" min="0" value="0" oninput="bbRecalc()" style="max-width:80px;margin:0 auto;"><span class="subtotal" id="bb-st-sup">$0.00</span></div>
-        <div class="pricing-row" style="background:#eef1fa;border-radius:7px;padding:8px 10px;"><span style="font-weight:700;color:#1a2d6e;">TOTAL ONBOARDING</span><span></span><span class="subtotal" id="bb-total-onboarding" style="font-size:1rem;">$1,999.00</span></div>
+        <div class="pricing-row" style="background:#eef1fa;border-radius:7px;padding:8px 10px;"><span style="font-weight:700;color:#1a2d6e;">TOTAL SET UP</span><span></span><span class="subtotal" id="bb-total-onboarding" style="font-size:1rem;">$0.00</span></div>
       </div>
       <div class="pricing-section">
         <h3>PLAN MENSUAL — BASE + ADICIONALES</h3>
-        <p style="font-size:.8rem;color:#666;margin-bottom:12px;">Base <span id="bb-od-base-hint2">$1,999</span>/mes: Omnicanal (WA/IG/FB/Web), 1,000 conv. servicio, 3 agentes, campañas masivas.</p>
+        <p style="font-size:.8rem;color:#666;margin-bottom:12px;" id="bb-od-base-desc">Base <span id="bb-od-base-hint2">$1,999</span>/mes: Omnicanal (WA/IG/FB/Web), 1,000 conv. servicio, 3 agentes.</p>
         <div class="pricing-row"><span class="label" style="font-weight:700;">Plataforma Omnicanal (base)</span><span class="unit-price" id="bb-up-base">$1,999.00</span><span class="subtotal" id="bb-base-disp">$1,999.00</span></div>
+        <div class="pricing-row"><span class="label">Tipo de Soporte</span><select id="bb-sel-soporte" onchange="bbRecalc()"></select><span class="subtotal" id="bb-st-soporte">$0.00</span></div>
         <div class="pricing-row"><span class="label" id="bb-agent-tiers-label">Agentes adicionales (1-20: $500, 21-30: $400, 31-50: $300)</span><input type="number" id="bb-extra-agents" min="0" value="0" oninput="bbRecalc()" style="max-width:80px;margin:0 auto;"><span class="subtotal" id="bb-st-agents">$0.00</span></div>
         <div class="pricing-row"><span class="label">Wizard Bot</span><input type="checkbox" id="bb-chk-wizard" onchange="bbRecalc()" style="width:20px;height:20px;margin:0 auto;"><span class="subtotal" id="bb-st-wizard">$0.00</span></div>
+        <div class="pricing-row"><span class="label">Campañas Masivas</span><input type="checkbox" id="bb-chk-campanas" onchange="bbRecalc()" style="width:20px;height:20px;margin:0 auto;"><span class="subtotal" id="bb-st-campanas">$0.00</span></div>
         <div class="pricing-row"><span class="label">Integración API</span><input type="checkbox" id="bb-chk-api" onchange="bbRecalc()" style="width:20px;height:20px;margin:0 auto;"><span class="subtotal" id="bb-st-api">$0.00</span></div>
         <div class="pricing-row"><span class="label">Versión Móvil</span><input type="checkbox" id="bb-chk-mobile" onchange="bbRecalc()" style="width:20px;height:20px;margin:0 auto;"><span class="subtotal" id="bb-st-mobile">$0.00</span></div>
-        <div class="pricing-row"><span class="label">Apple Business</span><input type="checkbox" id="bb-chk-apple" onchange="bbRecalc()" style="width:20px;height:20px;margin:0 auto;"><span class="subtotal" id="bb-st-apple">$0.00</span></div>
         <div class="pricing-row"><span class="label">Repositorio de Información</span><input type="checkbox" id="bb-chk-repo" onchange="bbRecalc()" style="width:20px;height:20px;margin:0 auto;"><span class="subtotal" id="bb-st-repo">$0.00</span></div>
         <div class="pricing-row"><span class="label">AMD — Gestión de Filas</span><input type="checkbox" id="bb-chk-amd" onchange="bbRecalc()" style="width:20px;height:20px;margin:0 auto;"><span class="subtotal" id="bb-st-amd">$0.00</span></div>
         <div class="pricing-row"><span class="label">Módulo de IA</span><select id="bb-sel-ia" onchange="bbRecalc()"><option value="0">No incluir</option></select><span class="subtotal" id="bb-st-ia">$0.00</span></div>
@@ -511,14 +511,15 @@
         <div class="pricing-row"><span class="label">Plantilla OTP/Autenticación (vol. mensual)</span><input type="number" id="bb-vol-otp" min="0" value="0" oninput="bbRecalc()" style="max-width:100px;"><span class="subtotal" id="bb-st-otp">$0.00</span></div>
         <div class="pricing-row"><span class="label">Conversaciones de Servicio (vol. mensual)</span><input type="number" id="bb-vol-svc" min="0" value="0" oninput="bbRecalc()" style="max-width:100px;"><span class="subtotal" id="bb-st-svc">$0.00</span></div>
       </div>
-      <div class="annual-box"><label><input type="checkbox" id="bb-chk-annual" onchange="bbRecalc()"><strong>Plan Anual Preferente (10% descuento en onboarding + mensualidad)</strong></label></div>
+      <div class="annual-box"><label><input type="checkbox" id="bb-chk-annual" onchange="bbRecalc()"><strong>Plan Anual Preferente (10% descuento en Set Up + mensualidad)</strong></label></div>
       <div class="totals-box" style="margin-top:20px;">
-        <div class="totals-row"><span>Total Onboarding (Pago Único):</span><span id="bb-disp-onboard">$1,999.00</span></div>
+        <div class="totals-row"><span>Total Set Up (Pago Único):</span><span id="bb-disp-onboard">$0.00</span></div>
         <div class="totals-row"><span>Total Plan Mensual:</span><span id="bb-disp-monthly">$1,999.00</span></div>
         <div class="totals-row"><span>Estimado Templates/mes:</span><span id="bb-disp-templates">$0.00</span></div>
         <div class="totals-row big"><span>INVERSIÓN MENSUAL ESTIMADA:</span><span id="bb-disp-total-month">$1,999.00</span></div>
-        <div class="totals-row hidden" id="bb-annual-row"><span>Plan Anual (× 12 con 10% dto):</span><span id="bb-disp-annual" class="discount"></span></div>
-        <div class="totals-row hidden" id="bb-saving-row"><span>Ahorro anual:</span><span id="bb-disp-saving" style="color:#888;"></span></div>
+        <div class="totals-row hidden" id="bb-subtotal-row"><span>Subtotal año 1 (Set Up + 12 × Mensual):</span><span id="bb-disp-subtotal">—</span></div>
+        <div class="totals-row hidden" id="bb-annual-row"><span>Plan Anual Preferente (10% dto):</span><span id="bb-disp-annual" class="discount"></span></div>
+        <div class="totals-row hidden" id="bb-saving-row"><span>Ahorro anual:</span><span id="bb-disp-saving" style="color:#25a244;font-weight:700;"></span></div>
       </div>
     </div>
 
@@ -540,8 +541,9 @@
         <div class="totals-row"><span>Agentes adicionales:</span><span id="bb-p-disp-agents">$0.00</span></div>
         <div class="totals-row"><span>Estimado Templates/mes:</span><span id="bb-p-disp-templates">$0.00</span></div>
         <div class="totals-row big"><span>TOTAL MENSUAL ESTIMADO:</span><span id="bb-p-disp-total">—</span></div>
-        <div class="totals-row hidden" id="bb-p-annual-row"><span>Plan Anual (× 12 con 10% dto):</span><span id="bb-p-disp-annual" class="discount"></span></div>
-        <div class="totals-row hidden" id="bb-p-saving-row"><span>Ahorro anual:</span><span id="bb-p-disp-saving" style="color:#888;"></span></div>
+        <div class="totals-row hidden" id="bb-p-subtotal-row"><span>Subtotal año 1 (Set Up + 12 × Mensual):</span><span id="bb-p-disp-subtotal">—</span></div>
+        <div class="totals-row hidden" id="bb-p-annual-row"><span>Plan Anual Preferente (10% dto):</span><span id="bb-p-disp-annual" class="discount"></span></div>
+        <div class="totals-row hidden" id="bb-p-saving-row"><span>Ahorro anual:</span><span id="bb-p-disp-saving" style="color:#25a244;font-weight:700;"></span></div>
       </div>
     </div>
 
@@ -1011,20 +1013,22 @@ function applyChannel(channel) {
   // --- BB adapter ---
   BB.alta    = bbC.set_up.alta_whatsapp;
   BB.setup   = bbC.set_up.setup_por_plan;
+  BB.incluirAltaDefault = !!bbC.set_up.incluir_alta_por_default;
   BB.hrsInfo = bbC.set_up.horas.config_bot_informativo;
   BB.hrsInt  = bbC.set_up.horas.integraciones;
   BB.hrsDev  = bbC.set_up.horas.desarrollo;
-  BB.hrsSup  = bbC.set_up.horas.soporte;
   BB.baseOD  = bbC.monthly_fee.on_demand.plataforma_base;
+  BB.descripcionBase = bbC.monthly_fee.on_demand.descripcion_base;
+  BB.soporteTiers = bbC.monthly_fee.on_demand.soporte_tiers || [];
   BB.plans   = bbC.monthly_fee.por_plan.planes;
   BB.agentePorPlan = bbC.monthly_fee.por_plan.agente_adicional;
   BB.wizard  = bbC.add_ons.wizard  ? bbC.add_ons.wizard.price  : 0;
   BB.api     = bbC.add_ons.api     ? bbC.add_ons.api.price     : 0;
   BB.mobile  = bbC.add_ons.mobile  ? bbC.add_ons.mobile.price  : 0;
-  BB.apple   = bbC.add_ons.apple   ? bbC.add_ons.apple.price   : 0;
   BB.repo    = bbC.add_ons.repo    ? bbC.add_ons.repo.price    : 0;
   BB.amd     = bbC.add_ons.amd     ? bbC.add_ons.amd.price     : 0;
   BB.webchat = bbC.add_ons.webchat ? bbC.add_ons.webchat.price : 0;
+  BB.campanas = bbC.add_ons.campanas_masivas ? bbC.add_ons.campanas_masivas.price : 0;
   BB.iaModulo = bbC.add_ons.ia_modulo || [{price:0,label:'No incluir'}];
   BB.agentesTramos = bbC.transaccionalidad.agentes_extra_on_demand_tramos;
   BB.tplRanges = bbC.transaccionalidad.templates_on_demand_tramos.map(r =>
@@ -1116,20 +1120,42 @@ function applyPricesToUI() {
   // ===== BBot =====
   s('bb-od-base-hint',  fmtInt(BB.baseOD));
   s('bb-od-base-hint2', fmtInt(BB.baseOD));
-  s('bb-up-alta',  fmt2(BB.alta));
-  s('bb-st-alta',  fmt2(BB.alta));
+  s('bb-up-alta',  fmtInt(BB.alta));
   s('bb-rate-info', fmtInt(BB.hrsInfo));
   s('bb-rate-int',  fmtInt(BB.hrsInt));
   s('bb-rate-dev',  fmtInt(BB.hrsDev));
-  s('bb-rate-sup',  fmtInt(BB.hrsSup));
-  s('bb-total-onboarding', fmt2(BB.alta));
   s('bb-up-base',    fmt2(BB.baseOD));
   s('bb-base-disp',  fmt2(BB.baseOD));
   s('bb-total-monthly', fmt2(BB.baseOD));
-  s('bb-disp-onboard',  fmt2(BB.alta));
   s('bb-disp-monthly',  fmt2(BB.baseOD));
   s('bb-disp-total-month', fmt2(BB.baseOD));
   s('bb-p-disp-setup', fmt2(BB.setup));
+
+  // Default del checkbox "incluir alta" según el JSON
+  const chkAlta = g('bb-chk-alta');
+  if (chkAlta) chkAlta.checked = BB.incluirAltaDefault;
+
+  // Set Up empieza en $0 si la alta no está incluida por default
+  s('bb-st-alta', BB.incluirAltaDefault ? fmt2(BB.alta) : '$0.00');
+  s('bb-total-onboarding', BB.incluirAltaDefault ? fmt2(BB.alta) : '$0.00');
+  s('bb-disp-onboard',     BB.incluirAltaDefault ? fmt2(BB.alta) : '$0.00');
+
+  // Descripción base ON DEMAND (desde JSON)
+  if (BB.descripcionBase) {
+    s('bb-od-base-desc', `Base $${BB.baseOD.toLocaleString('es-MX')}/mes: ${BB.descripcionBase}.`);
+  }
+
+  // Select de Soporte: poblar con los tiers del JSON
+  const selSop = g('bb-sel-soporte');
+  if (selSop && BB.soporteTiers) {
+    selSop.innerHTML = '';
+    for (const t of BB.soporteTiers) {
+      const o = document.createElement('option');
+      o.value = String(t.price);
+      o.textContent = `${t.label} — $${t.price.toLocaleString('es-MX')}/mes`;
+      selSop.appendChild(o);
+    }
+  }
 
   // Agentes adicionales — label dinámico desde tramos
   const tramos = BB.agentesTramos || [];
@@ -1324,32 +1350,62 @@ function bbTplOD(vol,idx) {
 }
 
 function bbRecalc() {
-  const hI=v('bb-hrs-info'),hN=v('bb-hrs-int'),hD=v('bb-hrs-dev'),hS=v('bb-hrs-sup');
-  const stI=hI*BB.hrsInfo,stN=hN*BB.hrsInt,stD=hD*BB.hrsDev,stS=hS*BB.hrsSup;
-  const onboard=BB.alta+stI+stN+stD+stS;
-  s('bb-st-info',fmt(stI));s('bb-st-int',fmt(stN));s('bb-st-dev',fmt(stD));s('bb-st-sup',fmt(stS));
-  s('bb-total-onboarding',fmt(onboard));
-  let monthly=BB.baseOD;
-  const ea=v('bb-extra-agents'),stA=bbAgentPrice(ea);s('bb-st-agents',fmt(stA));monthly+=stA;
-  monthly+=chk('bb-chk-wizard',BB.wizard,'bb-st-wizard');
-  monthly+=chk('bb-chk-api',BB.api,'bb-st-api');
-  monthly+=chk('bb-chk-mobile',BB.mobile,'bb-st-mobile');
-  monthly+=chk('bb-chk-apple',BB.apple,'bb-st-apple');
-  monthly+=chk('bb-chk-repo',BB.repo,'bb-st-repo');
-  monthly+=chk('bb-chk-amd',BB.amd,'bb-st-amd');
-  monthly+=chk('bb-chk-webchat',BB.webchat,'bb-st-webchat');
-  const ia=+g('bb-sel-ia').value||0;s('bb-st-ia',fmt(ia));monthly+=ia;
-  s('bb-total-monthly',fmt(monthly));
-  const rM=bbTplOD(v('bb-vol-mkt'),0),rU=bbTplOD(v('bb-vol-util'),1),rO=bbTplOD(v('bb-vol-otp'),2),rS=bbTplOD(v('bb-vol-svc'),3);
-  s('bb-st-mkt',fmt(rM.price)+` (${fmtU(rM.rate)}/conv)`);
-  s('bb-st-util',fmt(rU.price)+` (${fmtU(rU.rate)}/conv)`);
-  s('bb-st-otp',fmt(rO.price)+` (${fmtU(rO.rate)}/conv)`);
-  s('bb-st-svc',fmt(rS.price)+` (${fmtU(rS.rate)}/conv)`);
-  const tpl=rM.price+rU.price+rO.price+rS.price;
-  s('bb-disp-onboard',fmt(onboard));s('bb-disp-monthly',fmt(monthly));s('bb-disp-templates',fmt(tpl));s('bb-disp-total-month',fmt(monthly+tpl));
-  const isAnn=g('bb-chk-annual').checked;
-  toggle('bb-annual-row',isAnn);toggle('bb-saving-row',isAnn);
-  if(isAnn){const aT=onboard*.9+monthly*.9*12,rT=onboard+monthly*12;s('bb-disp-annual',fmt(aT)+' (anual c/ dto)');s('bb-disp-saving',fmt(rT-aT)+' de ahorro');}
+  // SET UP: alta opcional + horas
+  const incAlta = g('bb-chk-alta').checked;
+  const hI=v('bb-hrs-info'),hN=v('bb-hrs-int'),hD=v('bb-hrs-dev');
+  const stI=hI*BB.hrsInfo, stN=hN*BB.hrsInt, stD=hD*BB.hrsDev;
+  const altaAmount = incAlta ? BB.alta : 0;
+  const onboard = altaAmount + stI + stN + stD;
+  s('bb-st-alta', fmt(altaAmount));
+  s('bb-st-info', fmt(stI)); s('bb-st-int', fmt(stN)); s('bb-st-dev', fmt(stD));
+  s('bb-total-onboarding', fmt(onboard));
+
+  // MONTHLY FEE: base + soporte tier + agentes + add-ons + IA
+  let monthly = BB.baseOD;
+  const soporteSel = g('bb-sel-soporte');
+  const soportePrice = soporteSel ? (+soporteSel.value || 0) : 0;
+  s('bb-st-soporte', fmt(soportePrice));
+  monthly += soportePrice;
+  const ea = v('bb-extra-agents'), stA = bbAgentPrice(ea);
+  s('bb-st-agents', fmt(stA)); monthly += stA;
+  monthly += chk('bb-chk-wizard',   BB.wizard,   'bb-st-wizard');
+  monthly += chk('bb-chk-campanas', BB.campanas, 'bb-st-campanas');
+  monthly += chk('bb-chk-api',      BB.api,      'bb-st-api');
+  monthly += chk('bb-chk-mobile',   BB.mobile,   'bb-st-mobile');
+  monthly += chk('bb-chk-repo',     BB.repo,     'bb-st-repo');
+  monthly += chk('bb-chk-amd',      BB.amd,      'bb-st-amd');
+  monthly += chk('bb-chk-webchat',  BB.webchat,  'bb-st-webchat');
+  const ia = +g('bb-sel-ia').value || 0;
+  s('bb-st-ia', fmt(ia)); monthly += ia;
+  s('bb-total-monthly', fmt(monthly));
+
+  // TEMPLATES (transaccionalidad mensual variable)
+  const rM=bbTplOD(v('bb-vol-mkt'),0), rU=bbTplOD(v('bb-vol-util'),1),
+        rO=bbTplOD(v('bb-vol-otp'),2),  rS=bbTplOD(v('bb-vol-svc'),3);
+  s('bb-st-mkt',  fmt(rM.price)+` (${fmtU(rM.rate)}/conv)`);
+  s('bb-st-util', fmt(rU.price)+` (${fmtU(rU.rate)}/conv)`);
+  s('bb-st-otp',  fmt(rO.price)+` (${fmtU(rO.rate)}/conv)`);
+  s('bb-st-svc',  fmt(rS.price)+` (${fmtU(rS.rate)}/conv)`);
+  const tpl = rM.price + rU.price + rO.price + rS.price;
+
+  // TOTALS BOX
+  s('bb-disp-onboard',   fmt(onboard));
+  s('bb-disp-monthly',   fmt(monthly));
+  s('bb-disp-templates', fmt(tpl));
+  s('bb-disp-total-month', fmt(monthly + tpl));
+
+  // DESCUENTO ANUAL: subtotal anual sin dto, con dto, ahorro (resta verificable)
+  const isAnn = g('bb-chk-annual').checked;
+  toggle('bb-subtotal-row', isAnn);
+  toggle('bb-annual-row',   isAnn);
+  toggle('bb-saving-row',   isAnn);
+  if (isAnn) {
+    const rT = onboard + monthly * 12;   // sin descuento (set up + 12 × mensual)
+    const aT = onboard * 0.9 + monthly * 0.9 * 12;  // con 10% de descuento
+    s('bb-disp-subtotal', fmt(rT));
+    s('bb-disp-annual',   fmt(aT));
+    s('bb-disp-saving',   fmt(rT - aT));
+  }
 }
 
 function bbRecalcPlan() {
@@ -1363,8 +1419,17 @@ function bbRecalcPlan() {
   const tpl=sM+sU+sO+sV,total=pl.price+stA+tpl;
   s('bb-p-disp-templates',fmt(tpl));s('bb-p-disp-total',fmt(total));
   const isAnn=g('bb-plan-annual').checked;
-  toggle('bb-p-annual-row',isAnn);toggle('bb-p-saving-row',isAnn);
-  if(isAnn){const aT=BB.setup*.9+(pl.price+stA)*.9*12,rT=BB.setup+(pl.price+stA)*12;s('bb-p-disp-annual',fmt(aT)+' (anual c/ dto)');s('bb-p-disp-saving',fmt(rT-aT)+' de ahorro');}
+  toggle('bb-p-subtotal-row',isAnn);
+  toggle('bb-p-annual-row',isAnn);
+  toggle('bb-p-saving-row',isAnn);
+  if (isAnn) {
+    const monthlyBase = pl.price + stA;
+    const rT = BB.setup + monthlyBase * 12;
+    const aT = BB.setup * 0.9 + monthlyBase * 0.9 * 12;
+    s('bb-p-disp-subtotal', fmt(rT));
+    s('bb-p-disp-annual',   fmt(aT));
+    s('bb-p-disp-saving',   fmt(rT - aT));
+  }
 }
 
 /* ===== VI ===== */
@@ -1480,20 +1545,34 @@ function generateBBQuote(clientName,clientCity,propDate,preparedBy,clientScope) 
   let totalOnboard=0,totalMonthly=0,isAnnual=false,hasDev=false;
   if(bbQuoteType==='on-demand'){
     isAnnual=g('bb-chk-annual').checked;
-    const hI=v('bb-hrs-info'),hN=v('bb-hrs-int'),hD=v('bb-hrs-dev'),hS=v('bb-hrs-sup');
+    const incAlta=g('bb-chk-alta').checked;
+    const hI=v('bb-hrs-info'),hN=v('bb-hrs-int'),hD=v('bb-hrs-dev');
     if(hD>0) hasDev=true;
-    const montoSoporte=hS*BB.hrsSup;
-    totalOnboard=BB.alta+hI*BB.hrsInfo+hN*BB.hrsInt+hD*BB.hrsDev;
+    const altaAmount = incAlta ? BB.alta : 0;
+    totalOnboard = altaAmount + hI*BB.hrsInfo + hN*BB.hrsInt + hD*BB.hrsDev;
     row('SET UP','PAGO ÚNICO',true);
-    row('Alta de cuenta WhatsApp en Meta. Habilitación y configuración de plataforma Broadcaster Bot.','');
-    row('TOTAL SET UP',fmt(totalOnboard),false,true);
+    if (totalOnboard > 0) {
+      const partes = [];
+      if (incAlta) partes.push('Alta de cuenta WhatsApp en Meta');
+      if (hI > 0)  partes.push(`Configuración informativa (${hI} hrs)`);
+      if (hN > 0)  partes.push(`Integraciones (${hN} hrs)`);
+      if (hD > 0)  partes.push(`Desarrollo a la medida (${hD} hrs)`);
+      row(partes.join(' · ') + '. Habilitación y configuración de plataforma.', '');
+    } else {
+      row('Sin pago único (sin alta ni horas configuradas).', '');
+    }
+    row('TOTAL SET UP', fmt(totalOnboard), false, true);
     const ea=v('bb-extra-agents'),stA=bbAgentPrice(ea),ia=+g('bb-sel-ia').value||0;
-    let monthly=BB.baseOD+stA+montoSoporte;
-    const incl=['Omnicanal (WA/IG/FB/Webchat)','1,000 Conv. Servicio','3 Agentes','Campañas Masivas'];
+    const soporteSel = g('bb-sel-soporte');
+    const soportePrice = soporteSel ? (+soporteSel.value || 0) : 0;
+    const soporteLabel = (BB.soporteTiers || []).find(t => t.price === soportePrice);
+    let monthly=BB.baseOD+stA+soportePrice;
+    const incl=['Omnicanal (WA/IG/FB/Webchat)','1,000 Conv. Servicio','3 Agentes'];
+    if (soporteLabel) incl.push(`Soporte ${soporteLabel.label}`);
     if(g('bb-chk-wizard').checked){monthly+=BB.wizard;incl.push('Wizard Bot');}
+    if(g('bb-chk-campanas').checked){monthly+=BB.campanas;incl.push('Campañas Masivas');}
     if(g('bb-chk-api').checked){monthly+=BB.api;incl.push('Integración API');}
     if(g('bb-chk-mobile').checked){monthly+=BB.mobile;incl.push('Versión Móvil');}
-    if(g('bb-chk-apple').checked){monthly+=BB.apple;incl.push('Apple Business');}
     if(g('bb-chk-repo').checked){monthly+=BB.repo;incl.push('Repositorio de Información');}
     if(g('bb-chk-amd').checked){monthly+=BB.amd;incl.push('AMD — Gestión de Filas');}
     if(g('bb-chk-webchat').checked){monthly+=BB.webchat;incl.push('Web Chat');}
@@ -1526,8 +1605,18 @@ function generateBBQuote(clientName,clientCity,propDate,preparedBy,clientScope) 
     if(vV>0) row(`Conv. Servicio (${vV.toLocaleString('es-MX')} × $${tp.svc})`,fmt(vV*tp.svc)); else row('Conversaciones de Servicio',fmtU(tp.svc)+'/conv');
   }
   const annEl=g('bb-q-annual-section');
-  if(isAnnual){annEl.style.display='block';const dO=totalOnboard*.9,dM=totalMonthly*.9,aT=dO+dM*12,save=(totalOnboard-dO)+(totalMonthly-dM)*12;g('bb-q-annual-calcs').innerHTML=`<div class="calc-row"><span>Mensual:</span><span>${fmt(totalMonthly)} × 12 = ${fmt(totalMonthly*12)}</span></div><div class="calc-row highlight"><span>Anual Preferente (10% dto):</span><span>${fmt(aT)}</span></div><div class="calc-row saving"><span>Ahorro anual:</span><span>${fmt(save)}</span></div>`;}
-  else annEl.style.display='none';
+  if(isAnnual){
+    annEl.style.display='block';
+    const rT  = totalOnboard + totalMonthly * 12;       // sin descuento
+    const aT  = totalOnboard * 0.9 + totalMonthly * 0.9 * 12;  // con 10% dto
+    const save = rT - aT;
+    g('bb-q-annual-calcs').innerHTML = `
+      <div class="calc-row"><span>Set Up (pago único):</span><span>${fmt(totalOnboard)}</span></div>
+      <div class="calc-row"><span>Mensual × 12:</span><span>${fmt(totalMonthly)} × 12 = ${fmt(totalMonthly*12)}</span></div>
+      <div class="calc-row"><span><strong>Subtotal año 1 sin descuento:</strong></span><span><strong>${fmt(rT)}</strong></span></div>
+      <div class="calc-row highlight"><span>Plan Anual Preferente (10% dto):</span><span>${fmt(aT)}</span></div>
+      <div class="calc-row saving"><span>Ahorro anual (10%):</span><span>${fmt(save)}</span></div>`;
+  } else annEl.style.display='none';
   g('bb-q-dev-considerations').style.display=hasDev?'block':'none';
 }
 
