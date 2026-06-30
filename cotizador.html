@@ -357,6 +357,58 @@
     /* Cost info boxes */
     .cost-info { padding: 12px 14px; }
     .cost-row { font-size: .8rem; }
+    .channel-bar { flex-direction: column; align-items: stretch; gap: 8px; }
+    .channel-bar .channel-options { width: 100%; }
+    .channel-bar .ch-btn { flex: 1; padding: 9px 10px; font-size: .8rem; }
+  }
+
+  /* ===== CHANNEL SELECTOR ===== */
+  .channel-bar {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    background: #fff;
+    border: 1.5px solid #e5e7eb;
+    border-radius: 10px;
+    padding: 12px 16px;
+    margin: 0 0 18px 0;
+    box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .channel-bar .channel-label {
+    font-size: .82rem;
+    font-weight: 700;
+    color: #444;
+    letter-spacing: .3px;
+    text-transform: uppercase;
+  }
+  .channel-bar .channel-options {
+    display: flex;
+    gap: 0;
+    border: 1.5px solid #d0d5dd;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #f8f9fa;
+  }
+  .channel-bar .ch-btn {
+    background: transparent;
+    color: #555;
+    border: none;
+    padding: 8px 16px;
+    font-size: .85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background .15s, color .15s;
+  }
+  .channel-bar .ch-btn:hover { background: #eef1fa; color: #1a2d6e; }
+  .channel-bar .ch-btn.active {
+    background: #1a2d6e;
+    color: #fff;
+  }
+  .channel-bar .channel-hint {
+    margin-left: auto;
+    font-size: .72rem;
+    color: #888;
+    font-style: italic;
   }
 </style>
 </head>
@@ -369,7 +421,16 @@
       <h1>Cotizador Averix</h1>
       <span>Plataforma de Comunicación Conversacional & Comercio Conversacional</span>
     </div>
-    <span style="font-size:.8rem;opacity:.5;">v2.5</span>
+    <span style="font-size:.8rem;opacity:.5;">v2.6</span>
+  </div>
+
+  <div class="channel-bar">
+    <span class="channel-label">Canal comercial</span>
+    <div class="channel-options" role="tablist">
+      <button type="button" id="ch-btn-averix" class="ch-btn active" onclick="setChannel('averix_directo')">Averix Directo</button>
+      <button type="button" id="ch-btn-telcel" class="ch-btn" onclick="setChannel('telcel_reseller')">Telcel Reseller</button>
+    </div>
+    <span class="channel-hint" id="ch-hint">Aplica a los 3 productos</span>
   </div>
 
   <div class="product-tabs">
@@ -411,7 +472,7 @@
       <h2>2. Tipo de Cotización — Broadcaster Bot</h2>
       <div class="type-selector">
         <div class="type-btn" id="bb-btn-od" onclick="bbSelectType('on-demand')"><h3>ON DEMAND</h3><p>Cotización personalizada por horas y funcionalidades. Plan base <span id="bb-od-base-hint">$1,999</span>/mes.</p></div>
-        <div class="type-btn" id="bb-btn-pp" onclick="bbSelectType('por-plan')"><h3>POR PLAN</h3><p>Plan predefinido: Business, Enterprice o Enterprice Pro.</p></div>
+        <div class="type-btn" id="bb-btn-pp" onclick="bbSelectType('por-plan')"><h3>POR PLAN</h3><p id="bb-btn-pp-desc">Plan predefinido del canal seleccionado.</p></div>
       </div>
     </div>
 
@@ -464,12 +525,7 @@
     <!-- BB POR PLAN -->
     <div class="card hidden" id="bb-form-pp">
       <h2>3. Selección de Plan — Broadcaster Bot</h2>
-      <div class="plan-cards">
-        <div class="plan-card" id="bb-plan-api" onclick="bbSelectPlan('api')"><h4>API</h4><div class="price"><span id="bb-plan-api-price">$3,999</span> <span>/mes</span></div><ul><li>Integración × API</li><li>1,000 conv. servicio</li><li>3 Agentes incluidos</li><li>Campañas masivas + Wizard</li><li class="no">Versión Móvil</li><li class="no">IA</li></ul></div>
-        <div class="plan-card" id="bb-plan-business" onclick="bbSelectPlan('business')"><h4>Business</h4><div class="price"><span id="bb-plan-business-price">$5,999</span> <span>/mes</span></div><ul><li>Omnicanal (WA, FB, IG, Web)</li><li>1,000 conv. servicio</li><li>5 Agentes incluidos</li><li>Campañas masivas + Wizard</li><li class="no">Versión Móvil</li><li class="no">IA</li></ul></div>
-        <div class="plan-card" id="bb-plan-enterprice" onclick="bbSelectPlan('enterprice')"><h4>Enterprice</h4><div class="price"><span id="bb-plan-enterprice-price">$15,999</span> <span>/mes</span></div><ul><li>Omnicanal (WA, FB, IG, Web)</li><li>1,000 conv. servicio</li><li>10 Agentes incluidos</li><li>Campañas + Wizard + Móvil</li><li>Asignación automática</li><li class="no">IA / Repositorio</li></ul></div>
-        <div class="plan-card" id="bb-plan-enterprice-pro" onclick="bbSelectPlan('enterprice-pro')"><h4>Enterprice Pro</h4><div class="price"><span id="bb-plan-enterprice-pro-price">$19,999</span> <span>/mes</span></div><ul><li>Omnicanal (WA, FB, IG, Web)</li><li>1,000 conv. servicio</li><li>15 Agentes incluidos</li><li>Campañas + Wizard + Móvil</li><li>Integraciones API</li><li>Repositorio + IA (10K conv)</li></ul></div>
-      </div>
+      <div class="plan-cards" id="bb-plan-cards"></div>
       <div class="form-grid"><div><label>Agentes adicionales</label><input type="number" id="bb-plan-extra-agents" min="0" value="0" oninput="bbRecalcPlan()"></div><div><label>Precio x agente adicional</label><input type="text" id="bb-agent-pp-disp" value="$500.00 MXN/mes" readonly></div></div>
       <div class="pricing-section" style="margin-top:20px;"><h3>TEMPLATES / PLANTILLAS</h3>
         <div class="pricing-row"><span class="label">Plantilla Marketing</span><input type="number" id="bb-pv-mkt" min="0" value="0" oninput="bbRecalcPlan()" style="max-width:100px;"><span class="subtotal" id="bb-pst-mkt">$0.00</span></div>
@@ -941,6 +997,65 @@ let viSelectedPlazo = null;
 let BB = {}, VI = {}, OMIA = {};
 let BB_RAW = {}, VI_RAW = {}, OMIA_RAW = {};
 let pricingReady = false;
+let currentChannel = 'averix_directo';
+
+function applyChannel(channel) {
+  const bbC = BB_RAW[channel];
+  const viC = VI_RAW[channel];
+  const omC = OMIA_RAW[channel];
+  if (!bbC || !viC || !omC) {
+    console.warn('Canal no disponible en uno o más JSON:', channel);
+    return false;
+  }
+
+  // --- BB adapter ---
+  BB.alta    = bbC.set_up.alta_whatsapp;
+  BB.setup   = bbC.set_up.setup_por_plan;
+  BB.hrsInfo = bbC.set_up.horas.config_bot_informativo;
+  BB.hrsInt  = bbC.set_up.horas.integraciones;
+  BB.hrsDev  = bbC.set_up.horas.desarrollo;
+  BB.hrsSup  = bbC.set_up.horas.soporte;
+  BB.baseOD  = bbC.monthly_fee.on_demand.plataforma_base;
+  BB.plans   = bbC.monthly_fee.por_plan.planes;
+  BB.agentePorPlan = bbC.monthly_fee.por_plan.agente_adicional;
+  BB.wizard  = bbC.add_ons.wizard  ? bbC.add_ons.wizard.price  : 0;
+  BB.api     = bbC.add_ons.api     ? bbC.add_ons.api.price     : 0;
+  BB.mobile  = bbC.add_ons.mobile  ? bbC.add_ons.mobile.price  : 0;
+  BB.apple   = bbC.add_ons.apple   ? bbC.add_ons.apple.price   : 0;
+  BB.repo    = bbC.add_ons.repo    ? bbC.add_ons.repo.price    : 0;
+  BB.amd     = bbC.add_ons.amd     ? bbC.add_ons.amd.price     : 0;
+  BB.webchat = bbC.add_ons.webchat ? bbC.add_ons.webchat.price : 0;
+  BB.iaModulo = bbC.add_ons.ia_modulo || [{price:0,label:'No incluir'}];
+  BB.agentesTramos = bbC.transaccionalidad.agentes_extra_on_demand_tramos;
+  BB.tplRanges = bbC.transaccionalidad.templates_on_demand_tramos.map(r =>
+    [r.volumen_hasta, r.marketing, r.utilidad, r.otp, r.servicio]
+  );
+  const tp = bbC.transaccionalidad.templates_por_plan;
+  BB.tplPlan = { mkt: tp.marketing, util: tp.utilidad, otp: tp.otp, svc: tp.servicio };
+
+  // --- VI adapter ---
+  VI.setup  = viC.set_up.set_up;
+  VI.plazos = {};
+  for (const k of Object.keys(viC.monthly_fee.plazos)) {
+    const p = viC.monthly_fee.plazos[k];
+    VI.plazos[k] = { fee: p.fee, desc: p.desc, descuento_pct: p.descuento_pct };
+  }
+  VI.plantillasMeta = viC.transaccionalidad.plantillas_meta;
+  VI.deliveryUber   = viC.costos_extras.delivery_uber_direct;
+  VI.pasarelaStripe = viC.costos_extras.pasarela_pago_stripe;
+  VI.horaExtra      = viC.costos_extras.hora_desarrollo_adicional;
+
+  // --- OMIA adapter ---
+  OMIA.setup  = omC.set_up.set_up;
+  OMIA.plazos = {};
+  for (const k of Object.keys(omC.monthly_fee.plazos)) {
+    const p = omC.monthly_fee.plazos[k];
+    OMIA.plazos[k] = { fee: p.fee, desc: p.desc, descuento_pct: p.descuento_pct };
+  }
+  OMIA.llamada = omC.transaccionalidad.llamada_outbound;
+  OMIA.horaExtra = omC.costos_extras.hora_desarrollo_adicional;
+  return true;
+}
 
 async function loadPricing() {
   try {
@@ -950,59 +1065,9 @@ async function loadPricing() {
       fetch('pricing/omia.json',   {cache:'no-cache'}).then(r => { if(!r.ok) throw new Error('omia.json '+r.status);   return r.json(); })
     ]);
     BB_RAW = bb; VI_RAW = vi; OMIA_RAW = om;
-
-    // Resuelve canal comercial activo por producto (averix_directo / telcel_reseller)
-    const bbC = bb[bb._meta.canal_activo];
-    const viC = vi[vi._meta.canal_activo];
-    const omC = om[om._meta.canal_activo];
-
-    // --- BB adapter ---
-    BB.alta    = bbC.set_up.alta_whatsapp;
-    BB.setup   = bbC.set_up.setup_por_plan;
-    BB.hrsInfo = bbC.set_up.horas.config_bot_informativo;
-    BB.hrsInt  = bbC.set_up.horas.integraciones;
-    BB.hrsDev  = bbC.set_up.horas.desarrollo;
-    BB.hrsSup  = bbC.set_up.horas.soporte;
-    BB.baseOD  = bbC.monthly_fee.on_demand.plataforma_base;
-    BB.plans   = bbC.monthly_fee.por_plan.planes;
-    BB.agentePorPlan = bbC.monthly_fee.por_plan.agente_adicional;
-    BB.wizard  = bbC.add_ons.wizard  ? bbC.add_ons.wizard.price  : 0;
-    BB.api     = bbC.add_ons.api     ? bbC.add_ons.api.price     : 0;
-    BB.mobile  = bbC.add_ons.mobile  ? bbC.add_ons.mobile.price  : 0;
-    BB.apple   = bbC.add_ons.apple   ? bbC.add_ons.apple.price   : 0;
-    BB.repo    = bbC.add_ons.repo    ? bbC.add_ons.repo.price    : 0;
-    BB.amd     = bbC.add_ons.amd     ? bbC.add_ons.amd.price     : 0;
-    BB.webchat = bbC.add_ons.webchat ? bbC.add_ons.webchat.price : 0;
-    BB.iaModulo = bbC.add_ons.ia_modulo || [{price:0,label:'No incluir'}];
-    BB.agentesTramos = bbC.transaccionalidad.agentes_extra_on_demand_tramos;
-    BB.tplRanges = bbC.transaccionalidad.templates_on_demand_tramos.map(r =>
-      [r.volumen_hasta, r.marketing, r.utilidad, r.otp, r.servicio]
-    );
-    const tp = bbC.transaccionalidad.templates_por_plan;
-    BB.tplPlan = { mkt: tp.marketing, util: tp.utilidad, otp: tp.otp, svc: tp.servicio };
-
-    // --- VI adapter ---
-    VI.setup  = viC.set_up.set_up;
-    VI.plazos = {};
-    for (const k of Object.keys(viC.monthly_fee.plazos)) {
-      const p = viC.monthly_fee.plazos[k];
-      VI.plazos[k] = { fee: p.fee, desc: p.desc, descuento_pct: p.descuento_pct };
-    }
-    VI.plantillasMeta = viC.transaccionalidad.plantillas_meta;
-    VI.deliveryUber   = viC.costos_extras.delivery_uber_direct;
-    VI.pasarelaStripe = viC.costos_extras.pasarela_pago_stripe;
-    VI.horaExtra      = viC.costos_extras.hora_desarrollo_adicional;
-
-    // --- OMIA adapter ---
-    OMIA.setup  = omC.set_up.set_up;
-    OMIA.plazos = {};
-    for (const k of Object.keys(omC.monthly_fee.plazos)) {
-      const p = omC.monthly_fee.plazos[k];
-      OMIA.plazos[k] = { fee: p.fee, desc: p.desc, descuento_pct: p.descuento_pct };
-    }
-    OMIA.llamada = omC.transaccionalidad.llamada_outbound;
-    OMIA.horaExtra = omC.costos_extras.hora_desarrollo_adicional;
-
+    currentChannel = bb._meta.canal_activo || 'averix_directo';
+    applyChannel(currentChannel);
+    syncChannelButtons();
     pricingReady = true;
     applyPricesToUI();
   } catch (e) {
@@ -1011,6 +1076,38 @@ async function loadPricing() {
   }
 }
 loadPricing();
+
+function syncChannelButtons() {
+  const bA = g('ch-btn-averix'), bT = g('ch-btn-telcel');
+  if (bA) bA.classList.toggle('active', currentChannel === 'averix_directo');
+  if (bT) bT.classList.toggle('active', currentChannel === 'telcel_reseller');
+}
+
+function setChannel(channel) {
+  if (!pricingReady) { alert('Cargando precios… intenta de nuevo en un segundo.'); return; }
+  if (channel === currentChannel) return;
+  if (!applyChannel(channel)) { alert('Ese canal no está disponible para este producto.'); return; }
+  currentChannel = channel;
+  syncChannelButtons();
+  applyPricesToUI();
+  // Refresca cálculos activos si el usuario ya estaba cotizando
+  if (currentProduct === 'bb') {
+    if (bbQuoteType === 'on-demand') bbRecalc();
+    else if (bbQuoteType === 'por-plan') {
+      if (bbSelectedPlan) bbRecalcPlan();
+      else {
+        // El plan que tenía seleccionado no existe en el nuevo canal: limpiar totales
+        ['bb-p-disp-plan','bb-p-disp-agents','bb-p-disp-templates','bb-p-disp-total','bb-p-disp-annual','bb-p-disp-saving']
+          .forEach(id => s(id, '—'));
+        s('bb-p-disp-setup', fmt2(BB.setup));
+      }
+    }
+  } else if (currentProduct === 'vi' && viSelectedPlazo) {
+    viSelectPlazo(viSelectedPlazo);
+  } else if (currentProduct === 'om' && omSelectedPlazo) {
+    omSelectPlazo(omSelectedPlazo);
+  }
+}
 
 function fmtInt(n) { return '$' + Math.round(n).toLocaleString('es-MX'); }
 function fmt2(n)   { return '$' + n.toLocaleString('es-MX', {minimumFractionDigits:2, maximumFractionDigits:2}); }
@@ -1058,12 +1155,39 @@ function applyPricesToUI() {
     }
   }
 
-  // Plan cards
-  for (const k of Object.keys(BB.plans || {})) {
-    s(`bb-plan-${k}-price`, fmtInt(BB.plans[k].price));
+  // Plan cards — reconstruir dinámicamente según el canal activo
+  const cardsRoot = g('bb-plan-cards');
+  if (cardsRoot && BB.plans) {
+    cardsRoot.innerHTML = '';
+    for (const k of Object.keys(BB.plans)) {
+      const plan = BB.plans[k];
+      const card = document.createElement('div');
+      card.className = 'plan-card';
+      card.id = `bb-plan-${k}`;
+      card.setAttribute('onclick', `bbSelectPlan('${k}')`);
+      const title = (plan.label || k).replace(/^Plan\s+/i, '');
+      const featuresHtml = (plan.features || '').split(/\s*[,·]\s*/).filter(Boolean)
+        .map(f => `<li>${f}</li>`).join('');
+      card.innerHTML = `
+        <h4>${title}</h4>
+        <div class="price"><span id="bb-plan-${k}-price">${fmtInt(plan.price)}</span> <span>/mes</span></div>
+        <ul>${featuresHtml}</ul>`;
+      cardsRoot.appendChild(card);
+    }
+    // Si había un plan seleccionado, re-marcar (o limpiar si ya no existe en este canal)
+    if (bbSelectedPlan && !BB.plans[bbSelectedPlan]) bbSelectedPlan = null;
+    if (bbSelectedPlan) {
+      const sel = g('bb-plan-'+bbSelectedPlan);
+      if (sel) sel.classList.add('selected');
+    }
   }
   const ppDisp = g('bb-agent-pp-disp');
   if (ppDisp) ppDisp.value = fmt2(BB.agentePorPlan) + ' MXN/mes';
+  // Descripción de la sección POR PLAN: nombres de los planes del canal activo
+  if (BB.plans) {
+    const labels = Object.values(BB.plans).map(p => (p.label || '').replace(/^Plan\s+/i, '').trim()).filter(Boolean).join(' · ');
+    s('bb-btn-pp-desc', labels ? `Plan predefinido: ${labels}.` : 'Plan predefinido del canal seleccionado.');
+  }
 
   // ===== VendIA =====
   s('vi-disp-setup', fmt2(VI.setup));
@@ -1173,7 +1297,10 @@ function bbSelectType(t) {
 
 function bbSelectPlan(p) {
   bbSelectedPlan = p;
-  ['api','business','enterprice','enterprice-pro'].forEach(x => g('bb-plan-'+x).classList.toggle('selected', x===p));
+  Object.keys(BB.plans || {}).forEach(x => {
+    const el = g('bb-plan-'+x);
+    if (el) el.classList.toggle('selected', x===p);
+  });
   bbRecalcPlan();
 }
 
