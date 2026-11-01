@@ -55,32 +55,38 @@ Abre `https://cotizador-av.vercel.app/admin`. Login con `ADMIN_USER` / `ADMIN_PA
 ### Funcionalidades
 
 - **Editor**: cambia precios y estructura comercial por producto (BBot/VendIA/OMIA) y canal (Averix Directo / Telcel Reseller).
-- **Borrado lógico**: en items dentro de arrays/maps (planes, plazos, add-ons, tiers de soporte), botón **🗑 Borrar** marca el item con `_deleted: true`. El cotizador lo ignora automáticamente. Botón **↺ Restaurar** lo reactiva.
-- **Guardar Cambios**: dispara un PUT a `/api/pricing/<product>` que:
+- **Borrado lógico**: el botón **🗑 Borrar** aparece en objetos con `price`, `label` o `fee`, y en cada ítem de un array. Marca `_deleted: true` y agrega `_deleted_at` / `_deleted_by`. **↺ Restaurar** quita esas tres claves. El cotizador deja fuera los planes, los tiers de soporte, las opciones de IA y las filas de delivery marcadas. Un add-on marcado queda en precio 0 (el checkbox sigue visible). Un plazo marcado no se quita de la tarjeta 12/24/36: elegirla rompe el cálculo porque el código asume que el plazo existe. Los tramos de agentes y de templates sí tienen botón de borrar, pero el calculador no lee `_deleted`. `plantillas_meta` y la pasarela Stripe no tienen botón: no traen `price`, `label` ni `fee`.
+- **Guardar Cambios**: dispara un `PUT /api/pricing?product=<bbot|vendia|omia>` con cuerpo `{content: {...}}` que:
   1. Verifica auth (cookie firmada)
-  2. Hace diff contra la versión actual
-  3. Commit del JSON actualizado al repo vía GitHub Contents API
-  4. Append al `pricing/_audit_log.json` (otro commit) con el detalle (path, valor antes/después, usuario, timestamp, SHA del commit)
-  5. Vercel auto-despliega (~30s) — los cambios se reflejan en el cotizador
-- **Auditoría**: lee `pricing/_audit_log.json`. Filtros por producto y por cantidad. Cada entrada incluye el SHA del commit (puedes ir a GitHub y ver el diff exacto).
+  2. Hace diff contra el archivo en GitHub
+  3. Si no hay diferencias, responde `{ok: true, changes: 0}` y no crea commits
+  4. Si las hay, hace commit del JSON vía GitHub Contents API. El mensaje es `admin(<usuario>): <producto> → <path o resumen>`
+  5. Intenta un segundo commit que antepone las entradas a `pricing/_audit_log.json` (path, valor antes/después, usuario, timestamp, SHA del commit de precios). Si ese commit falla, el precio **igual queda guardado**; el error solo va al log de la función. El archivo se recorta a 1,000 entradas. Objetos de más de 200 caracteres se guardan truncados.
+  6. Vercel auto-despliega (~30s) cuando entra un commit — el cotizador lee los JSON estáticos, no la API
+- **Auditoría**: `GET /api/audit-log` lee `pricing/_audit_log.json` (lista vacía si el archivo aún no existe). Filtros `product` y `limit` (la UI ofrece 50, 100, 200 y 1,000). La tabla muestra los primeros 7 caracteres del SHA, sin enlace. El SHA completo está en el JSON.
 
 ## Endpoints
 
 | Endpoint | Método | Auth | Función |
 |---|---|---|---|
-| `/api/auth` | GET | — | Devuelve sesión actual o 401 |
-| `/api/auth` | POST `{action:"login", username, password}` | — | Login (set cookie) |
+| `/api/auth` | GET | — | `{ user, exp }` o 401. Igual exige las 5 env vars: si falta alguna responde 500 |
+| `/api/auth` | POST `{action:"login", username, password}` | — | Login (set cookie `cotz_sess`) |
 | `/api/auth` | POST `{action:"logout"}` | — | Logout (clear cookie) |
-| `/api/pricing?product=bbot` | GET | sí | Devuelve el JSON completo del producto |
-| `/api/pricing?product=bbot` | PUT `{content: {...}}` | sí | Persiste cambios + log |
-| `/api/audit-log?product=bbot&limit=50` | GET | sí | Lee el log de auditoría |
+| `/api/pricing?product=bbot` | GET | sí | `{ product, content, sha }` del JSON en GitHub |
+| `/api/pricing?product=bbot` | PUT `{content: {...}}` | sí | Persiste cambios y, si puede, el log |
+| `/api/audit-log?product=bbot&limit=50` | GET | sí | `{ entries }` más recientes primero |
+
+Productos válidos: `bbot`, `vendia`, `omia`. Otro valor responde 400.
+
+`/api/extract` no es de esta consola. Lo usa `/contratos` y requiere `ANTHROPIC_API_KEY` (dependencia `@anthropic-ai/sdk`). Sin esa variable el admin sigue funcionando.
 
 ## Seguridad
 
-- **Cookie de sesión**: HTTP-only, `Secure`, `SameSite=Strict`, expira en 8 horas. Firmada con HMAC-SHA256 (no JWT estándar pero equivalente).
-- **Sin npm deps**: solo `crypto` y `fetch` built-in de Node 20.
+- **Cookie de sesión**: nombre `cotz_sess`. HTTP-only, `Secure`, `SameSite=Strict`, `Path=/`, expira en 8 horas. El valor es `base64url(JSON {u, exp}).HMAC-SHA256` (no es un JWT con header).
+- **API admin sin npm**: `api/auth.js`, `api/pricing.js`, `api/audit-log.js` y `api/_utils.js` usan solo `crypto` y `fetch` de Node. El único dependency del repo es `@anthropic-ai/sdk`, y solo lo importa `api/extract.js`.
 - **Rate limiting**: básico (retardo de 400ms en login fallido). Para producción seria, agregar IP-based throttling vía middleware Vercel.
-- **Trazabilidad**: cada cambio genera 2 commits firmados con el usuario admin en el mensaje (`admin(jpoumian): bbot → averix_directo.set_up.alta_whatsapp`). Más el append al audit log.
+- **Trazabilidad**: un cambio con diff crea el commit de precios (`admin(jpoumian): bbot → averix_directo.set_up.alta_whatsapp`) y, en el caso feliz, un segundo commit de audit log. No son atómicos.
+- **Campo que el editor muestra y el cotizador ignora**: `_meta.descuento_anual_pct`. El 10% anual está fijo en `cotizador.html`. Cambiar ese número en el admin no cambia las propuestas. `canal_activo` sí define el canal con el que abre el cotizador (lee el de `bbot.json`).
 
 ## Cómo cambiar tu contraseña
 
