@@ -1,7 +1,22 @@
 # Paso 01 — Análisis y Mapeo de Activos en Google Drive
 
 **Fecha:** 2026-05-05  
-**Carpeta raíz Drive:** Cotizador AV (`1O7QpLb0pIdRSWe4f1A8ywuF43yVbUFbW`)
+**Carpeta raíz Drive:** Cotizador AV (`1O7QpLb0pIdRSWe4f1A8ywuF43yVbUFbW`)  
+**Vigencia:** nota histórica del relevamiento. No es la especificación del cotizador v3.0.
+
+> Validado contra el código el 2026-11-01. Los logos citados siguen en `logos/`. Las tablas de abajo describen el Excel de Drive de mayo, no el esquema que calcula hoy `cotizador.html`. La fuente de precios en runtime es `pricing/bbot.json` (canales `averix_directo` y `telcel_reseller`).
+
+## Qué de esta nota ya no aplica
+
+- La app no es HTML standalone sin servidor. Corre en Vercel (`vercel.json`): `/` → cotizador, `/admin` → consola, `/contratos` → contratos. El cotizador carga `pricing/{bbot,vendia,omia}.json` al iniciar.
+- Hay tres productos (Broadcaster Bot, VendIA, OMIA) y dos canales (Averix Directo / Telcel Reseller). Esta nota solo cubre Broadcaster Bot.
+- El Plan Anual Preferente aplica 10% sobre set up y mensualidad (`* 0.9` fijo en `cotizador.html`). No regala un agente adicional. `_meta.descuento_anual_pct` no lo lee el calculador.
+- La alta de WhatsApp es opcional (`incluir_alta_por_default: false`). El set up por hora ya no incluye “Soporte $900/hr”.
+- El soporte on demand es un tier mensual (pequeña $0 / mediana $1,999 / grande $3,999), no una hora.
+- No existe el add-on Apple Business. Sí existe Campañas Masivas ($1,000) y un Plan API ($3,999) que esta nota no lista.
+- La descripción base vigente dice WA/IG/FB/Web, no GBM.
+- Los tramos de agentes del canal Averix Directo siguen produciendo 1–20 $500, 21–30 $400, 31–50 $300, 51–100 $250, y además 101+ a $250. En el JSON `hasta_agentes` es el ancho del tramo, no el tope absoluto. Telcel Reseller usa un solo tramo a $599.
+- Los precios de templates on demand y por plan de esta nota coinciden con `averix_directo`. Telcel usa otra tarifa plana (marketing $1.13, utilidad $0.71, OTP $0.64, servicio $0.39).
 
 ---
 
@@ -141,5 +156,5 @@ Secciones identificadas en `MACHOTE PROPUESTA COMERCIAL_BBOT CON DESARROLLO.docx
   - `ON DEMAND` → usa precios de la pestaña "Cotizador" con selección granular
   - `POR PLAN` → usa precios de la pestaña "Planes Comercial 2024"
 - **Output:** Propuesta imprimible en formato del MACHOTE, con la sección INVERSIÓN generada dinámicamente
-- **Plan Anual Preferente:** 10% descuento en onboarding + mensualidades + 1 agente adicional sin costo
-- **Tecnología:** Aplicación web HTML/CSS/JS standalone (sin servidor requerido)
+- **Plan Anual Preferente (decisión de mayo, ya no vigente tal cual):** 10% de descuento en onboarding + mensualidades, y 1 agente adicional sin costo. El cotizador actual solo aplica el 10% sobre set up y mensualidad; el agente extra se cobra.
+- **Tecnología (decisión de mayo, ya no vigente):** se pensó como HTML/CSS/JS standalone. Hoy es un proyecto Vercel con JSON de precios, API admin y generación de contratos.

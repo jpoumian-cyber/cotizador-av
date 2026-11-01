@@ -2,7 +2,32 @@
 
 **Fecha:** 2026-05-06  
 **Producto:** VendIA — Comercio Conversacional en WhatsApp  
-**Estado:** Completado ✅
+**Estado:** nota histórica. El modelo de precios de esta página fue reemplazado.
+
+> Validado contra el código el 2026-11-01. VendIA sigue en el cotizador (color `#15803d`, pestaña propia, propuesta imprimible), pero **no** usa ON DEMAND por hora ni los planes Starter / Business / Enterprise de las tablas de abajo. El esquema vigente está en `pricing/vendia.json`.
+
+## Esquema vigente (no el de las tablas siguientes)
+
+Canal **Averix Directo**
+
+| Concepto | Valor |
+|---|---|
+| Set up (pago único) | $12,000 |
+| Fee 12 meses | $6,000/mes |
+| Fee 24 meses | $5,400/mes (10%) |
+| Fee 36 meses | $4,800/mes (20%) |
+| Plantillas Meta | marketing $0.70, utilidad $0.25, OTP $0.25, servicio $0.20 |
+
+Canal **Telcel Reseller:** set up $5,000; fees $9,747 / $8,772 / $7,798; plantillas marketing $1.13, utilidad $0.71, OTP $0.64, servicio $0.39.
+
+Además, el formulario actual incluye:
+
+- Add-on “Plataforma de Atención a Cliente (BC Bot)”, que toma planes y set up de `pricing/bbot.json` del mismo canal.
+- Costos de referencia (no se suman a la inversión): delivery Uber Direct y comisión Stripe (3.6% + $3 MXN, +0.5% internacional, +2% conversión).
+- Plan Anual Preferente: otro 10% sobre el set up y sobre el fee del plazo, hardcodeado (`* 0.9`). No lee `_meta.descuento_anual_pct`.
+- OMIA es un tercer producto (plazos 12/24/36, set up $5,000, fee Averix $8,998 / $8,098 / $7,198). No está en esta nota.
+- La versión visible en el header es **v3.0**. El `<title>` sigue diciendo “Broadcaster Bot & VendIA”.
+- Árbol de archivos actual: `cotizador.html`, `admin.html`, `contratos.html`, `api/`, `pricing/`, `logos/`, `vercel.json`, `package.json`, `ADMIN_SETUP.md` y estas dos notas.
 
 ---
 
